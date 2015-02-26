@@ -1,0 +1,36 @@
+ ---------------------------------------------------------------
+ --        Tables.  
+ ---------------------------------------------------------------
+
+create table mainuser(
+idUser number not null,
+userName varchar2(25) not null,
+userFirstName varchar2(25) not null,
+userAdresse varchar2(50) not null,
+userCity varchar2(25) not null,
+userCP varchar2(5) not null,
+userNumber varchar(10) not null,
+userEMail varchar2(50) not null,
+password varchar2(255) not null,
+constraint User_PK primary key(idUser),
+constraint User_uniq unique (userEmail)
+);
+
+ ---------------------------------------------------------------
+ --        Sequences pour les auto_increments.
+ ---------------------------------------------------------------
+ 
+create sequence user_seq;
+
+ ---------------------------------------------------------------
+ --        Triggers.  
+ ---------------------------------------------------------------
+
+create or replace trigger user_inc
+before insert on mainuser
+for each row
+begin
+  select user_seq.NEXTVAL
+  into :new.idUser
+  from dual;
+end;
