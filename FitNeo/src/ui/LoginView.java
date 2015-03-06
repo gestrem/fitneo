@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 import core.UserFacade;
 
 @SuppressWarnings("serial")
-public class LoginView extends JFrame implements ILoginView {
+public class LoginView extends JFrame {
 	
 	public LoginView(){
 		super("login Form");

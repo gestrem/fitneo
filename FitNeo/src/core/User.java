@@ -5,6 +5,7 @@ import persist.JdbcUser;
 public class User {
 	private String userName;
 	private String password;
+	protected static User user = null;
 	
 	public User(){
 		
@@ -32,9 +33,8 @@ public class User {
 	}
 	
 	public void login(String login, String pwd){
-		JdbcUser userJdbc = new JdbcUser();
-		User user = userJdbc.getUser(login);
-		if((user != null) && (user.isPassOK(pwd))){
+		JdbcUser userJdbc = new JdbcUser(login);
+		if((user.getName() != null) && (user.isPassOK(pwd))){
 			System.out.println("Connection autorisée pour " + login);
 		}
 		else

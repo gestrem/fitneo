@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="true" nesting-relationships="true">  
-  <package id="1" language="java" name="persist" project="FitNeo" file="/FitNeo/src/persist" binary="false" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" language="java" name="core" project="FitNeo" file="/FitNeo/src/core" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="229" y="286"/>    
+    <position height="-1" width="-1" x="353" y="200"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="2" language="java" name="core" project="FitNeo" file="/FitNeo/src/core" binary="false" 
+  <package id="2" language="java" name="persist" project="FitNeo" file="/FitNeo/src/persist" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="228" y="164"/>    
+    <position height="-1" width="-1" x="353" y="324"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="3" language="java" name="ui" project="FitNeo" file="/FitNeo/src/ui" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="229" y="63"/>    
+    <position height="-1" width="-1" x="352" y="66"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <dependency id="4">    
@@ -25,7 +25,7 @@
   </dependency>  
   <dependency id="6">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="TARGET" refId="1"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

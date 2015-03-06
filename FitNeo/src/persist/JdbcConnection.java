@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class JdbcConnection implements IJdbcConnection {	
-    private Connection con = null;
+public class JdbcConnection implements JdbcConstants {	
+    private static Connection con = null;
 
-    public Connection openConnection(){
+    public static Connection openConnection(){
     	try {
     		// Load Oracle JDBC Driver
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
@@ -22,23 +22,23 @@ public class JdbcConnection implements IJdbcConnection {
     	return con;
     }
     
-    public void closeConnection(){
+    public static void closeConnection(){
     	if(con!=null) {
     		try { con.close(); } 
     		catch (SQLException e) { e.printStackTrace(); }
     	}
     }
     
-    public Connection getConnection() { return con;}
+    public static Connection getConnection() { return con;}
 
-	public void close(Statement stmt) {
+	public static void close(Statement stmt) {
 		if(stmt!=null) {
 			try { stmt.close(); } 
 			catch (SQLException e) { e.printStackTrace(); }
 		}		
 	}
 
-	public void close(ResultSet rs) {
+	public static void close(ResultSet rs) {
 		if(rs!=null) {
 			try { rs.close(); } 
 			catch (SQLException e) { e.printStackTrace(); }
