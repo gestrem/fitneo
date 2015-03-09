@@ -3,29 +3,42 @@
   associations="true" dependencies="false" nesting-relationships="true">  
   <package id="1" language="java" name="core" project="FitNeo" file="/FitNeo/src/core" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="353" y="200"/>    
+    <position height="-1" width="-1" x="429" y="167"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="2" language="java" name="persist" project="FitNeo" file="/FitNeo/src/persist" binary="false" 
+  <package id="2" language="java" name="fitneo" project="FitNeo" file="/FitNeo/src/fitneo" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="353" y="324"/>    
+    <position height="-1" width="-1" x="626" y="170"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="3" language="java" name="ui" project="FitNeo" file="/FitNeo/src/ui" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="352" y="66"/>    
+  <package id="3" language="java" name="persist" project="FitNeo" file="/FitNeo/src/persist" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="426" y="300"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <dependency id="4">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </dependency>  
+  <package id="4" language="java" name="ui" project="FitNeo" file="/FitNeo/src/ui" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="423" y="62"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
   <dependency id="5">    
     <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="TARGET" refId="3"/>  
   </dependency>  
   <dependency id="6">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="7">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="8">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
