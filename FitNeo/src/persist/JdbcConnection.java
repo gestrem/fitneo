@@ -7,42 +7,94 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JdbcConnection implements JdbcConstants {	
-    private static Connection con = null;
+	
+    private Statement streamConnection;
+    private ResultSet streamResponse;
 
-    public static Connection openConnection(){
+    public boolean openConnection(){
     	try {
-    		// Load Oracle JDBC Driver
+    		// Charge le driver JDBC pour mysql
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             
-            // Connect to Oracle Database
-            con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
+            // Creation de la connection à la base
+            Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
+            this.streamConnection = con.createStatement();
         } 
-    	catch(Exception e) {  System.out.println("Cannot access database at : " +DBURL);  } 
+    	catch(Exception e) {  
+    		System.out.println("Cannot access database at : " +DBURL); 
+    		return false;  
+    	} 
     	
-    	return con;
+    	return true;
     }
     
-    public static void closeConnection(){
-    	if(con!=null) {
-    		try { con.close(); } 
-    		catch (SQLException e) { e.printStackTrace(); }
-    	}
+    /**
+     * Methode close qui ferme la connexion SQL
+     */
+	public void close() {
+		try{
+			if(this.streamResponse != null) 
+				this.streamResponse.close();
+			this.streamConnection.close();
+		}
+		catch (SQLException e) { e.printStackTrace(); }		
+	}
+	
+    /**
+     * Methode executeRequest
+     * @param sqlRequest la requete
+     * @return true si l'execution c'est bien passe, false sinon
+     */
+	public boolean executeRequest(String sqlRequest) {
+        try {
+        	//s'il s'agit d'une requete SELECT il faut utiliser executeQuery()
+            if (sqlRequest.substring(0, 6).equalsIgnoreCase("SELECT")) {
+                this.streamResponse = this.streamConnection.executeQuery(sqlRequest);
+            } 
+            //sinon pour tout autre requete (DELETE, UPDATE, INSERT) on utilise executeUpdate()
+            else {
+                this.streamConnection.executeUpdate(sqlRequest);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();           
+            return false;
+        }
+        return true;
     }
-    
-    public static Connection getConnection() { return con;}
-
-	public static void close(Statement stmt) {
-		if(stmt!=null) {
-			try { stmt.close(); } 
-			catch (SQLException e) { e.printStackTrace(); }
-		}		
-	}
-
-	public static void close(ResultSet rs) {
-		if(rs!=null) {
-			try { rs.close(); } 
-			catch (SQLException e) { e.printStackTrace(); }
-		}	
-	}
+	
+    /**
+     * Methode fetchArray
+     * @return le tuple sous forme d'un ResultSet
+     */
+	public ResultSet fetchArray() {  
+        try {
+            if (this.streamResponse.next()) {
+            	return this.streamResponse;              
+            } 
+            else {
+                return null;
+            }
+        } 
+        catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+	
+    /**
+     * Methode nbResponse
+     * @return le nombre de tuple de la requete
+     */
+	public int nbResponse() {      
+        ResultSet resultSet = this.streamResponse;
+        int size = 0;
+        try {
+            resultSet.last();
+            size = resultSet.getRow();        
+        } catch (SQLException e) {
+            return 0;
+        }
+        return size;
+    }	
 }
 

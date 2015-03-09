@@ -1,10 +1,13 @@
 package core;
 
+import persist.PersistKit;
+
 public class UserFacade {
-	User user;
+	private User user;
 	
-	public UserFacade(){
-		user = new User();
+	public UserFacade(int persistType){
+		//On charge le kit de persistance en fonction du type demandé
+		user = PersistKit.getInstance(persistType).makeKit();
 	}
 	
 	public void login(String login, String pwd){

@@ -21,11 +21,27 @@ import javax.swing.border.EmptyBorder;
 import core.UserFacade;
 
 @SuppressWarnings("serial")
-public class LoginView extends JFrame {
+public class LoginView extends JFrame implements ActionListener {
 	
-	public LoginView(){
+	private JTextField fieldLogin;
+	private JPasswordField fieldPassword;
+	private JButton connectButton;
+	private JButton missingpwdButton;
+	
+	//Facade de la classe User
+	private UserFacade userFacade;
+	//tyepe de persistance choisi
+	private int persistType;
+	//fenetre en cas de mdp oublié
+	public JFrame passwordForgot;
+	
+	public LoginView(int persistType){
 		super("login Form");
+		this.persistType = persistType;
+		//On instancie une facadeUser pour la vue
+		this.userFacade = new UserFacade(this.persistType);
 		initComponents();
+		setVisible(true);
 	};
 	
 	public String getLoginText(){ 
@@ -35,11 +51,6 @@ public class LoginView extends JFrame {
 	public String getPasswdText(){
 		return new String( fieldPassword.getPassword() );
 	}
-
-	JTextField fieldLogin;
-	JPasswordField fieldPassword;
-	JButton connectButton;
-	JButton missingpwdButton;
 	  
 	private void initComponents()
 	{
@@ -47,7 +58,6 @@ public class LoginView extends JFrame {
 		Container contentPane = getContentPane();
 		setLocationRelativeTo(null); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ActionListener e = new ButtonListener();
 		  
 		JPanel loginPanel = new JPanel();
 		loginPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,9 +73,9 @@ public class LoginView extends JFrame {
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblNewLabel.setForeground(Color.BLUE);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		connectButton.addActionListener(e);
+		connectButton.addActionListener(this);
 		connectButton.setActionCommand("Connexion");
-		missingpwdButton.addActionListener(e);
+		missingpwdButton.addActionListener(this);
 		missingpwdButton.setActionCommand("forgottenpwd");
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -113,29 +123,18 @@ public class LoginView extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	  }
 	
-	public class ButtonListener implements ActionListener {
-		public JFrame passwordForgot;
-		public ButtonListener(){}
-		
-		public void actionPerformed(ActionEvent e)
-		{
-			String cmd = e.getActionCommand();
-			if(cmd.equals("Connexion")){
-				if((!getLoginText().equals("")) && (!getPasswdText().equals(""))){
-					UserFacade facade = new UserFacade();
-					facade.login(getLoginText(), getPasswdText());
-				}			
-			}
-			else if(cmd.equals("forgottenpwd")){
-				passwordForgot= new PasswordForgottenView();
-				passwordForgot.setVisible(true);
-			}
+	public void actionPerformed(ActionEvent e)
+	{
+		String cmd = e.getActionCommand();
+		if(cmd.equals("Connexion")){
+			if((!getLoginText().equals("")) && (!getPasswdText().equals(""))){
+				userFacade.login(getLoginText(), getPasswdText());				
+			}			
+		}
+		else if(cmd.equals("forgottenpwd")){
+			passwordForgot= new PasswordForgottenView();
+			passwordForgot.setVisible(true);
 		}
 	}
-	
-	public static void main(String[] args) 
-	{
-		 LoginView loginView = new LoginView();
-		 loginView.setVisible(true);
-	}
+
 }
