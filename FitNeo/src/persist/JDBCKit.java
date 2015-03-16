@@ -1,7 +1,6 @@
 package persist;
 
-import com.sun.nio.sctp.Notification;
-
+import core.Notification;
 import core.AccessoryType;
 import core.Activity;
 import core.Basket;
