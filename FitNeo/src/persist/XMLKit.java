@@ -10,8 +10,10 @@ public class XMLKit extends PersistKit {
      */
 
     @Override
-    public User makeKit() {
+    public User createUser() {
 
-        return User.getInstance(PersistKit.XML);
+		User user = new UserXML();
+		return user;
+		
     }
 }

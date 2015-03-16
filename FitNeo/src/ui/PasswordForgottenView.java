@@ -2,11 +2,12 @@ package ui;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.Color;
@@ -19,36 +20,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class PasswordForgottenView extends JFrame {
+public class PasswordForgottenView extends JDialog {
 
 	private JPanel contentPane;
 	private JTextField textField;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PasswordForgottenView frame = new PasswordForgottenView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public PasswordForgottenView() {
+	public PasswordForgottenView(JFrame owner, boolean modal) {
 		setTitle("PasswordForgotten GUI");
 		setBounds(100, 100, 655, 496);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		setModal(modal);
 		
 		JLabel lblEnterEmailTo = new JLabel("Enter Email to receive your password ");
 		lblEnterEmailTo.setForeground(Color.BLUE);

@@ -10,9 +10,10 @@ public class JDBCKit extends PersistKit {
      */
 
     @Override
-    public User makeKit() {
-        
-        return User.getInstance(PersistKit.JDBC);
-        
+    public User createUser() {
+    	
+        User user = new UserJDBC();
+        return user;
+     
     }
 }

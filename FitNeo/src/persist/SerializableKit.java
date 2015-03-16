@@ -10,8 +10,10 @@ public class SerializableKit extends PersistKit {
      */
     
     @Override
-    public User makeKit() {
-        
-        return User.getInstance(PersistKit.SERIALIZABLE);
+    public User createUser() {
+
+    	User user = new UserSerializable();
+    	return user;
+
     }
 }

@@ -1,16 +1,18 @@
 package core;
 
-import persist.PersistKit;
-
 public class UserFacade {
 	private User user;
 	
 	public UserFacade(int persistType){
-		//On charge le kit de persistance en fonction du type demandé
-		user = PersistKit.getInstance(persistType).makeKit();
+		//On crée un user du type de persistance choisi
+		user = User.getInstance(persistType);
 	}
 	
-	public void login(String login, String pwd){
-		user.login(login, pwd);
+	public User login(String login, String pwd){
+		return user.login(login, pwd);
+	}
+	
+	public boolean isMailAvailable(String mail){
+		return user.isMailAvailable(mail);
 	}
 }

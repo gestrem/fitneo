@@ -5,7 +5,7 @@ import core.User;
 public abstract class PersistKit {
 
     /* L'instance de notre kit */
-    private static PersistKit pesistKit = null;
+    private static PersistKit persistKit = null;
 
     /* Les types de persistance possible */
     public static final int JDBC = 1;
@@ -17,7 +17,7 @@ public abstract class PersistKit {
      * @return un user du type choisit
      */
     
-    public abstract User makeKit();
+    public abstract User createUser(); 
 
     /**
      * Methode getInstance
@@ -25,24 +25,24 @@ public abstract class PersistKit {
      * @return le kit de persistance choisit
      */
     
-    public static PersistKit getInstance(int type) {
+    public static PersistKit createKit(int type) {
 
-        if (pesistKit == null) {
+        if (persistKit == null) {
 
             if (type == JDBC) {
 
-                pesistKit = new JDBCKit();
+                persistKit = new JDBCKit();
 
             } else  if (type == SERIALIZABLE) {
 
-                pesistKit = new SerializableKit();
+                persistKit = new SerializableKit();
 
             } else  if (type == XML) {
 
-                pesistKit = new XMLKit();
+                persistKit = new XMLKit();
             } 
         }
 
-        return pesistKit;
+        return persistKit;
     }
 }
