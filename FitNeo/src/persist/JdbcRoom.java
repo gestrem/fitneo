@@ -1,5 +1,5 @@
 package persist;
 
-public class JdbcRoom {
+public class JDBCRoom {
 
 }
