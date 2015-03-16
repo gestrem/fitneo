@@ -1,5 +1,14 @@
 package persist;
 
+import com.sun.nio.sctp.Notification;
+
+import core.AccessoryType;
+import core.Activity;
+import core.Basket;
+import core.CategoryProduct;
+import core.Event;
+import core.Product;
+import core.Room;
 import core.User;
 
 public abstract class PersistKit {
@@ -12,12 +21,18 @@ public abstract class PersistKit {
     public static final int SERIALIZABLE = 2;
     public static final int XML = 3;
 
-    /**
-     * Methode makeKit
-     * @return un user du type choisit
-     */
-    
+
+    /* Methodes create qui créer une classe metier du bon type de persistance */
     public abstract User createUser(); 
+    public abstract Basket createBasket();
+    public abstract AccessoryType createAccessory();
+    public abstract Activity createActivity();
+    public abstract CategoryProduct createCategory();
+    public abstract Event createEvent();
+    public abstract Notification createNotification();
+    public abstract Product createProduct();
+    public abstract Room createRoom();
+    
 
     /**
      * Methode getInstance
