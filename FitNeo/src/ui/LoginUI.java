@@ -34,6 +34,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	//type de persistance choisi
 	private int persistType;
 	//fenetre en cas de mdp oublié	
+	public JButton btnForgottenPassword;
 	public JDialog passwordForgot;
 	//fenetre pour s'enregistrer
 	public JDialog registerView;
@@ -73,29 +74,25 @@ public class LoginUI extends JFrame implements ActionListener {
 		getContentPane().setLayout(springLayout);
 		
 		fieldLogin = new JTextField();
-		springLayout.putConstraint(SpringLayout.EAST, fieldLogin, -78, SpringLayout.EAST, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, fieldLogin, 98, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, fieldLogin, -64, SpringLayout.EAST, getContentPane());
 		getContentPane().add(fieldLogin);
 		fieldLogin.setColumns(10);
 		
 		fieldPassword = new JPasswordField();
-		springLayout.putConstraint(SpringLayout.WEST, fieldLogin, 0, SpringLayout.WEST, fieldPassword);
-		springLayout.putConstraint(SpringLayout.SOUTH, fieldPassword, -144, SpringLayout.SOUTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, fieldPassword, -78, SpringLayout.EAST, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, fieldPassword, 0, SpringLayout.WEST, fieldLogin);
+		springLayout.putConstraint(SpringLayout.EAST, fieldPassword, -64, SpringLayout.EAST, getContentPane());
 		fieldPassword.setColumns(10);
 		getContentPane().add(fieldPassword);
 		
-		JLabel lblLogin = new JLabel("Login :");
+		JLabel lblLogin = new JLabel("Email :");
 		springLayout.putConstraint(SpringLayout.NORTH, lblLogin, 3, SpringLayout.NORTH, fieldLogin);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblLogin, -190, SpringLayout.SOUTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, lblLogin, -6, SpringLayout.WEST, fieldLogin);
 		getContentPane().add(lblLogin);
 		
 		JLabel lblPassword = new JLabel("Password :");
-		springLayout.putConstraint(SpringLayout.NORTH, lblPassword, 29, SpringLayout.SOUTH, lblLogin);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblPassword, -147, SpringLayout.SOUTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, lblLogin, 0, SpringLayout.EAST, lblPassword);
-		springLayout.putConstraint(SpringLayout.NORTH, fieldPassword, -3, SpringLayout.NORTH, lblPassword);
-		springLayout.putConstraint(SpringLayout.WEST, fieldPassword, 17, SpringLayout.EAST, lblPassword);
-		springLayout.putConstraint(SpringLayout.WEST, lblPassword, 52, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, lblPassword, 3, SpringLayout.NORTH, fieldPassword);
+		springLayout.putConstraint(SpringLayout.EAST, lblPassword, -6, SpringLayout.WEST, fieldPassword);
 		getContentPane().add(lblPassword);
 		
 		JLabel label = new JLabel("");
@@ -106,10 +103,10 @@ public class LoginUI extends JFrame implements ActionListener {
 		getContentPane().add(label);
 		
 		JButton connectButton = new JButton("Log In");
+		springLayout.putConstraint(SpringLayout.SOUTH, fieldPassword, -19, SpringLayout.NORTH, connectButton);
+		springLayout.putConstraint(SpringLayout.WEST, connectButton, 0, SpringLayout.WEST, fieldLogin);
 		connectButton.addActionListener(this);
 		connectButton.setActionCommand("Connexion");
-		springLayout.putConstraint(SpringLayout.NORTH, connectButton, 19, SpringLayout.SOUTH, fieldPassword);
-		springLayout.putConstraint(SpringLayout.WEST, connectButton, 0, SpringLayout.WEST, fieldLogin);
 		getContentPane().add(connectButton);
 		
 		JButton registerButton = new JButton("Sign up now");
@@ -120,14 +117,23 @@ public class LoginUI extends JFrame implements ActionListener {
 		getContentPane().add(registerButton);
 		
 		labelMsg = new JLabel("");
+		springLayout.putConstraint(SpringLayout.NORTH, fieldLogin, 18, SpringLayout.SOUTH, labelMsg);
 		labelMsg.setVisible(false);
 		springLayout.putConstraint(SpringLayout.SOUTH, label, -20, SpringLayout.NORTH, labelMsg);
 		springLayout.putConstraint(SpringLayout.SOUTH, labelMsg, -225, SpringLayout.SOUTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.NORTH, fieldLogin, 18, SpringLayout.SOUTH, labelMsg);
 		labelMsg.setHorizontalAlignment(SwingConstants.CENTER);
 		springLayout.putConstraint(SpringLayout.WEST, labelMsg, 0, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, labelMsg, 0, SpringLayout.EAST, getContentPane());
 		getContentPane().add(labelMsg);
+		
+		btnForgottenPassword = new JButton("Forgotten password ?");
+		springLayout.putConstraint(SpringLayout.NORTH, btnForgottenPassword, 326, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, connectButton, -6, SpringLayout.NORTH, btnForgottenPassword);
+		springLayout.putConstraint(SpringLayout.WEST, btnForgottenPassword, 0, SpringLayout.WEST, fieldLogin);
+		btnForgottenPassword.setVisible(false);
+		btnForgottenPassword.addActionListener(this);
+		btnForgottenPassword.setActionCommand("forgottenpwd");
+		getContentPane().add(btnForgottenPassword);
 	}
 	
 	public String getLoginText(){ 
@@ -152,6 +158,7 @@ public class LoginUI extends JFrame implements ActionListener {
 			if((!getLoginText().equals("")) && (!getPasswdText().equals(""))){
 				if (userFacade.login(getLoginText(), getPasswdText()) == null){
 					setLabelMsg("Wrong login and/or password ", Color.RED, true);
+					btnForgottenPassword.setVisible(true);
 				}
 				else{
 					//setLabelMsg("Welcome on FitNeo, "+getLoginText()+" !", Color.GREEN, true);

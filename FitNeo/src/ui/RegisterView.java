@@ -28,6 +28,7 @@ import javax.swing.WindowConstants;
 @SuppressWarnings("serial")
 public class RegisterView extends JDialog implements ActionListener {
 
+	//attribut de la fenetre
 	private final JPanel contentPanel = new JPanel();
 	private JTextField firstNameField;
 	private JTextField LastNameField;
@@ -38,9 +39,20 @@ public class RegisterView extends JDialog implements ActionListener {
 	private JTextField cityField;
 	private JTextField answerField;
 	private JTextArea adressField;
-	
+	private JComboBox questionBox;
+	//JFrame a partir de laquelle on crée cette fenetre
 	private LoginUI owner;
 
+	//toutes les infos sur le user a enregistrer
+	private String userFirstName;
+	private String userLastName;
+	private String userAdresse;
+	private String userCity;
+	private String userCP;
+	private String userEmail;
+	private String passwordUser;
+	private String userAnswer;
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -162,7 +174,7 @@ public class RegisterView extends JDialog implements ActionListener {
 		contentPanel.add(lblNewLabel);
 		
 		String[] questions = {"Place of birth of my mother", "Name of my favorite professor", "Name of my pet" };
-		JComboBox questionBox = new JComboBox(questions);
+		questionBox = new JComboBox(questions);
 		sl_contentPanel.putConstraint(SpringLayout.NORTH, questionBox, 6, SpringLayout.SOUTH, lblNewLabel);
 		sl_contentPanel.putConstraint(SpringLayout.WEST, questionBox, -1, SpringLayout.WEST, lblCreateAn);
 		sl_contentPanel.putConstraint(SpringLayout.EAST, questionBox, 0, SpringLayout.EAST, LastNameField);
@@ -210,6 +222,7 @@ public class RegisterView extends JDialog implements ActionListener {
 		String cmd = e.getActionCommand();
 		if(cmd.equals("OK")){
 			if (verifyMandatoryFields()){
+				this.owner.getUserFacade().signin(userLastName, userFirstName, userAdresse, userCity, userCP, userEmail, passwordUser, userAnswer, questionBox.getSelectedIndex());
 				this.owner.setLabelMsg("Successfull registration, you can now login", Color.GREEN, true);
 				dispose();
 			}
@@ -256,22 +269,28 @@ public class RegisterView extends JDialog implements ActionListener {
 			firstNameField.setBackground(Color.RED);
 			result = false;
 		}
-		else
+		else{
 			firstNameField.setBackground(Color.WHITE);
+			userFirstName=firstNameField.getText();
+		}
 		
 		if(LastNameField.getText().equals("")){
 			LastNameField.setBackground(Color.RED);
 			result = false;
 		}
-		else
+		else{
 			LastNameField.setBackground(Color.WHITE);
+			userLastName=LastNameField.getText();
+		}
 		
 		if(mailField.getText().equals("") || !isValidMail(mailField.getText()) || !isMailAvailable(mailField.getText())){
 				mailField.setBackground(Color.RED);
 				result = false;
 		}
-		else
+		else{
 			mailField.setBackground(Color.WHITE);
+			userEmail=mailField.getText();
+		}
 		
 		if(!isMatchPasswords(passwordField.getPassword(),passwordConfirmField.getPassword())){
 			passwordField.setBackground(Color.RED);
@@ -281,35 +300,44 @@ public class RegisterView extends JDialog implements ActionListener {
 		else{
 			passwordField.setBackground(Color.WHITE);
 			passwordConfirmField.setBackground(Color.WHITE);
+			passwordUser = new String(passwordField.getPassword());
 		}
 				
 		if(adressField.getText().equals("")){
 			adressField.setBackground(Color.RED);
 			result = false;
 		}
-		else
+		else{
 			adressField.setBackground(Color.WHITE);
+			userAdresse = adressField.getText();
+		}
 		
 		if(zipField.getText().equals("") || !isValidZipCode(zipField.getText())){
 			zipField.setBackground(Color.RED);
 			result = false;
 		}
-		else
+		else{
 			zipField.setBackground(Color.WHITE);
+			userCP=zipField.getText();
+		}
 		
 		if(cityField.getText().equals("")){
 			cityField.setBackground(Color.RED);
 			result = false;
 		}
-		else
+		else{
 			cityField.setBackground(Color.WHITE);
+			userCity=cityField.getText();
+		}
 		
 		if(answerField.getText().equals("")){
 			answerField.setBackground(Color.RED);
 			result = false;
 		}
-		else
+		else{
 			answerField.setBackground(Color.WHITE);
+			userAnswer=answerField.getText();
+		}
 		
 		return result;
 	}

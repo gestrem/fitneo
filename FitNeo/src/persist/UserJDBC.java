@@ -26,11 +26,22 @@ public class UserJDBC extends User{
 		ResultSet rs = null;
 		
 		try{
-			String query = "SELECT username, password FROM mainuser WHERE username ='" + login + "'";
+			String query = "SELECT * FROM mainuser WHERE userEmail ='" + login + "'";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-            	this.setName(rs.getString("UserName"));
-            	this.setPassword(rs.getString("Password"));
+				this.setUserFirstName(rs.getString("userFirstName"));
+            	this.setUserLastName(rs.getString("userLastName"));
+            	this.setUserAdresse(rs.getString("userAdresse"));
+            	this.setUserCity(rs.getString("userCity"));
+            	this.setUserCP(rs.getString("userCP"));
+            	this.setUserEmail(rs.getString("userEmail"));
+            	this.setPasswordUser(rs.getString("passwordUser"));
+            	this.setRoleAdmin(rs.getBoolean("roleAdmin"));
+            	this.setRoleParticipant(rs.getBoolean("roleParticipant"));
+            	this.setRoleMember(rs.getBoolean("roleMember"));
+            	this.setRoleManager(rs.getBoolean("roleManager"));
+            	this.setUserAnswer(rs.getString("answer"));
+            	this.setIdquestion(rs.getInt("idquestion"));
             }
 		}
 		catch(SQLException e){
@@ -59,5 +70,19 @@ public class UserJDBC extends User{
 			result = false;
 		jdbc.close();
 		return result;
+	}
+	
+	@Override
+	public void registerUser(String userLastName, String userFirstName, String userAdresse, String userCity, String userCP, String userEmail, String passwordUser, String userAnswer, int idquestion){
+		jdbc.openConnection();
+		try{
+			String query ="INSERT INTO mainuser(userFirstName, userLastName, userAdresse, userCity, userCP, userEmail, passwordUser, roleAdmin, roleParticipant, rolemember, roleManager, answer, idquestion) "
+					+ "values('"+userFirstName+"','"+userLastName+"','"+userAdresse+"','"+userCity+"','"+userCP+"','"+userEmail+"','"+passwordUser+"', 0, 0, 0, 0, '"+userAnswer+"','"+idquestion+"')";
+			jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
 	}
 }

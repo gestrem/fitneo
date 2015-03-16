@@ -16,4 +16,8 @@ public class UserFacade {
 		return user.isMailAvailable(mail);
 	}
 	
+	public void signin(String userLastName, String userFirstName, String userAdresse, String userCity, String userCP, String userEmail, String passwordUser, String userAnswer, int idquestion){
+		user.signin(userLastName, userFirstName, userAdresse, userCity, userCP, userEmail, passwordUser, userAnswer, idquestion);
+	}
+	
 }
