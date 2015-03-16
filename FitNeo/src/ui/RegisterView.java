@@ -22,8 +22,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 
 @SuppressWarnings("serial")
 public class RegisterView extends JDialog implements ActionListener {
@@ -46,7 +46,7 @@ public class RegisterView extends JDialog implements ActionListener {
 	 */
 	public RegisterView(JFrame owner, boolean modal) {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setModal(modal);
 		this.owner = (LoginUI) owner;
 		setBounds(100, 100, 350, 620);
@@ -204,6 +204,7 @@ public class RegisterView extends JDialog implements ActionListener {
 		}
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		String cmd = e.getActionCommand();

@@ -15,7 +15,7 @@ public abstract class Notification {
 	/* isRead renvoie vrai si la notification est lue
 	 * is Demand renvoie vrai si la notification correspond a une demande a valider */
 	
-	private static Notification[] notification = null;
+	private static Notification notification = null;
 	private ArrayList<Notification> listNotification = null; 
 	
 	public Notification(){	

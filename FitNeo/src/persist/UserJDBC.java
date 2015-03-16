@@ -19,6 +19,7 @@ public class UserJDBC extends User{
      * Si l'user n'existe pas, l'user est null.
      * @param login le login donné par l'user
      */
+	@Override
 	public void setUser(String login){
 		
 		jdbc.openConnection();
@@ -43,6 +44,7 @@ public class UserJDBC extends User{
      * @param mail, le mail a verifier
      * @return result, vrai si mail inconnu, false sinon
      */
+	@Override
 	public boolean verifyMail(String mail){
 		jdbc.openConnection();
 		boolean result = true;

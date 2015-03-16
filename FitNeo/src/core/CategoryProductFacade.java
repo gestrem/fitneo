@@ -5,6 +5,6 @@ public class CategoryProductFacade {
 	
 	public CategoryProductFacade(int persistType){
 		//On crée une room du type de persistance choisi
-		usecatr = CategoryProduct.getInstance(persistType);
+		cat = CategoryProduct.getInstance(persistType);
 	}
 }

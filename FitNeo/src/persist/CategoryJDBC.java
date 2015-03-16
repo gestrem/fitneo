@@ -1,8 +1,5 @@
 package persist;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import core.CategoryProduct;
 
 public class CategoryJDBC extends CategoryProduct{

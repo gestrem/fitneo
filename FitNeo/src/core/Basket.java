@@ -7,7 +7,7 @@ public abstract class Basket {
 	
 	private static Basket basket = null;
 	
-	Basket(){
+	public Basket(){
 		
 	}
 	

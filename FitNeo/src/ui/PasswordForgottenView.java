@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
@@ -45,6 +43,7 @@ public class PasswordForgottenView extends JDialog {
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}

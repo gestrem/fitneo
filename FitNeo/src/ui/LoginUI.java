@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 
 import javax.swing.ImageIcon;
+import javax.swing.WindowConstants;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	public JDialog passwordForgot;
 	//fenetre pour s'enregistrer
 	public JDialog registerView;
+	public JFrame mainWindow;
 	
 	private JPasswordField fieldPassword;
 	private JTextField fieldLogin;
@@ -50,7 +52,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		this.userFacade = new UserFacade(this.persistType);	
 		initialize();
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
 	public UserFacade getUserFacade(){
@@ -100,7 +102,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		springLayout.putConstraint(SpringLayout.WEST, label, 0, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, label, 0, SpringLayout.EAST, getContentPane());
-		label.setIcon(new ImageIcon("C:\\Users\\Florent\\workspace\\FitNeo\\data\\Sans titre-2.png"));
+		label.setIcon(new ImageIcon("././data/petitlogo.png"));
 		getContentPane().add(label);
 		
 		JButton connectButton = new JButton("Log In");
@@ -142,6 +144,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		labelMsg.setVisible(b);
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		String cmd = e.getActionCommand();
@@ -151,7 +154,10 @@ public class LoginUI extends JFrame implements ActionListener {
 					setLabelMsg("Wrong login and/or password ", Color.RED, true);
 				}
 				else{
-					setLabelMsg("Welcome on FitNeo, "+getLoginText()+" !", Color.GREEN, true);
+					//setLabelMsg("Welcome on FitNeo, "+getLoginText()+" !", Color.GREEN, true);
+					mainWindow = new MainView();
+					mainWindow.setVisible(true);
+					dispose();
 				}
 			}			
 		}

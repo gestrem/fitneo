@@ -16,6 +16,7 @@ public class AccessoryView extends JFrame {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					AccessoryView frame = new AccessoryView();

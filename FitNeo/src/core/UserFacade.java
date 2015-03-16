@@ -15,4 +15,5 @@ public class UserFacade {
 	public boolean isMailAvailable(String mail){
 		return user.isMailAvailable(mail);
 	}
+	
 }
