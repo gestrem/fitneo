@@ -1,7 +1,6 @@
 package fitneo;
 
-import ui.LoginView;
-
+import ui.LoginUI;
 import persist.PersistKit;
 
 public class Main {
@@ -25,10 +24,10 @@ public class Main {
 
         /* On charge notre fenetre avec le type souhaite */
         switch (typePersist) {
-            case 0: new LoginView(PersistKit.JDBC); break;
-            case 1: new LoginView(PersistKit.SERIALIZABLE); break;
-            case 2: new LoginView(PersistKit.XML); break;
-            default :  new LoginView(PersistKit.JDBC); break;
+            case 0: new LoginUI(PersistKit.JDBC); break;
+            case 1: new LoginUI(PersistKit.SERIALIZABLE); break;
+            case 2: new LoginUI(PersistKit.XML); break;
+            default :  new LoginUI(PersistKit.JDBC); break;
         }
     }
 }
