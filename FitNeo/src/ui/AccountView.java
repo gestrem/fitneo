@@ -89,7 +89,7 @@ public class AccountView extends JPanel {
 		springLayout.putConstraint(SpringLayout.EAST, taEmail, -396, SpringLayout.EAST, this);
 		add(taEmail);
 		
-		JLabel lblYourProfile = new JLabel("Your profile");
+		JLabel lblYourProfile = new JLabel("Your Fitneo profile");
 		springLayout.putConstraint(SpringLayout.NORTH, lblYourProfile, 36, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.EAST, lblYourProfile, -325, SpringLayout.EAST, this);
 		lblYourProfile.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
