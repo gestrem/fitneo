@@ -1,27 +1,20 @@
 package core;
 
-import java.util.ArrayList;
-
-import persist.PersistKit;
-
-public abstract class Product {
+public class Product {
 	private String productTypeName; 
 	private int productPrice; 
 	private int availableQuantity; 
 	private int discountMember; 
-	private CategoryProduct category; 
+	private int category; 
 	
-	private static Product product = null;
-	private ArrayList<Product> listProduct = null; 
-	
-	public Product(){	
+	public Product(String productTypeName, int productPrice,int availableQuantity,int discountMember,int category){	
+		this.productTypeName= productTypeName;
+		this.productPrice= productPrice;
+		this.availableQuantity = availableQuantity;
+		this.discountMember = discountMember;
+		this.category = category;
 	}
-	
-	
-	public static Product getInstance(int persistType){
-		if (product == null)
-			product = PersistKit.createKit(persistType).createProduct();
-		return product;
+	public String toString(){
+		return productTypeName;
 	}
-
 }

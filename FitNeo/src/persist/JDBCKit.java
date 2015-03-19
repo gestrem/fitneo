@@ -1,12 +1,12 @@
 package persist;
 
+import core.ListProduct;
 import core.Notification;
 import core.AccessoryType;
 import core.Activity;
 import core.Basket;
 import core.CategoryProduct;
 import core.Event;
-import core.Product;
 import core.Room;
 import core.User;
 
@@ -62,8 +62,8 @@ public class JDBCKit extends PersistKit {
     }
     
     @Override
-    public Product createProduct(){
-    	Product product = new ProductJDBC();
+    public ListProduct createListProduct(){
+    	ListProduct product = new ListProductJDBC();
         return product;
     }
     
