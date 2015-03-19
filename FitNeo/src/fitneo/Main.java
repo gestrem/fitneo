@@ -3,7 +3,7 @@ package fitneo;
 import ui.LoginUI;
 
 import persist.PersistKit;
-import core.Room;
+import core.ListRoom;
 public class Main {
 
     /**
@@ -19,7 +19,12 @@ public class Main {
          * 
          * */
         
-    	Room room=new Room();
+    	ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);
+    	System.out.println("test");
+    	//listroom.createListRoom("20m", "Cours");
+    	//listroom.updateListRoom(1,"40m2","Concert",20);
+    	listroom.deleteRoom(1);
+    	System.out.println("Fait");
     	
     	
     	

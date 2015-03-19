@@ -9,7 +9,7 @@ import core.Event;
 import core.Product;
 import core.Room;
 import core.User;
-
+import core.ListRoom;
 public abstract class PersistKit {
 
     /* L'instance de notre kit */
@@ -21,7 +21,7 @@ public abstract class PersistKit {
     public static final int XML = 3;
 
 
-    /* Methodes create qui créer une classe metier du bon type de persistance */
+    /* Methodes create qui crï¿½er une classe metier du bon type de persistance */
     public abstract User createUser(); 
     public abstract Basket createBasket();
     public abstract AccessoryType createAccessory();
@@ -30,7 +30,7 @@ public abstract class PersistKit {
     public abstract Event createEvent();
     public abstract Notification createNotification();
     public abstract Product createProduct();
-    public abstract Room createRoom();
+    public abstract ListRoom createListRoom();
     
 
     /**
@@ -44,7 +44,7 @@ public abstract class PersistKit {
         if (persistKit == null) {
 
             if (type == JDBC) {
-
+            	System.out.println("test perist kits");
                 persistKit = new JDBCKit();
 
             } else  if (type == SERIALIZABLE) {
