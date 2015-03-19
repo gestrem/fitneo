@@ -4,21 +4,59 @@ import java.util.ArrayList;
 
 import persist.PersistKit;
 
-public abstract class Room {
+public class Room {
 	private int roomId;
-	private int roomArea;
+	private String roomArea;
+	private String roomType;
 	
-	private static Room room = null;
-	private ArrayList<Room> listRoom = null; 
+
 	
-	public Room(){
+	public Room(int idRoom,String roomArea,String roomType){
+		this.roomArea=roomArea;
+		this.roomId=idRoom;
+		this.roomType=roomType;
+		
 	}
 	
 	
-	public static Room getInstance(int persistType){
-		if (room == null)
-			room = PersistKit.createKit(persistType).createRoom();
-		return room;
+	
+
+
+	public int getRoomId() {
+		return roomId;
+	}
+
+
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
+	}
+
+
+	public String getRoomArea() {
+		return roomArea;
+	}
+
+
+	public void setRoomArea(String roomArea) {
+		this.roomArea = roomArea;
+	}
+
+
+
+
+
+	public String getRoomType() {
+		return roomType;
+	}
+
+
+
+
+
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
 	}
 	
+	
+
 }

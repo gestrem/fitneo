@@ -8,6 +8,8 @@ import core.Basket;
 import core.CategoryProduct;
 import core.Event;
 import core.Room;
+import core.Product;
+import core.ListRoom;
 import core.User;
 
 public class JDBCKit extends PersistKit {
@@ -68,8 +70,21 @@ public class JDBCKit extends PersistKit {
     }
     
     @Override
-    public Room createRoom(){
-    	Room room = new RoomJDBC();
-        return room;
+    public ListRoom createListRoom(){
+    	System.out.println("jdbckit");
+    	ListRoom listRoom = new ListRoomJDBC();
+        return listRoom;
     }
+
+	@Override
+	public Room createRoom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product createProduct() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
