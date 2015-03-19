@@ -55,7 +55,7 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 	
-public void getAllroomJDBC(){
+public void getAllRoomJDBC(){
 		
 		jdbc.openConnection();
 		ResultSet rs = null;
@@ -76,7 +76,14 @@ public void getAllroomJDBC(){
 		jdbc.close();
 	}
 
-public void getAllroomFreeJDBC(){
+
+@Override
+public void getAllRoomFreeJDBC() {
+	// TODO Auto-generated method stub
+	
+}
+
+/*public void getAllroomFreeJDBC(){
 	 //to do
 	jdbc.openConnection();
 	ResultSet rs = null;
@@ -96,4 +103,5 @@ public void getAllroomFreeJDBC(){
 	}
 	jdbc.close();
 }
+*/
 }

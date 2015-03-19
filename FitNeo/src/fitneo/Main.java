@@ -21,9 +21,11 @@ public class Main {
         
     	ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);
     	System.out.println("test");
-    	//listroom.createListRoom("20m", "Cours");
+    	listroom.createRoom("20m", "Cours");
+    	listroom.createRoom("30m","repos");
     	//listroom.updateListRoom(1,"40m2","Concert",20);
-    	listroom.deleteRoom(1);
+    	listroom.createListRoom(0);
+    	listroom.getListRoom();
     	System.out.println("Fait");
     	
     	
