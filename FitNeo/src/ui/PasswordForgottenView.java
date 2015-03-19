@@ -30,16 +30,19 @@ public class PasswordForgottenView extends JDialog implements ActionListener {
 	private JLabel lblNewLabel;
 	private JLabel lblYouCanUse;
 	private JLabel lblEnterYouEmail;
-	private JTextField textField;
+	private JTextField mailField;
 	private JLabel lblEnterYourEmail;
 	private JLabel msglabel;
 	private JLabel lblYourNewPassword;
-	private JTextField textField_1;
+	private JTextField newPasswordField;
+	private JPanel panelPassword;
 
 	/**
 	 * Create the dialog.
 	 */
 	public PasswordForgottenView(JFrame owner, boolean modal) {
+		setModal(modal);
+		this.owner = (LoginUI) owner;
 		setResizable(false);
 		setBounds(100, 100, 316, 391);
 		getContentPane().setLayout(new BorderLayout());
@@ -72,47 +75,48 @@ public class PasswordForgottenView extends JDialog implements ActionListener {
 			contentPanel.add(lblEnterYourEmail);
 		}
 		{
-			textField = new JTextField();
-			sl_contentPanel.putConstraint(SpringLayout.NORTH, textField, -3, SpringLayout.NORTH, lblEnterYourEmail);
-			sl_contentPanel.putConstraint(SpringLayout.WEST, textField, 6, SpringLayout.EAST, lblEnterYourEmail);
-			sl_contentPanel.putConstraint(SpringLayout.EAST, textField, -15, SpringLayout.EAST, contentPanel);
-			contentPanel.add(textField);
-			textField.setColumns(10);
+			mailField = new JTextField();
+			sl_contentPanel.putConstraint(SpringLayout.NORTH, mailField, -3, SpringLayout.NORTH, lblEnterYourEmail);
+			sl_contentPanel.putConstraint(SpringLayout.WEST, mailField, 6, SpringLayout.EAST, lblEnterYourEmail);
+			sl_contentPanel.putConstraint(SpringLayout.EAST, mailField, -15, SpringLayout.EAST, contentPanel);
+			contentPanel.add(mailField);
+			mailField.setColumns(10);
 		}
 		{
 			msglabel = new JLabel("This email is invalid !");
 			msglabel.setVisible(false);
-			sl_contentPanel.putConstraint(SpringLayout.NORTH, msglabel, 6, SpringLayout.SOUTH, textField);
-			sl_contentPanel.putConstraint(SpringLayout.WEST, msglabel, 0, SpringLayout.WEST, textField);
+			sl_contentPanel.putConstraint(SpringLayout.NORTH, msglabel, 6, SpringLayout.SOUTH, mailField);
+			sl_contentPanel.putConstraint(SpringLayout.WEST, msglabel, 0, SpringLayout.WEST, mailField);
 			sl_contentPanel.putConstraint(SpringLayout.EAST, msglabel, -64, SpringLayout.EAST, contentPanel);
 			msglabel.setForeground(Color.RED);
 			contentPanel.add(msglabel);
 		}
 		{
-			JPanel panel = new JPanel();
-			sl_contentPanel.putConstraint(SpringLayout.WEST, panel, 0, SpringLayout.WEST, contentPanel);
-			sl_contentPanel.putConstraint(SpringLayout.EAST, panel, -10, SpringLayout.EAST, contentPanel);
-			sl_contentPanel.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, panel);
-			sl_contentPanel.putConstraint(SpringLayout.NORTH, panel, 16, SpringLayout.SOUTH, msglabel);
-			sl_contentPanel.putConstraint(SpringLayout.SOUTH, panel, -24, SpringLayout.SOUTH, contentPanel);
-			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel.setBackground(Color.WHITE);
-			contentPanel.add(panel);
-			SpringLayout sl_panel = new SpringLayout();
-			panel.setLayout(sl_panel);
+			panelPassword = new JPanel();
+			panelPassword.setVisible(false);
+			sl_contentPanel.putConstraint(SpringLayout.WEST, panelPassword, 0, SpringLayout.WEST, contentPanel);
+			sl_contentPanel.putConstraint(SpringLayout.EAST, panelPassword, -10, SpringLayout.EAST, contentPanel);
+			sl_contentPanel.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, panelPassword);
+			sl_contentPanel.putConstraint(SpringLayout.NORTH, panelPassword, 16, SpringLayout.SOUTH, msglabel);
+			sl_contentPanel.putConstraint(SpringLayout.SOUTH, panelPassword, -24, SpringLayout.SOUTH, contentPanel);
+			panelPassword.setBorder(new LineBorder(new Color(0, 0, 0)));
+			panelPassword.setBackground(Color.WHITE);
+			contentPanel.add(panelPassword);
+			SpringLayout sl_panelPassword = new SpringLayout();
+			panelPassword.setLayout(sl_panelPassword);
 			{
 				lblYourNewPassword = new JLabel("Your new password is :");
-				panel.add(lblYourNewPassword);
+				panelPassword.add(lblYourNewPassword);
 			}
 			{
-				textField_1 = new JTextField();
-				sl_panel.putConstraint(SpringLayout.NORTH, textField_1, 48, SpringLayout.NORTH, panel);
-				sl_panel.putConstraint(SpringLayout.WEST, textField_1, 20, SpringLayout.WEST, panel);
-				sl_panel.putConstraint(SpringLayout.EAST, textField_1, -22, SpringLayout.EAST, panel);
-				sl_panel.putConstraint(SpringLayout.WEST, lblYourNewPassword, 0, SpringLayout.WEST, textField_1);
-				sl_panel.putConstraint(SpringLayout.SOUTH, lblYourNewPassword, -6, SpringLayout.NORTH, textField_1);
-				panel.add(textField_1);
-				textField_1.setColumns(10);
+				newPasswordField = new JTextField();
+				sl_panelPassword.putConstraint(SpringLayout.NORTH, newPasswordField, 48, SpringLayout.NORTH, panelPassword);
+				sl_panelPassword.putConstraint(SpringLayout.WEST, newPasswordField, 20, SpringLayout.WEST, panelPassword);
+				sl_panelPassword.putConstraint(SpringLayout.EAST, newPasswordField, -22, SpringLayout.EAST, panelPassword);
+				sl_panelPassword.putConstraint(SpringLayout.WEST, lblYourNewPassword, 0, SpringLayout.WEST, newPasswordField);
+				sl_panelPassword.putConstraint(SpringLayout.SOUTH, lblYourNewPassword, -6, SpringLayout.NORTH, newPasswordField);
+				panelPassword.add(newPasswordField);
+				newPasswordField.setColumns(10);
 			}
 		}
 		{
@@ -140,7 +144,15 @@ public class PasswordForgottenView extends JDialog implements ActionListener {
 	{
 		String cmd = e.getActionCommand();
 		if(cmd.equals("OK")){
-			
+			if(!mailField.getText().equals("") && !owner.getUserFacade().isMailAvailable(mailField.getText())){
+				String newpass = owner.getUserFacade().reinitializePassword(mailField.getText());
+				panelPassword.setVisible(true);
+				newPasswordField.setText(newpass);
+				msglabel.setVisible(false);
+			}
+			else{
+				msglabel.setVisible(true);
+			}
 		}
 		else if(cmd.equals("Cancel")){
 			dispose();

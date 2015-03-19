@@ -60,7 +60,7 @@ public class UserJDBC extends User{
 		jdbc.openConnection();
 		boolean result = true;
 		try{
-			String query ="SELECT userEMail from mainuser WHERE userEMail ='" + mail + "'";
+			String query ="SELECT userEmail from mainuser WHERE userEmail ='" + mail + "'";
 			jdbc.executeRequest(query);
 		}
 		catch(Exception e){
@@ -84,5 +84,24 @@ public class UserJDBC extends User{
 			e.printStackTrace();
 		}
 		jdbc.close();
+	}
+
+	@Override
+	public String changePassword(String mail) {
+		jdbc.openConnection();
+		String newpass=null;
+		ResultSet rs = null;
+		try{
+			String query ="SELECT passwordUser from mainuser WHERE userEmail ='" + mail + "'";
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				newpass=rs.getString("passworduser");
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+		return newpass;
 	}
 }

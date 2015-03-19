@@ -168,12 +168,17 @@ public abstract class User {
 		return verifyMail(mail);
 	}
 	
+	public String reinitializePassword(String mail){
+		return changePassword(mail);
+	}
+	
 	public static User getInstance(int persistType){
 		if (user == null)
 			user = PersistKit.createKit(persistType).createUser();
 		return user;
 	}
 	
+	public abstract String changePassword(String mail);
 	public abstract void setUser(String login);
 	public abstract boolean verifyMail(String mail);
 	public abstract void registerUser(String userLastName, String userFirstName, String userAdresse, String userCity, String userCP, String userEmail, String passwordUser, String userAnswer, int idquestion);

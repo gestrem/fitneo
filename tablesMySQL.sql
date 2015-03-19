@@ -121,14 +121,18 @@ eventDate date not null,
 eventPrice float,
 idroom int not null,
 participant int not null,
+id_activity int default null,
 primary key (idEvent),
 key FK_event_room (idroom),
-key FK_event_participant(participant)
+key FK_event_participant(participant),
+key FK_event_activity(id_activity)
 );
 ALTER TABLE `event`
 	ADD CONSTRAINT FK_event_room FOREIGN KEY (idroom) REFERENCES room (idRoom);
 ALTER TABLE `event`
 	ADD CONSTRAINT FK_event_participant FOREIGN KEY (participant) REFERENCES mainuser (idUser);
+ALTER TABLE `event`
+	ADD CONSTRAINT FK_event_activity FOREIGN KEY (id_activity) REFERENCES activity (idActivity);
 
 --Participe --
 create table inscription (

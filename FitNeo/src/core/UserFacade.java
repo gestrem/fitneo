@@ -20,4 +20,8 @@ public class UserFacade {
 		user.signin(userLastName, userFirstName, userAdresse, userCity, userCP, userEmail, passwordUser, userAnswer, idquestion);
 	}
 	
+	public String reinitializePassword(String mail){
+		return user.reinitializePassword(mail);
+	}
+	
 }
