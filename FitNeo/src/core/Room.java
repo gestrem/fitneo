@@ -11,9 +11,10 @@ public class Room {
 	
 
 	
-	public Room(int roomId,String roomArea){
+	public Room(int idRoom,String roomArea,String roomType){
 		this.roomArea=roomArea;
-		this.roomId=roomId;
+		this.roomId=idRoom;
+		this.roomType=roomType;
 		
 	}
 	

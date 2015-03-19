@@ -2,6 +2,7 @@ package persist;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import core.Room;
 import core.ListRoom;
@@ -53,4 +54,46 @@ public class ListRoomJDBC extends ListRoom{
 		}
 		jdbc.close();
 	}
+	
+public void getAllroomJDBC(){
+		
+		jdbc.openConnection();
+		ResultSet rs = null;
+		ArrayList listRoom=new ArrayList<ListRoom>();
+		
+		try{
+			String query = "SELECT * FROM room";
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType")));
+            	
+            }
+		this.setListRoom(listRoom);
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+	}
+
+public void getAllroomFreeJDBC(){
+	 //to do
+	jdbc.openConnection();
+	ResultSet rs = null;
+	ArrayList listRoom=new ArrayList<ListRoom>();
+	
+	try{
+		String query = "SELECT * FROM room ";
+		jdbc.executeRequest(query);
+		while ((rs = jdbc.fetchArray()) != null) {
+			listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType")));
+        	
+        }
+	this.setListRoom(listRoom);
+	}
+	catch(SQLException e){
+		e.printStackTrace();
+	}
+	jdbc.close();
+}
 }
