@@ -12,6 +12,11 @@ public abstract class Room {
 	private ArrayList<Room> listRoom = null; 
 	
 	public Room(){
+	}
+	
+	public Room(int roomId,int roomArea){
+		this.roomArea=roomArea;
+		this.roomId=roomId;
 		
 	}
 	
@@ -42,4 +47,12 @@ public abstract class Room {
 		this.roomArea = roomArea;
 	}
 	
+	public void createRoom(int roomArea){
+		room.createRoom(roomArea);
+		
+	}
+	public void updateRoomArea(int roomId,int roomArea){
+		room.updateRoomArea(roomId,roomArea);
+		
+	}
 }
