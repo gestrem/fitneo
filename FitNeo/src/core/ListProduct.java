@@ -10,9 +10,7 @@ public abstract class ListProduct {
 	
 	private ArrayList <Product> listAllProduct = new ArrayList<Product>();
 	
-	public ArrayList<Product> getListAllProduct() {
-		return listAllProduct;
-	}
+
 
 	public ListProduct(){
 		
@@ -20,16 +18,21 @@ public abstract class ListProduct {
 	
 	public void add(Product prod){
 		listAllProduct.add(prod);
+	}	
+
+	public ArrayList<Product> getListAllProduct() {
+		return listAllProduct;
 	}
 	
-	public abstract void getAllProduct();
+	public void setListProduct(ArrayList<Product> listProduct){
+		this.listAllProduct= listProduct;
+	}
 	
 	public static ListProduct getInstance(int persistType){
 		if (listProduct == null)
 			listProduct = PersistKit.createKit(persistType).createListProduct();
 		return listProduct;
 	}
-	public void setListProduct(ArrayList<Product> listProduct){
-		this.listAllProduct= listProduct;
-	}
+	
+	public abstract void getAllProduct();
 }

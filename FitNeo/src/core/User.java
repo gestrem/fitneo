@@ -173,8 +173,10 @@ public abstract class User {
 	}
 	
 	public static User getInstance(int persistType){
-		if (user == null)
+		if (user == null){
 			user = PersistKit.createKit(persistType).createUser();
+			System.out.println("hello user");
+		}
 		return user;
 	}
 	

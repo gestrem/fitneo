@@ -162,7 +162,7 @@ public class LoginUI extends JFrame implements ActionListener {
 				}
 				else{
 					//setLabelMsg("Welcome on FitNeo, "+getLoginText()+" !", Color.GREEN, true);
-					mainWindow = new MainView();
+					mainWindow = new MainView(this.persistType);
 					mainWindow.setVisible(true);
 					dispose();
 				}

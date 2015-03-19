@@ -6,6 +6,7 @@ public class UserFacade {
 	public UserFacade(int persistType){
 		//On crée un user du type de persistance choisi
 		user = User.getInstance(persistType);
+		System.out.println(user.getUserEmail());
 	}
 	
 	public User login(String login, String pwd){
@@ -22,6 +23,46 @@ public class UserFacade {
 	
 	public String reinitializePassword(String mail){
 		return user.reinitializePassword(mail);
+	}
+	
+	public String getUserCP(){
+		return user.getUserCP();
+	}
+	
+	public String getUserEmail() {
+		return user.getUserEmail();
+	}
+	
+	public String getUserCity() {
+		return user.getUserCity();
+	}
+	
+	public String getUserAdresse() {
+		return user.getUserAdresse();
+	}
+	
+	public String getUserLastName() {
+		return user.getUserLastName();
+	}
+	
+	public String getUserFirstName() {
+		return user.getUserFirstName();
+	}
+	
+	public boolean isRoleParticipant() {
+		return user.isRoleParticipant();
+	}
+	
+	public boolean isRoleMember() {
+		return user.isRoleMember();
+	}
+	
+	public boolean isRoleManager() {
+		return user.isRoleManager();
+	}
+	
+	public boolean isRoleAdmin() {
+		return user.isRoleAdmin();
 	}
 	
 }

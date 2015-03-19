@@ -309,7 +309,7 @@ public class RegisterView extends JDialog implements ActionListener {
 		}
 		else{
 			adressField.setBackground(Color.WHITE);
-			userAdresse = adressField.getText();
+			userAdresse = adressField.getText().replace("'", "''");;
 		}
 		
 		if(zipField.getText().equals("") || !isValidZipCode(zipField.getText())){

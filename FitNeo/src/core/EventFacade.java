@@ -1,10 +1,10 @@
 package core;
 
 public class EventFacade {
-	private Event event;
+	private ListEvent listevent;
 	
 	public EventFacade(int persistType){
 		//On crée une room du type de persistance choisi
-		event = Event.getInstance(persistType);
+		listevent = ListEvent.getInstance(persistType);
 	}
 }

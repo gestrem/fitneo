@@ -1,14 +1,12 @@
 package persist;
 
+import core.ListCategory;
+import core.ListEvent;
 import core.ListProduct;
 import core.Notification;
 import core.AccessoryType;
 import core.Activity;
 import core.Basket;
-import core.CategoryProduct;
-import core.Event;
-import core.Product;
-import core.Room;
 import core.User;
 import core.ListRoom;
 public abstract class PersistKit {
@@ -22,18 +20,17 @@ public abstract class PersistKit {
     public static final int XML = 3;
 
 
-    /* Methodes create qui crï¿½er une classe metier du bon type de persistance */
+    /* Methodes create qui create une classe metier du bon type de persistance */
     public abstract User createUser(); 
-    public abstract Basket createBasket();
+    public abstract Basket createBasket();  
+    public abstract ListCategory createListCategory();
+    public abstract ListEvent createListEvent();  
+    public abstract ListProduct createListProduct();
+    public abstract ListRoom createListRoom();
+    //reste à modifier ici
     public abstract AccessoryType createAccessory();
     public abstract Activity createActivity();
-    public abstract CategoryProduct createCategory();
-    public abstract Event createEvent();
     public abstract Notification createNotification();
-    public abstract ListProduct createListProduct();
-    public abstract Room createRoom();
-    public abstract Product createProduct();
-    public abstract ListRoom createListRoom();
     
 
     /**
@@ -47,7 +44,7 @@ public abstract class PersistKit {
         if (persistKit == null) {
 
             if (type == JDBC) {
-            	System.out.println("test perist kits");
+            	
                 persistKit = new JDBCKit();
 
             } else  if (type == SERIALIZABLE) {

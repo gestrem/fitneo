@@ -3,97 +3,132 @@ package ui;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import javax.swing.JComboBox;
+import core.UserFacade;
 import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class AccountView extends JPanel {
 
+	//Facade de la classe User
+	private UserFacade userFacade;
+	//type de persistance choisi
+	private int persistType;
+	
+	JPanel panel_1;
+	private JLabel firstnameLabel;
+	private JLabel lastnameLabel;
+	private JLabel adressLabel;
+	private JLabel cpLabel;
+	private JLabel cityLabel;
+	private JLabel mailLabel;
+	private JComboBox<String> comboBoxRole;
+	
 	/**
 	 * Create the panel.
 	 */
-	public AccountView() {
-		SpringLayout springLayout = new SpringLayout();
-		setLayout(springLayout);
+	public AccountView(int persistType) {
+		this.persistType = persistType;
+		//On instancie une facadeUser pour la vue
+		this.userFacade = new UserFacade(this.persistType);	
 		
-		JLabel lblFirstname = new JLabel("FirstName :");
-		springLayout.putConstraint(SpringLayout.NORTH, lblFirstname, 156, SpringLayout.NORTH, this);
-		lblFirstname.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		springLayout.putConstraint(SpringLayout.WEST, lblFirstname, 10, SpringLayout.WEST, this);
-		add(lblFirstname);
+		setBorder(new LineBorder(new Color(0, 0, 0)));
+		setBackground(Color.WHITE);
+		setLayout(new GridLayout(1, 2, 0, 0));
 		
-		JTextArea taFirstname = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, taFirstname, 7, SpringLayout.NORTH, lblFirstname);
-		add(taFirstname);
+		JPanel panel = new JPanel();
+		add(panel);
+		SpringLayout sl_panel = new SpringLayout();
+		panel.setLayout(sl_panel);
 		
-		JLabel lblLastname = new JLabel("Lastname:");
-		springLayout.putConstraint(SpringLayout.WEST, lblLastname, 0, SpringLayout.WEST, this);
-		lblLastname.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		add(lblLastname);
+		firstnameLabel = new JLabel("New label");
+		sl_panel.putConstraint(SpringLayout.WEST, firstnameLabel, 10, SpringLayout.WEST, panel);
+		panel.add(firstnameLabel);
 		
-		JTextArea taLastName = new JTextArea();
-		springLayout.putConstraint(SpringLayout.WEST, taFirstname, 0, SpringLayout.WEST, taLastName);
-		springLayout.putConstraint(SpringLayout.EAST, taFirstname, 0, SpringLayout.EAST, taLastName);
-		springLayout.putConstraint(SpringLayout.NORTH, lblLastname, -7, SpringLayout.NORTH, taLastName);
-		springLayout.putConstraint(SpringLayout.WEST, taLastName, 124, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.EAST, taLastName, -387, SpringLayout.EAST, this);
-		add(taLastName);
+		lastnameLabel = new JLabel("New label");
+		sl_panel.putConstraint(SpringLayout.NORTH, lastnameLabel, 30, SpringLayout.NORTH, panel);
+		sl_panel.putConstraint(SpringLayout.WEST, lastnameLabel, 135, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, lastnameLabel, -156, SpringLayout.EAST, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, firstnameLabel, -6, SpringLayout.WEST, lastnameLabel);
+		panel.add(lastnameLabel);
 		
-		JLabel lblNewLabel = new JLabel("Adress:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 156, SpringLayout.NORTH, this);
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		add(lblNewLabel);
+		adressLabel = new JLabel("New label");
+		sl_panel.putConstraint(SpringLayout.NORTH, adressLabel, 6, SpringLayout.SOUTH, firstnameLabel);
+		sl_panel.putConstraint(SpringLayout.WEST, adressLabel, 10, SpringLayout.WEST, panel);
+		panel.add(adressLabel);
 		
-		JTextArea taAdress = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, taAdress, 7, SpringLayout.NORTH, lblFirstname);
-		springLayout.putConstraint(SpringLayout.WEST, taAdress, 546, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, taAdress, 23, SpringLayout.NORTH, lblFirstname);
-		add(taAdress);
+		cpLabel = new JLabel("New label");
+		sl_panel.putConstraint(SpringLayout.NORTH, cpLabel, 6, SpringLayout.SOUTH, adressLabel);
+		sl_panel.putConstraint(SpringLayout.WEST, cpLabel, 10, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, cpLabel, 0, SpringLayout.EAST, adressLabel);
+		panel.add(cpLabel);
 		
-		JLabel lblCity = new JLabel("City :");
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, lblCity);
-		springLayout.putConstraint(SpringLayout.NORTH, lblCity, 0, SpringLayout.NORTH, lblLastname);
-		lblCity.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		add(lblCity);
+		cityLabel = new JLabel("New label");
+		sl_panel.putConstraint(SpringLayout.NORTH, cityLabel, 6, SpringLayout.SOUTH, cpLabel);
+		sl_panel.putConstraint(SpringLayout.EAST, adressLabel, 0, SpringLayout.EAST, cityLabel);
+		sl_panel.putConstraint(SpringLayout.WEST, cityLabel, 10, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, cityLabel, -156, SpringLayout.EAST, panel);
+		panel.add(cityLabel);
 		
-		JTextArea taCity = new JTextArea();
-		springLayout.putConstraint(SpringLayout.EAST, taAdress, 0, SpringLayout.EAST, taCity);
-		springLayout.putConstraint(SpringLayout.EAST, lblCity, -28, SpringLayout.WEST, taCity);
-		springLayout.putConstraint(SpringLayout.SOUTH, taCity, 16, SpringLayout.NORTH, taLastName);
-		springLayout.putConstraint(SpringLayout.EAST, taCity, -10, SpringLayout.EAST, this);
-		springLayout.putConstraint(SpringLayout.NORTH, taCity, 0, SpringLayout.NORTH, taLastName);
-		add(taCity);
+		mailLabel = new JLabel("New label");
+		sl_panel.putConstraint(SpringLayout.NORTH, mailLabel, 6, SpringLayout.SOUTH, cityLabel);
+		sl_panel.putConstraint(SpringLayout.WEST, mailLabel, 10, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.EAST, mailLabel, 0, SpringLayout.EAST, adressLabel);
+		panel.add(mailLabel);
 		
-		JLabel lblZipcode = new JLabel("ZipCode :");
-		lblZipcode.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		add(lblZipcode);
+		JLabel lblNewLabel = new JLabel("Personnal informations");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		sl_panel.putConstraint(SpringLayout.WEST, lblNewLabel, 10, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.NORTH, firstnameLabel, 6, SpringLayout.SOUTH, lblNewLabel);
+		sl_panel.putConstraint(SpringLayout.NORTH, lblNewLabel, 10, SpringLayout.NORTH, panel);
+		panel.add(lblNewLabel);
 		
-		JTextArea taZipcode = new JTextArea();
-		springLayout.putConstraint(SpringLayout.WEST, taZipcode, 18, SpringLayout.EAST, lblZipcode);
-		springLayout.putConstraint(SpringLayout.EAST, taZipcode, -10, SpringLayout.EAST, this);
-		springLayout.putConstraint(SpringLayout.WEST, taCity, 0, SpringLayout.WEST, taZipcode);
-		springLayout.putConstraint(SpringLayout.NORTH, taZipcode, 0, SpringLayout.NORTH, lblZipcode);
-		add(taZipcode);
+		JButton btnUpdateProfil = new JButton("Update profil");
+		sl_panel.putConstraint(SpringLayout.WEST, btnUpdateProfil, 10, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.SOUTH, btnUpdateProfil, -10, SpringLayout.SOUTH, panel);
+		panel.add(btnUpdateProfil);
 		
-		JLabel lblEmail = new JLabel("email :");
-		springLayout.putConstraint(SpringLayout.NORTH, lblZipcode, 7, SpringLayout.NORTH, lblEmail);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblEmail, -44, SpringLayout.SOUTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, lblEmail, 0, SpringLayout.EAST, lblLastname);
-		lblEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		add(lblEmail);
+		JButton btnChangePassword = new JButton("Change password");
+		sl_panel.putConstraint(SpringLayout.WEST, btnChangePassword, 10, SpringLayout.WEST, panel);
+		sl_panel.putConstraint(SpringLayout.SOUTH, btnChangePassword, -6, SpringLayout.NORTH, btnUpdateProfil);
+		panel.add(btnChangePassword);
 		
-		JTextArea taEmail = new JTextArea();
-		springLayout.putConstraint(SpringLayout.WEST, lblZipcode, 37, SpringLayout.EAST, taEmail);
-		springLayout.putConstraint(SpringLayout.SOUTH, taLastName, -72, SpringLayout.NORTH, taEmail);
-		springLayout.putConstraint(SpringLayout.NORTH, taEmail, 7, SpringLayout.NORTH, lblEmail);
-		springLayout.putConstraint(SpringLayout.WEST, taEmail, 0, SpringLayout.WEST, taLastName);
-		springLayout.putConstraint(SpringLayout.EAST, taEmail, -396, SpringLayout.EAST, this);
-		add(taEmail);
+		panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		/*comboBoxRole = new JComboBox();
+		comboBoxRole.setToolTipText("Select your role");
+		panel_1.add(comboBoxRole, BorderLayout.NORTH);*/
 		
-		JLabel lblYourProfile = new JLabel("Your Fitneo profile");
-		springLayout.putConstraint(SpringLayout.NORTH, lblYourProfile, 36, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, lblYourProfile, -325, SpringLayout.EAST, this);
-		lblYourProfile.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		add(lblYourProfile);
-
+		setInfosUser();
+	}
+	
+	public void setInfosUser(){
+		firstnameLabel.setText(userFacade.getUserFirstName());
+		lastnameLabel.setText(userFacade.getUserLastName());
+		adressLabel.setText(userFacade.getUserAdresse());
+		cpLabel.setText(userFacade.getUserCP());
+		cityLabel.setText(userFacade.getUserCity());
+		mailLabel.setText(userFacade.getUserEmail());
+		
+		String[] roles = {"Simple user"};
+		if(userFacade.isRoleAdmin())
+			roles= new String[] {"Administrator", "Manager", "Participant", "Member"};
+		else if(userFacade.isRoleManager())
+			roles= new String[] {"Manager", "Participant", "Member"};
+		else if(userFacade.isRoleParticipant())
+			roles= new String[] {"Participant", "Member"};
+		else if(userFacade.isRoleMember())
+			roles= new String[] {"Member", "Simple user"};
+		
+		comboBoxRole = new JComboBox<String>(roles);
+		comboBoxRole.setToolTipText("Select your role");
+		panel_1.add(comboBoxRole, BorderLayout.NORTH);
 	}
 }

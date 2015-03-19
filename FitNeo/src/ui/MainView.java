@@ -4,24 +4,42 @@ import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
+
 import java.awt.CardLayout;
+
 import javax.swing.ImageIcon;
+
+import core.UserFacade;
 
 @SuppressWarnings("serial")
 public class MainView extends JFrame implements ActionListener {
 
+	//Facade de la classe User
+	private UserFacade userFacade;
+	//type de persistance choisi
+	private int persistType;
+	
 	private JPanel panelDisplay;
 	private SpringLayout springLayout;
-	private HomeView hpanel;
+	private HomeView homePanel;
+	private AccountView accountPanel;
+	private ActivityView activityPanel;
+	private EventView eventPanel;
 	
 	/**
 	 * Create the application.
 	 */
-	public MainView() {
+	public MainView(int persistType) {
+		this.persistType = persistType;
+		//On instancie une facadeUser pour la vue
+		this.userFacade = new UserFacade(this.persistType);	
+		
 		setTitle("FitNeo");
 		setResizable(false);
 		initialize();
@@ -37,11 +55,11 @@ public class MainView extends JFrame implements ActionListener {
 		getContentPane().setLayout(springLayout);
 		
 		panelDisplay = new JPanel();
-		hpanel = new HomeView();
+		homePanel = new HomeView();
 		springLayout.putConstraint(SpringLayout.WEST, panelDisplay, 10, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, panelDisplay, -10, SpringLayout.SOUTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, panelDisplay, -10, SpringLayout.EAST, getContentPane());
-		panelDisplay.add(hpanel);
+		panelDisplay.add(homePanel);
 		getContentPane().add(panelDisplay);
 		
 		Button homeButton = new Button("Home");
@@ -54,12 +72,16 @@ public class MainView extends JFrame implements ActionListener {
 		getContentPane().add(homeButton);
 		
 		Button activityButton = new Button("Activities");
+		activityButton.addActionListener(this);
+		activityButton.setActionCommand("Activity");
 		springLayout.putConstraint(SpringLayout.WEST, activityButton, 6, SpringLayout.EAST, homeButton);
 		springLayout.putConstraint(SpringLayout.SOUTH, activityButton, -6, SpringLayout.NORTH, panelDisplay);
 		springLayout.putConstraint(SpringLayout.EAST, activityButton, -412, SpringLayout.EAST, getContentPane());
 		getContentPane().add(activityButton);
 		
 		Button eventButton = new Button("Events");
+		eventButton.addActionListener(this);
+		eventButton.setActionCommand("Event");
 		springLayout.putConstraint(SpringLayout.WEST, eventButton, 6, SpringLayout.EAST, activityButton);
 		springLayout.putConstraint(SpringLayout.SOUTH, eventButton, -6, SpringLayout.NORTH, panelDisplay);
 		springLayout.putConstraint(SpringLayout.EAST, eventButton, -211, SpringLayout.EAST, getContentPane());
@@ -78,6 +100,8 @@ public class MainView extends JFrame implements ActionListener {
 		getContentPane().add(basketButton);
 		
 		Button accountButton = new Button("My account");
+		accountButton.addActionListener(this);
+		accountButton.setActionCommand("Account");
 		springLayout.putConstraint(SpringLayout.NORTH, accountButton, 0, SpringLayout.NORTH, basketButton);
 		springLayout.putConstraint(SpringLayout.EAST, accountButton, -6, SpringLayout.WEST, basketButton);
 		getContentPane().add(accountButton);
@@ -109,7 +133,43 @@ public class MainView extends JFrame implements ActionListener {
 			panelDisplay.revalidate();
 			
 			//add the new JPanel
-			panelDisplay.add(hpanel);
+			panelDisplay.add(homePanel);
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+		}
+		else if(cmd.equals("Account")){
+			accountPanel = new AccountView(this.persistType);
+			//remove ancient JPanel if exist
+			panelDisplay.removeAll();
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+			
+			//add the new JPanel
+			panelDisplay.add(accountPanel);
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+		}
+		else if(cmd.equals("Activity")){
+			activityPanel = new ActivityView();
+			//remove ancient JPanel if exist
+			panelDisplay.removeAll();
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+			
+			//add the new JPanel
+			panelDisplay.add(activityPanel);
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+		}
+		else if(cmd.equals("Event")){
+			eventPanel = new EventView();
+			//remove ancient JPanel if exist
+			panelDisplay.removeAll();
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+			
+			//add the new JPanel
+			panelDisplay.add(eventPanel);
 			panelDisplay.repaint();
 			panelDisplay.revalidate();
 		}

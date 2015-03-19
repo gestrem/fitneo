@@ -1,14 +1,12 @@
 package persist;
 
+import core.ListCategory;
+import core.ListEvent;
 import core.ListProduct;
 import core.Notification;
 import core.AccessoryType;
 import core.Activity;
 import core.Basket;
-import core.CategoryProduct;
-import core.Event;
-import core.Room;
-import core.Product;
 import core.ListRoom;
 import core.User;
 
@@ -34,6 +32,35 @@ public class JDBCKit extends PersistKit {
     }
     
     @Override
+    public ListCategory createListCategory(){
+    	ListCategory listcategory = new ListCategoryJDBC();
+        return listcategory;
+    }
+    
+    @Override
+    public ListEvent createListEvent(){
+    	ListEvent listevent = new ListEventJDBC();
+        return listevent;
+    }
+    
+    @Override
+    public ListProduct createListProduct(){
+    	ListProduct product = new ListProductJDBC();
+        return product;
+    }
+    
+    @Override
+    public ListRoom createListRoom(){
+    	ListRoom listRoom = new ListRoomJDBC();
+        return listRoom;
+    }
+    
+    /*
+     * Ce qui reste à modifier
+     * 
+     */
+    
+    @Override
     public AccessoryType createAccessory(){
     	AccessoryType accessory = new AccessoryJDBC();
         return accessory;
@@ -46,45 +73,8 @@ public class JDBCKit extends PersistKit {
     }
     
     @Override
-    public CategoryProduct createCategory(){
-    	CategoryProduct category = new CategoryJDBC();
-        return category;
-    }
-    
-    @Override
-    public Event createEvent(){
-    	Event event = new EventJDBC();
-        return event;
-    }
-    
-    @Override
     public Notification createNotification(){    	
     	Notification notification = new NotificationJDBC();
         return notification;
     }
-    
-    @Override
-    public ListProduct createListProduct(){
-    	ListProduct product = new ListProductJDBC();
-        return product;
-    }
-    
-    @Override
-    public ListRoom createListRoom(){
-    	System.out.println("jdbckit");
-    	ListRoom listRoom = new ListRoomJDBC();
-        return listRoom;
-    }
-
-	@Override
-	public Room createRoom() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Product createProduct() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

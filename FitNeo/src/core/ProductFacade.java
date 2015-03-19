@@ -1,10 +1,10 @@
 package core;
 
 public class ProductFacade {
-	private Product product;
+	private ListProduct listproduct;
 	
 	public ProductFacade(int persistType){
-		//On crée une room du type de persistance choisi
-		product = Product.getInstance(persistType);
+		//On crée une listProduct du type de persistance choisi
+		listproduct = ListProduct.getInstance(persistType);
 	}
 }
