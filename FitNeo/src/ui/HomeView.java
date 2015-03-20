@@ -35,7 +35,7 @@ public class HomeView extends JPanel {
 		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -47, SpringLayout.SOUTH, this);
 		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, 0, SpringLayout.EAST, lblHomeView);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("././data/FitNeo-logo .png"));
+		lblNewLabel.setIcon(new ImageIcon("./data/FitNeo-logo .png"));
 		add(lblNewLabel);
 		
 		setVisible(true);

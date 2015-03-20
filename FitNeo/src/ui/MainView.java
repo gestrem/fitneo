@@ -116,7 +116,7 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, lblLogoFitneo, 10, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, lblLogoFitneo, -6, SpringLayout.NORTH, homeButton);
 		springLayout.putConstraint(SpringLayout.EAST, lblLogoFitneo, -2, SpringLayout.EAST, homeButton);
-		lblLogoFitneo.setIcon(new ImageIcon("././data/petitlogo.png"));
+		lblLogoFitneo.setIcon(new ImageIcon("./data/petitlogo.png"));
 		lblLogoFitneo.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblLogoFitneo);
 	}
