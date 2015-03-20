@@ -1,9 +1,11 @@
 package persist;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
+import core.Room;
 import core.ListRoom;
-
 public class ListRoomJDBC extends ListRoom{
 	
 	private JdbcConnection jdbc = null;
@@ -11,15 +13,15 @@ public class ListRoomJDBC extends ListRoom{
 	
 	public ListRoomJDBC(){
 		jdbc = new JdbcConnection();
+		System.out.println("jdbclist");
 	}
 	
-	public void createRoom(int roomArea){
+	public void createRoomJDBC(String roomArea, String roomType){
 		
 		jdbc.openConnection();
-		ResultSet rs = null;
 		
 		try{
-			String query = "INSERT INTO ROOM VALUES ( ROOMAREAM ='" +roomArea + "')";
+			String query = "INSERT INTO room(roomArea, roomType) VALUES ('" +roomArea +"','"+ roomType+"')";
 			jdbc.executeRequest(query);
 			
             
@@ -30,10 +32,22 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 	
-	public void updateRoomArea(int roomId,int roomArea){
+	public void updateListRoomJDBC(int roomId,String roomArea,String roomType,int capacity){
 		jdbc.openConnection();
 		try{
-			String query ="UPDATE ROOM set ROOMAREA='"+roomArea+"' WHERE IDROOM='"+roomId+"' ";
+			String query ="UPDATE room set roomArea='"+roomArea+"' ,roomType='"+roomType+"',capacity='"+capacity+"' WHERE idRoom='"+roomId+"' ";
+						jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+	}
+	
+	public void deleteListRoomJDBC(int roomId){
+		jdbc.openConnection();
+		try{
+			String query ="delete from room where idRoom='"+roomId+"'  ";
 						jdbc.executeRequest(query);
 		}
 		catch(Exception e){
@@ -42,34 +56,46 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 
-	@Override
-	public void createRoomJDBC(String roomArea, String roomType) {
-		// TODO Auto-generated method stub
+	public void getAllRoomJDBC(){
 		
+		jdbc.openConnection();
+		ResultSet rs = null;
+		ArrayList<Room> listRoom=new ArrayList<Room>();
+		
+		try{
+			String query = "SELECT * FROM room";
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType")));
+            	
+            }
+		this.setListRoom(listRoom);
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		jdbc.close();
 	}
 
-	@Override
-	public void updateListRoomJDBC(int idRoom, String roomArea,
-			String roomType, int capacite) {
-		// TODO Auto-generated method stub
+	public void getAllRoomFreeJDBC(){
+		 //to do
+		jdbc.openConnection();
+		ResultSet rs = null;
+		ArrayList<Room> listRoom=new ArrayList<Room>();
 		
+		try{
+			String query = "SELECT * FROM room ";
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType")));
+	        	
+	        }
+		this.setListRoom(listRoom);
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		jdbc.close();
 	}
 
-	@Override
-	public void deleteListRoomJDBC(int idRoom) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getAllRoomJDBC() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getAllRoomFreeJDBC() {
-		// TODO Auto-generated method stub
-		
-	}
 }
