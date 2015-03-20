@@ -29,14 +29,14 @@ public class Main {
          * 
          * */
         
-    	/*ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);
+    	ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);
     	System.out.println("test");
-    	listroom.createRoom("20m", "Cours");
-    	listroom.createRoom("30m","repos");
+    	//listroom.createRoom("20m", "Cours");
+    	//listroom.createRoom("30m","repos");
     	//listroom.updateListRoom(1,"40m2","Concert",20);
     	listroom.createListRoom(0);
     	listroom.getListRoom();
-    	System.out.println("Fait");*/
+    	System.out.println("Fait");
     	
         /* Choix du type de persistance */
         int typePersist = 0;
