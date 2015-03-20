@@ -7,6 +7,8 @@ import core.Activity;
 import core.Basket;
 import core.CategoryProduct;
 import core.Event;
+import core.ListCategory;
+import core.ListEvent;
 import core.Product;
 import core.Room;
 import core.User;
@@ -22,16 +24,17 @@ public abstract class PersistKit {
     public static final int XML = 3;
 
 
-    /* Methodes create qui créer une classe metier du bon type de persistance */
+    /* Methodes create qui crï¿½er une classe metier du bon type de persistance */
     public abstract User createUser(); 
     public abstract Basket createBasket();
     public abstract AccessoryType createAccessory();
     public abstract Activity createActivity();
-    public abstract CategoryProduct createCategory();
-    public abstract Event createEvent();
+    public abstract ListCategory createListCategory();
+    public abstract ListEvent createListEvent();
     public abstract Notification createNotification();
     public abstract Product createProduct();
     public abstract Room createRoom();
+   
     
 
     /**

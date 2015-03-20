@@ -7,6 +7,8 @@ import core.Activity;
 import core.Basket;
 import core.CategoryProduct;
 import core.Event;
+import core.ListCategory;
+import core.ListEvent;
 import core.Product;
 import core.Room;
 import core.User;
@@ -45,15 +47,15 @@ public class JDBCKit extends PersistKit {
     }
     
     @Override
-    public CategoryProduct createCategory(){
-    	CategoryProduct category = new CategoryJDBC();
-        return category;
+    public ListCategory createListCategory(){
+    	ListCategory listCategory = new CategoryJDBC();
+        return listCategory;
     }
     
     @Override
-    public Event createEvent(){
-    	Event event = new EventJDBC();
-        return event;
+    public ListEvent createListEvent(){
+    	ListEvent listEvent = new EventJDBC();
+        return listEvent;
     }
     
     @Override

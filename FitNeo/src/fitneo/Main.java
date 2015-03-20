@@ -1,5 +1,8 @@
 package fitneo;
 
+import java.util.Iterator;
+
+import core.ListCategory;
 import ui.LoginUI;
 import persist.PersistKit;
 
@@ -10,6 +13,13 @@ public class Main {
      */
     public static void main(String[] args) {
 
+    	ListCategory listCat = ListCategory.getInstance(PersistKit.JDBC); 
+    	listCat.getAllCategories();
+    	Iterator it = listCat.getListAllCategories().iterator(); 
+    	while( it.hasNext() ){
+    		System.out.println(it.next().toString());
+    	}
+    	
         /* Les differents choix de persistances 
          * 
          * 0 pour JDBC
