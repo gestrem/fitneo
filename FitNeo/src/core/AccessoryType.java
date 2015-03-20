@@ -28,13 +28,12 @@ public abstract class AccessoryType {
 
 	
 	
-	public AccessoryType(){	
+	public AccessoryType(int idAccessory,String accessoryTypeName){
+		this.accessoryTypeName=accessoryTypeName;
+		this.idAccessory=idAccessory;
+		
 	}
 	
-	public static AccessoryType getInstance(int persistType){
-		if (accessory == null)
-			accessory = PersistKit.createKit(persistType).createAccessory();
-		return accessory;
-	}
+
 
 }

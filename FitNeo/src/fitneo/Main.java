@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import core.ListProduct;
 import ui.LoginUI;
+import core.ListAccessoryType;
 
 import persist.PersistKit;
 import core.ListRoom;
@@ -28,16 +29,20 @@ public class Main {
          * 2 pour XML
          * 
          * */
-        
+        ListAccessoryType listAccessoryType= ListAccessoryType.getInstance(PersistKit.JDBC);
+        listAccessoryType.createAccessory("poids 20kg");
+    	System.out.println("test accessory");
+
+        /*
     	ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);
     	System.out.println("test");
-    	//listroom.createRoom("20m", "Cours");
-    	//listroom.createRoom("30m","repos");
-    	//listroom.updateListRoom(1,"40m2","Concert",20);
+    	listroom.createRoom("20m", "Cours");
+    	listroom.createRoom("30m","repos");
+    	listroom.updateListRoom(1,"40m2","Concert",20);
     	listroom.createListRoom(0);
     	listroom.getListRoom();
     	System.out.println("Fait");
-    	
+    	*/
         /* Choix du type de persistance */
         int typePersist = 0;
 
