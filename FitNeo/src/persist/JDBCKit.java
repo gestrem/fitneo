@@ -2,8 +2,8 @@ package persist;
 
 import core.ListCategory;
 import core.ListEvent;
+import core.ListNotification;
 import core.ListProduct;
-import core.Notification;
 import core.AccessoryType;
 import core.Activity;
 import core.Basket;
@@ -73,8 +73,8 @@ public class JDBCKit extends PersistKit {
     }
     
     @Override
-    public Notification createNotification(){    	
-    	Notification notification = new NotificationJDBC();
+    public ListNotification createListNotification(){    	
+    	ListNotification notification = new ListNotificationJDBC();
         return notification;
     }
 }

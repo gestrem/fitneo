@@ -29,6 +29,7 @@ public class UserJDBC extends User{
 			String query = "SELECT * FROM mainuser WHERE userEmail ='" + login + "'";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
+				this.setIdUser(rs.getInt("idUser"));
 				this.setUserFirstName(rs.getString("userFirstName"));
             	this.setUserLastName(rs.getString("userLastName"));
             	this.setUserAdresse(rs.getString("userAdresse"));

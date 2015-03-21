@@ -12,9 +12,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 
+import core.Notification;
+import core.NotificationFacade;
 import core.UserFacade;
 
 @SuppressWarnings("serial")
@@ -22,6 +26,7 @@ public class MainView extends JFrame implements ActionListener {
 
 	//Facade de la classe User
 	private UserFacade userFacade;
+	private NotificationFacade notifFacade;
 	//type de persistance choisi
 	private int persistType;
 	
@@ -107,6 +112,8 @@ public class MainView extends JFrame implements ActionListener {
 		getContentPane().add(accountButton);
 		
 		Button notifButton = new Button("Notifications");
+		notifButton.addActionListener(this);
+		notifButton.setActionCommand("Notif");
 		springLayout.putConstraint(SpringLayout.NORTH, notifButton, 0, SpringLayout.NORTH, basketButton);
 		springLayout.putConstraint(SpringLayout.EAST, notifButton, -6, SpringLayout.WEST, accountButton);
 		getContentPane().add(notifButton);
@@ -172,6 +179,12 @@ public class MainView extends JFrame implements ActionListener {
 			panelDisplay.add(eventPanel);
 			panelDisplay.repaint();
 			panelDisplay.revalidate();
+		}
+		else if(cmd.equals("Notif")){
+			notifFacade = new NotificationFacade(this.persistType);
+			this.notifFacade.load(userFacade.getIdUser());
+			
+			ArrayList<Notification> list = this.notifFacade.getListNotification();
 		}
 	}
 }

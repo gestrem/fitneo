@@ -1,30 +1,55 @@
 package core;
 
-import java.util.ArrayList;
-
-import persist.PersistKit;
-
-public abstract class Notification {
+public class Notification {
 
 	private String message;
-	private User receiver; 
-	private User sender;
+	private String sender;
+	//isRead renvoie vrai si la notification est lue
 	private Boolean isRead; 
-	private Boolean isDemand; 
+	//is Demand renvoie vrai si la notification correspond a une demande a valider 
+	private Boolean isCreationDemand;
 	
-	/* isRead renvoie vrai si la notification est lue
-	 * is Demand renvoie vrai si la notification correspond a une demande a valider */
-	
-	private static Notification notification = null;
-	private ArrayList<Notification> listNotification = null; 
-	
-	public Notification(){	
+	public Notification(String sender, String message, boolean isRead, boolean isCreationDemand){	
+		this.sender=sender;
+		this.message=message;
+		this.isRead=isRead;
+		this.isCreationDemand=isCreationDemand;	
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	public Boolean getIsRead() {
+		return isRead;
+	}
+
+	public void setIsRead(Boolean isRead) {
+		this.isRead = isRead;
+	}
+
+	public Boolean getIsCreationDemand() {
+		return isCreationDemand;
+	}
+
+	public void setIsCreationDemand(Boolean isCreationDemand) {
+		this.isCreationDemand = isCreationDemand;
 	}
 	
-	
-	public static Notification getInstance(int persistType){
-		if (notification == null)
-			notification = PersistKit.createKit(persistType).createNotification();
-		return notification;
+	public String toString(){
+		return this.sender+" "+this.message+" "+this.isCreationDemand;
 	}
+	
 }

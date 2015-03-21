@@ -2,8 +2,8 @@ package persist;
 
 import core.ListCategory;
 import core.ListEvent;
+import core.ListNotification;
 import core.ListProduct;
-import core.Notification;
 import core.AccessoryType;
 import core.Activity;
 import core.Basket;
@@ -30,7 +30,7 @@ public abstract class PersistKit {
     //reste à modifier ici
     public abstract AccessoryType createAccessory();
     public abstract Activity createActivity();
-    public abstract Notification createNotification();
+    public abstract ListNotification createListNotification();
     
 
     /**
