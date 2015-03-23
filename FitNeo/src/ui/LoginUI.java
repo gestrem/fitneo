@@ -33,7 +33,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	private UserFacade userFacade;
 	//type de persistance choisi
 	private int persistType;
-	//fenetre en cas de mdp oublié	
+	//fenetre en cas de mdp oubliï¿½	
 	public JButton btnForgottenPassword;
 	public JDialog passwordForgot;
 	//fenetre pour s'enregistrer
@@ -99,7 +99,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		springLayout.putConstraint(SpringLayout.WEST, label, 0, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, label, 0, SpringLayout.EAST, getContentPane());
-		label.setIcon(new ImageIcon("././data/petitlogo.png"));
+		label.setIcon(new ImageIcon("./data/petitlogo.png"));
 		getContentPane().add(label);
 		
 		JButton connectButton = new JButton("Log In");

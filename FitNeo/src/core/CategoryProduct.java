@@ -1,15 +1,34 @@
 package core;
 
 public class CategoryProduct {
-
-	private String categoryLabel; 
-	private int categoryId; 
-	private int superCategoryId;
-		
-	public CategoryProduct( int aCategoryId,String 	aCategoryName, int aSubCategoryId){	
+	
+	private int categoryId;
+	private String categoryLabel;  
+	private CategoryProduct superCategory = null;
+	
+	public CategoryProduct(String aCategoryName){	
 		this.categoryLabel = aCategoryName;  
-		this.categoryId = aCategoryId; 
-		this.superCategoryId = aSubCategoryId; 
+	}
+	
+	public CategoryProduct(int aCategoryInt,String aCategoryName){	
+		this.categoryId = aCategoryInt; 
+		this.categoryLabel = aCategoryName;  
+	}
+	
+		
+	public CategoryProduct(int aCategoryInt, String aCategoryName, CategoryProduct aSuperCategory){	
+		this.categoryId = aCategoryInt; 
+		this.categoryLabel = aCategoryName;  
+		this.superCategory = aSuperCategory; 
+	}
+	
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	
 	public String getCategoryName() {
@@ -19,22 +38,23 @@ public class CategoryProduct {
 	public void setCategoryName(String categoryName) {
 		this.categoryLabel = categoryName;
 	}
+		
+	public CategoryProduct getSuperCategory() {
+		return superCategory;
+	}
+
+	public void setSuperCategory(CategoryProduct superCategory) {
+		this.superCategory = superCategory;
+	}
 	
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	
-	public int getSubCategoryId() {
-		return superCategoryId;
-	}
-
-	public void setSubCategoryId(int subCategoryId) {
-		this.superCategoryId = subCategoryId;
+	public String toString(){
+		return this.categoryLabel;
 	}
 		
+	public int getSuperCategoryId(){
+		return this.superCategory.categoryId;
+	}
+
+
+	
 }

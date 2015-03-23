@@ -1,10 +1,12 @@
 package fitneo;
 
+import java.sql.SQLException;
 import java.util.Iterator;
 
+import core.CategoryProduct;
+import core.ListCategory;
 import core.ListProduct;
 import ui.LoginUI;
-
 import persist.PersistKit;
 import core.ListRoom;
 public class Main {
@@ -13,13 +15,56 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+    	/*
+    	 * AFFICHE LISTE CATEGORIE
     	
-    	/*ListProduct liste= ListProduct.getInstance(PersistKit.JDBC);
-    	liste.getAllProduct();
-    	Iterator it= liste.getListAllProduct().iterator();
+    	ListCategory liste= ListCategory.getInstance(PersistKit.JDBC);
+    	liste.getAllCategories();
+    	Iterator it= liste.getListAllCategories().iterator();
     	while ( it.hasNext()) {
     		System.out.println(it.next().toString());
-    	}*/
+    	} */
+    	
+    	/* CREE UNE CATEGORIE
+    	 *  
+    	 ListCategory liste= ListCategory.getInstance(PersistKit.JDBC);
+    	
+    	String catName =  "Streching"; 
+    	try {
+			liste.insertCategoryWithSuperCategoryJDBC(catName, 5);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		}*/
+    	
+    	/* UPDATE UNE CATEGORIE
+    	 * 
+    	 ListCategory liste= ListCategory.getInstance(PersistKit.JDBC);
+    	
+    	
+    	try {
+			liste.updateCategoryWithNameJDBC(6, "YOYO");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		} */
+    	
+    	/* DELETE UNE CATEGORIE
+    	 * */
+    	 ListCategory liste= ListCategory.getInstance(PersistKit.JDBC);
+    	
+    	
+    	try {
+			liste.deleteCategoryJDBC(6);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		} 
+    	
+    	
     	
         /* Les differents choix de persistances 
          * 
