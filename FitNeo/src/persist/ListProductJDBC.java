@@ -36,5 +36,23 @@ public class ListProductJDBC extends ListProduct{
 		}
 		jdbc.close();
 	}
+	public void createProductJDBC(Product aProduct) throws SQLException{
+	
+		jdbc.openConnection();
+		ResultSet rs = null;
+		
+		String query = "INSERT INTO ProductType(productTypeName,productPrice,availableProductQuantity,DiscountMember,id_category) values('"+aProduct.getProductTypeName()+"','"+aProduct.getProductPrice()+"','"+aProduct.getAvailableQuantity()+"','"+aProduct.getDiscountMember()+"','"+aProduct.getCategory()+"')";
+		jdbc.executeRequest(query);
+		jdbc.close();
+	}
+	public void updateProductJDBC(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product) throws SQLException{
+		
+		jdbc.openConnection();
+		ResultSet rs = null;
+		
+		String query = "UPDATE ProductType SET productTypeName='"+productName+"',productPrice='"+productPrice+"',availableProductQuantity='"+availableQuantity+"',DiscountMember='"+discountMember+"' WHERE id_producttype='"+id_product+"'";
+		jdbc.executeRequest(query);
+		jdbc.close();
+	}
 	
 }

@@ -4,17 +4,36 @@ import persist.PersistKit;
 
 public abstract class AccessoryType {
 	
-	private String accessoryTypeName; 
+	private String accessoryTypeName;
 	
+	private int idAccessory;
+	
+	public int getIdAccessory() {
+		return idAccessory;
+	}
+
+	public void setIdAccessory(int idAccessory) {
+		this.idAccessory = idAccessory;
+	}
+
 	private static AccessoryType accessory = null;
 	
-	public AccessoryType(){	
+	public String getAccessoryTypeName() {
+		return accessoryTypeName;
+	}
+
+	public void setAccessoryTypeName(String accessoryTypeName) {
+		this.accessoryTypeName = accessoryTypeName;
+	}
+
+	
+	
+	public AccessoryType(int idAccessory,String accessoryTypeName){
+		this.accessoryTypeName=accessoryTypeName;
+		this.idAccessory=idAccessory;
+		
 	}
 	
-	public static AccessoryType getInstance(int persistType){
-		if (accessory == null)
-			accessory = PersistKit.createKit(persistType).createAccessory();
-		return accessory;
-	}
+
 
 }

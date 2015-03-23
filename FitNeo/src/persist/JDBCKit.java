@@ -5,6 +5,8 @@ import core.ListEvent;
 import core.ListNotification;
 import core.ListProduct;
 import core.AccessoryType;
+import core.Notification;
+import core.ListAccessoryType;
 import core.Activity;
 import core.Basket;
 import core.ListRoom;
@@ -56,15 +58,11 @@ public class JDBCKit extends PersistKit {
     }
     
     /*
-     * Ce qui reste à modifier
+     * Ce qui reste ï¿½ modifier
      * 
      */
     
-    @Override
-    public AccessoryType createAccessory(){
-    	AccessoryType accessory = new AccessoryJDBC();
-        return accessory;
-    }
+  
     
     @Override
     public Activity createActivity(){
@@ -77,4 +75,10 @@ public class JDBCKit extends PersistKit {
     	ListNotification notification = new ListNotificationJDBC();
         return notification;
     }
+
+	@Override
+	public ListAccessoryType createListAccessory() {
+		ListAccessoryType accessory = new ListAccessoryJDBC();
+        return accessory;
+	}
 }
