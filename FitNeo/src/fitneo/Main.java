@@ -1,10 +1,14 @@
 package fitneo;
 
+import java.sql.SQLException;
 import java.util.Iterator;
 
 import core.ListProduct;
+import core.Product;
 import ui.LoginUI;
 import core.ListAccessoryType;
+
+
 
 import persist.PersistKit;
 import core.ListRoom;
@@ -13,8 +17,12 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+		public static void main(String[] args) throws SQLException {
+    	ListProduct liste= ListProduct.getInstance(PersistKit.JDBC);
+    	liste.getAllProduct();
+    	liste.updateProduct("tapis pour chaval", 10, 12, 6, 1, 4);
     	
+
     	/*ListProduct liste= ListProduct.getInstance(PersistKit.JDBC);
     	liste.getAllProduct();
     	Iterator it= liste.getListAllProduct().iterator();
