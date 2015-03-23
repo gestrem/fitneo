@@ -4,6 +4,7 @@ import persist.PersistKit;
 
 public abstract class User {
 	
+	private int idUser;
 	private String userFirstName;
 	private String userLastName;
 	private String userAdresse;
@@ -184,5 +185,13 @@ public abstract class User {
 	public abstract void setUser(String login);
 	public abstract boolean verifyMail(String mail);
 	public abstract void registerUser(String userLastName, String userFirstName, String userAdresse, String userCity, String userCP, String userEmail, String passwordUser, String userAnswer, int idquestion);
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 	
 }

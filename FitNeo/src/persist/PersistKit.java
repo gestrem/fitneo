@@ -2,9 +2,11 @@ package persist;
 
 import core.ListCategory;
 import core.ListEvent;
+import core.ListNotification;
 import core.ListProduct;
-import core.Notification;
 import core.AccessoryType;
+import core.Notification;
+import core.ListAccessoryType;
 import core.Activity;
 import core.Basket;
 import core.User;
@@ -27,10 +29,10 @@ public abstract class PersistKit {
     public abstract ListEvent createListEvent();  
     public abstract ListProduct createListProduct();
     public abstract ListRoom createListRoom();
-    //reste à modifier ici
-    public abstract AccessoryType createAccessory();
+    //reste ï¿½ modifier ici
+    public abstract ListAccessoryType createListAccessory();
     public abstract Activity createActivity();
-    public abstract Notification createNotification();
+    public abstract ListNotification createListNotification();
     
 
     /**

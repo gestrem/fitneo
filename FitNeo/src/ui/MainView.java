@@ -10,11 +10,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.SwingConstants;
-
 import java.awt.CardLayout;
-
 import javax.swing.ImageIcon;
 
+import core.Notification;
+import core.NotificationFacade;
 import core.UserFacade;
 
 @SuppressWarnings("serial")
@@ -31,6 +31,7 @@ public class MainView extends JFrame implements ActionListener {
 	private AccountView accountPanel;
 	private ActivityView activityPanel;
 	private EventView eventPanel;
+	private NotificationCenterView notifPanel;
 	
 	/**
 	 * Create the application.
@@ -107,6 +108,8 @@ public class MainView extends JFrame implements ActionListener {
 		getContentPane().add(accountButton);
 		
 		Button notifButton = new Button("Notifications");
+		notifButton.addActionListener(this);
+		notifButton.setActionCommand("Notif");
 		springLayout.putConstraint(SpringLayout.NORTH, notifButton, 0, SpringLayout.NORTH, basketButton);
 		springLayout.putConstraint(SpringLayout.EAST, notifButton, -6, SpringLayout.WEST, accountButton);
 		getContentPane().add(notifButton);
@@ -116,7 +119,7 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, lblLogoFitneo, 10, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, lblLogoFitneo, -6, SpringLayout.NORTH, homeButton);
 		springLayout.putConstraint(SpringLayout.EAST, lblLogoFitneo, -2, SpringLayout.EAST, homeButton);
-		lblLogoFitneo.setIcon(new ImageIcon("././data/petitlogo.png"));
+		lblLogoFitneo.setIcon(new ImageIcon("./data/petitlogo.png"));
 		lblLogoFitneo.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblLogoFitneo);
 	}
@@ -170,6 +173,18 @@ public class MainView extends JFrame implements ActionListener {
 			
 			//add the new JPanel
 			panelDisplay.add(eventPanel);
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+		}
+		else if(cmd.equals("Notif")){
+			notifPanel = new NotificationCenterView(this.persistType);
+			//remove ancient JPanel if exist
+			panelDisplay.removeAll();
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+			
+			//add the new JPanel
+			panelDisplay.add(notifPanel);
 			panelDisplay.repaint();
 			panelDisplay.revalidate();
 		}

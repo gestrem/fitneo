@@ -27,7 +27,7 @@ public class AccountView extends JPanel {
 	private JLabel cpLabel;
 	private JLabel cityLabel;
 	private JLabel mailLabel;
-	private JComboBox<String> comboBoxRole;
+	private JComboBox comboBoxRole;
 	
 	/**
 	 * Create the panel.
@@ -127,7 +127,7 @@ public class AccountView extends JPanel {
 		else if(userFacade.isRoleMember())
 			roles= new String[] {"Member", "Simple user"};
 		
-		comboBoxRole = new JComboBox<String>(roles);
+		comboBoxRole = new JComboBox(roles);
 		comboBoxRole.setToolTipText("Select your role");
 		panel_1.add(comboBoxRole, BorderLayout.NORTH);
 	}

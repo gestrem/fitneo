@@ -65,4 +65,8 @@ public class UserFacade {
 		return user.isRoleAdmin();
 	}
 	
+	public int getIdUser(){
+		return user.getIdUser();
+	}
+	
 }

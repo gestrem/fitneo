@@ -6,7 +6,9 @@ import java.util.Iterator;
 import core.CategoryProduct;
 import core.ListCategory;
 import core.ListProduct;
+import core.Product;
 import ui.LoginUI;
+import core.ListAccessoryType;
 import persist.PersistKit;
 import core.ListRoom;
 public class Main {
@@ -17,10 +19,18 @@ public class Main {
     public static void main(String[] args) {
     	/*
     	 * AFFICHE LISTE CATEGORIE
+		public static void main(String[] args) throws SQLException {
+    	ListProduct liste= ListProduct.getInstance(PersistKit.JDBC);
+    	liste.getAllProduct();
+    	liste.updateProduct("tapis pour chaval", 10, 12, 6, 1, 4);
     	
     	ListCategory liste= ListCategory.getInstance(PersistKit.JDBC);
     	liste.getAllCategories();
     	Iterator it= liste.getListAllCategories().iterator();
+
+    	/*ListProduct liste= ListProduct.getInstance(PersistKit.JDBC);
+    	liste.getAllProduct();
+    	Iterator it= liste.getListAllProduct().iterator();
     	while ( it.hasNext()) {
     		System.out.println(it.next().toString());
     	} */
@@ -73,16 +83,20 @@ public class Main {
          * 2 pour XML
          * 
          * */
-        
-    	/*ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);
+        ListAccessoryType listAccessoryType= ListAccessoryType.getInstance(PersistKit.JDBC);
+        listAccessoryType.createAccessory("poids 20kg");
+    	System.out.println("test accessory");
+
+        /*
+    	ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);
     	System.out.println("test");
     	listroom.createRoom("20m", "Cours");
     	listroom.createRoom("30m","repos");
-    	//listroom.updateListRoom(1,"40m2","Concert",20);
+    	listroom.updateListRoom(1,"40m2","Concert",20);
     	listroom.createListRoom(0);
     	listroom.getListRoom();
-    	System.out.println("Fait");*/
-    	
+    	System.out.println("Fait");
+    	*/
         /* Choix du type de persistance */
         int typePersist = 0;
 

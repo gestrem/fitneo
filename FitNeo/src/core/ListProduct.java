@@ -1,6 +1,8 @@
 package core;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import persist.PersistKit;
 
@@ -35,4 +37,30 @@ public abstract class ListProduct {
 	}
 	
 	public abstract void getAllProduct();
+	
+	public void createProduct(Product aProduct)throws SQLException{
+		createProductJDBC(aProduct);
+	}
+	public abstract void createProductJDBC(Product aProduct)throws SQLException;
+
+	public void updateProduct(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product )throws SQLException{
+		updateProductJDBC( productName,productPrice,availableQuantity,discountMember,category,id_product);
+	}
+	public abstract void updateProductJDBC(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product)throws SQLException;
+	
+	
+	public Product searchWithId(int idprod){
+		Product prod = null; 
+		Iterator<Product> it =  this.getListAllProduct().iterator();
+		
+		boolean find = false; 
+		while ( it.hasNext() && !(find)) {
+			if(it.next().getId_product() == idprod){
+				find=true;
+				prod = ((Product) it);
+			}
+		}
+		return prod; 
+	}
 }
+

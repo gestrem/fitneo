@@ -20,6 +20,11 @@ public abstract class ListRoom {
 			createRoomJDBC(roomArea, roomType);
 		}
 		
+		public Room getRoom(int idRoom){
+			
+			return (getRoomJDBC(idRoom));
+			
+		}
 		public void addRoomToList(Room room){
 			listRoom.add(room);
 		}
@@ -60,6 +65,8 @@ public abstract class ListRoom {
 		public abstract void createRoomJDBC(String roomArea, String roomType);
 		public abstract void updateListRoomJDBC(int idRoom,String roomArea, String roomType,int capacite);
 		public abstract void deleteListRoomJDBC(int idRoom);
+		public abstract Room getRoomJDBC(int idRoom);
+
 		public abstract void getAllRoomJDBC();
 		public abstract void getAllRoomFreeJDBC();
 	}
