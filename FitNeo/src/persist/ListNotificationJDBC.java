@@ -22,10 +22,10 @@ public class ListNotificationJDBC extends ListNotification{
 		
 		try{
 			ArrayList<Notification> listNotification = new ArrayList<Notification>();
-			String query = "SELECT notification.*, mainuser.userFirstName FROM notification, mainuser WHERE sender=mainuser.idUser AND receiver ="+idUser;
+			String query = "SELECT notification.*, DAY(notification_date) as jour, MONTH(notification_date) as mois, YEAR(notification_date) as an, mainuser.userFirstName, mainuser.userLastName FROM notification, mainuser WHERE sender=mainuser.idUser AND receiver ="+idUser;
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-				listNotification.add(new Notification(rs.getString("userFirstName"), rs.getString("message"), rs.getBoolean("isread"), rs.getBoolean("isCreationDemand"))); 	
+				listNotification.add(new Notification(rs.getString("userFirstName")+" "+rs.getString("userLastName"), rs.getString("message"), rs.getBoolean("isread"), rs.getBoolean("isCreationDemand"), rs.getString("jour")+"/"+rs.getString("mois")+"/"+rs.getString("an"))); 	
             }
 			this.setListNotification(listNotification);
 		}

@@ -10,11 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.SwingConstants;
-
 import java.awt.CardLayout;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.swing.ImageIcon;
 
 import core.Notification;
@@ -26,7 +22,6 @@ public class MainView extends JFrame implements ActionListener {
 
 	//Facade de la classe User
 	private UserFacade userFacade;
-	private NotificationFacade notifFacade;
 	//type de persistance choisi
 	private int persistType;
 	
@@ -36,6 +31,7 @@ public class MainView extends JFrame implements ActionListener {
 	private AccountView accountPanel;
 	private ActivityView activityPanel;
 	private EventView eventPanel;
+	private NotificationCenterView notifPanel;
 	
 	/**
 	 * Create the application.
@@ -181,10 +177,16 @@ public class MainView extends JFrame implements ActionListener {
 			panelDisplay.revalidate();
 		}
 		else if(cmd.equals("Notif")){
-			notifFacade = new NotificationFacade(this.persistType);
-			this.notifFacade.load(userFacade.getIdUser());
+			notifPanel = new NotificationCenterView(this.persistType);
+			//remove ancient JPanel if exist
+			panelDisplay.removeAll();
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
 			
-			ArrayList<Notification> list = this.notifFacade.getListNotification();
+			//add the new JPanel
+			panelDisplay.add(notifPanel);
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
 		}
 	}
 }

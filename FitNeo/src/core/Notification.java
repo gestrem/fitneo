@@ -4,16 +4,18 @@ public class Notification {
 
 	private String message;
 	private String sender;
+	private String date;
 	//isRead renvoie vrai si la notification est lue
 	private Boolean isRead; 
 	//is Demand renvoie vrai si la notification correspond a une demande a valider 
 	private Boolean isCreationDemand;
 	
-	public Notification(String sender, String message, boolean isRead, boolean isCreationDemand){	
+	public Notification(String sender, String message, boolean isRead, boolean isCreationDemand, String date){	
 		this.sender=sender;
 		this.message=message;
 		this.isRead=isRead;
 		this.isCreationDemand=isCreationDemand;	
+		this.date = date;
 	}
 
 	public String getMessage() {
@@ -50,6 +52,14 @@ public class Notification {
 	
 	public String toString(){
 		return this.sender+" "+this.message+" "+this.isCreationDemand;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 }
