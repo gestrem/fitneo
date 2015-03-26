@@ -48,6 +48,10 @@ public abstract class ListProduct {
 	}
 	public abstract void updateProductJDBC(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product)throws SQLException;
 	
+	public void deleteListProduct(int aProductId){
+		deleteListProductJDBC(aProductId);
+		}
+	public abstract void deleteListProductJDBC(int aProductId);
 	
 	public Product searchWithId(int idprod){
 		Product prod = null; 

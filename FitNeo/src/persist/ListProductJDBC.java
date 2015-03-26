@@ -55,4 +55,16 @@ public class ListProductJDBC extends ListProduct{
 		jdbc.close();
 	}
 	
+	public void deleteListProductJDBC(int aProductId){
+		jdbc.openConnection();
+		try{
+			String query ="delete from ProductType where id_producttype='"+aProductId+"'  ";
+						jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+	}
+	
 }

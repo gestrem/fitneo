@@ -8,12 +8,7 @@ public class Product {
 	private int category; 
 	private int id_product;
 	
-	public int getId_product() {
-		return id_product;
-	}
-	public void setId_product(int id_product) {
-		this.id_product = id_product;
-	}
+
 	public Product(String productTypeName, int productPrice,int availableQuantity,int discountMember,int category){	
 		this.productTypeName= productTypeName;
 		this.productPrice= productPrice;
@@ -27,6 +22,13 @@ public class Product {
 		this.availableQuantity = availableQuantity;
 		this.discountMember = discountMember;
 		this.category = category;
+		this.id_product = id_product;
+	}
+	
+	public int getId_product() {
+		return id_product;
+	}
+	public void setId_product(int id_product) {
 		this.id_product = id_product;
 	}
 	public String getProductTypeName() {
@@ -59,9 +61,6 @@ public class Product {
 	public void setCategory(int category) {
 		this.category = category;
 	}
-	public void createProduct(String productTypeName, int productPrice,int availableQuantity,int discountMember,int category){};
-	
-	public void updateProduct(String productTypeName, int productPrice,int availableQuantity,int discountMember,int category){};
 	
 	public String toString(){
 		return productTypeName;
