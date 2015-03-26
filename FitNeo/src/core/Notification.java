@@ -5,11 +5,16 @@ public class Notification {
 	private String message;
 	private String sender;
 	private String date;
+	private String categoryName;
+	private int idCategoryParent;
 	//isRead renvoie vrai si la notification est lue
 	private Boolean isRead; 
 	//is Demand renvoie vrai si la notification correspond a une demande a valider 
 	private Boolean isCreationDemand;
 	
+	/*
+	 * Constructeur Notification simple
+	 */
 	public Notification(String sender, String message, boolean isRead, boolean isCreationDemand, String date){	
 		this.sender=sender;
 		this.message=message;
@@ -17,7 +22,20 @@ public class Notification {
 		this.isCreationDemand=isCreationDemand;	
 		this.date = date;
 	}
-
+	
+	/*
+	 * Constructeur Notification avec demande de creation
+	 */
+	public Notification(String sender, String message, boolean isRead, boolean isCreationDemand, String date, String categoryName, int idCategoryParent){	
+		this.sender=sender;
+		this.message=message;
+		this.isRead=isRead;
+		this.isCreationDemand=isCreationDemand;	
+		this.date = date;
+		this.categoryName=categoryName;	
+		this.idCategoryParent = idCategoryParent;
+	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -60,6 +78,22 @@ public class Notification {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public int getIdCategoryParent() {
+		return idCategoryParent;
+	}
+
+	public void setIdCategoryParent(int idCategoryParent) {
+		this.idCategoryParent = idCategoryParent;
 	}
 	
 }

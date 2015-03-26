@@ -25,8 +25,11 @@ public class ListNotificationJDBC extends ListNotification{
 			String query = "SELECT notification.*, DAY(notification_date) as jour, MONTH(notification_date) as mois, YEAR(notification_date) as an, mainuser.userFirstName, mainuser.userLastName FROM notification, mainuser WHERE sender=mainuser.idUser AND receiver ="+idUser;
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-				listNotification.add(new Notification(rs.getString("userFirstName")+" "+rs.getString("userLastName"), rs.getString("message"), rs.getBoolean("isread"), rs.getBoolean("isCreationDemand"), rs.getString("jour")+"/"+rs.getString("mois")+"/"+rs.getString("an"))); 	
-            }
+				if(!rs.getBoolean("isCreationDemand"))
+					listNotification.add(new Notification(rs.getString("userFirstName")+" "+rs.getString("userLastName"), rs.getString("message"), rs.getBoolean("isread"), rs.getBoolean("isCreationDemand"), rs.getString("jour")+"/"+rs.getString("mois")+"/"+rs.getString("an"))); 	
+				else
+					listNotification.add(new Notification(rs.getString("userFirstName")+" "+rs.getString("userLastName"), rs.getString("message"), rs.getBoolean("isread"), rs.getBoolean("isCreationDemand"), rs.getString("jour")+"/"+rs.getString("mois")+"/"+rs.getString("an"), rs.getString("categoryName"), rs.getInt("idCategoryParent")));
+			}
 			this.setListNotification(listNotification);
 		}
 		catch(Exception e){

@@ -28,6 +28,19 @@ public abstract class ListCategory {
 		return listAllCategories;
 	}
 	
+	public boolean confirmCreationCategory(String category, int idParent){
+		if(verifyCategoryExist(category)){
+			if(idParent == 0)
+				insertCategoryWithNameJDBC(category);
+			else
+				insertCategoryWithNameAndSuperCategoryJDBC(category, idParent);
+			return true;
+		}
+		else
+			return false;
+			
+	}
+	
 	public static ListCategory getInstance (int persistType){
 		
 		if (listCategory == null){
@@ -39,14 +52,13 @@ public abstract class ListCategory {
 	
 	public abstract void getAllCategories();
 	
-	public abstract void insertCategoryWithNameJDBC(String cat) throws SQLException; 
-	public abstract void insertCategoryWithNameAndSuperCategoryJDBC(String catName, int catParent) throws SQLException;
+	public abstract void insertCategoryWithNameJDBC(String cat) ; 
+	public abstract void insertCategoryWithNameAndSuperCategoryJDBC(String catName, int catParent);
 	public abstract void updateCategoryWithNameJDBC(int idCat, String catName) throws SQLException;
 	public abstract void updateCategoryWithSuperCategoryJDBC(int idCat,  int catIdSuperCategory) throws SQLException; 
 	public abstract void updateCategoryWithNameAndSuperCategoryJDBC(int idCat, String catName,  int catIdSuperCategory) throws SQLException;
 	public abstract void deleteCategoryJDBC(int idCat) throws SQLException; 
-	
-	
+	public abstract boolean verifyCategoryExist(String nameCat);
 	
 	public CategoryProduct searchWithId(int idcat){
 		CategoryProduct cat = null; 

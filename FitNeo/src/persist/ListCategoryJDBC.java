@@ -41,10 +41,8 @@ public class ListCategoryJDBC extends ListCategory {
 				else {
 					listAllCategories.add(new CategoryProduct(id,name, this.searchWithId(idParent))); 
 				}
-			}
-			
-		
-		this.setListCategory(listAllCategories);
+			}	
+			this.setListCategory(listAllCategories);
 		}
 		
 		catch(SQLException e){
@@ -54,19 +52,23 @@ public class ListCategoryJDBC extends ListCategory {
 	}
 	
 	
-	public void insertCategoryWithNameJDBC(String catName) throws SQLException{
+	public void insertCategoryWithNameJDBC(String catName){
 
 		jdbc.openConnection();
 		ResultSet rs = null; 
-		
-		//String query = "INSERT INTO categoryProduct (categoryLabel, id_super_category)values ('" +cat.getCategoryName()+ "', "+cat.getSuperCategoryId()+")"; 
-		String query = "INSERT INTO categoryProduct (categoryLabel)values ('" +catName+ "')"; 
-		jdbc.executeRequest(query);
+		try{
+			//String query = "INSERT INTO categoryProduct (categoryLabel, id_super_category)values ('" +cat.getCategoryName()+ "', "+cat.getSuperCategoryId()+")"; 
+			String query = "INSERT INTO categoryProduct (categoryLabel)values ('" +catName+ "')"; 
+			jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			System.out.println("Duplicate entry");
+		}
 		jdbc.close();
 	
 	}
 	
-	public void insertCategoryWithNameAndSuperCategoryJDBC(String catName, int catParent) throws SQLException{
+	public void insertCategoryWithNameAndSuperCategoryJDBC(String catName, int catParent){
 
 		jdbc.openConnection();
 		ResultSet rs = null; 
@@ -121,6 +123,23 @@ public class ListCategoryJDBC extends ListCategory {
 		jdbc.close();
 	
 
+	}
+
+	@Override
+	public boolean verifyCategoryExist(String nameCat) {
+		jdbc.openConnection();
+		boolean result = true;
+		try{
+			String query ="SELECT categoryLabel from categoryProduct WHERE categoryLabel ='" + nameCat + "'";
+			jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		if(jdbc.nbResponse() != 0)
+			result = false;
+		jdbc.close();
+		return result;
 	}
 	
 	
