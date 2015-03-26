@@ -3,24 +3,35 @@ package ui;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
+
 import java.awt.Color;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JComboBox;
+
+import persist.PersistKit;
 import core.UserFacade;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
-public class AccountView extends JPanel {
+public class AccountView extends JPanel implements ActionListener {
 
 	//Facade de la classe User
 	private UserFacade userFacade;
 	//type de persistance choisi
 	private int persistType;
 	
-	JPanel panel_1;
+	private JPanel panelDroit;
 	private JLabel firstnameLabel;
 	private JLabel lastnameLabel;
 	private JLabel adressLabel;
@@ -28,6 +39,7 @@ public class AccountView extends JPanel {
 	private JLabel cityLabel;
 	private JLabel mailLabel;
 	private JComboBox comboBoxRole;
+	private JPanel panelButton;
 	
 	/**
 	 * Create the panel.
@@ -41,70 +53,77 @@ public class AccountView extends JPanel {
 		setBackground(Color.WHITE);
 		setLayout(new GridLayout(1, 2, 0, 0));
 		
-		JPanel panel = new JPanel();
-		add(panel);
-		SpringLayout sl_panel = new SpringLayout();
-		panel.setLayout(sl_panel);
+		JPanel panelGauche = new JPanel();
+		add(panelGauche);
+		SpringLayout sl_panelGauche = new SpringLayout();
+		panelGauche.setLayout(sl_panelGauche);
 		
 		firstnameLabel = new JLabel("New label");
-		sl_panel.putConstraint(SpringLayout.WEST, firstnameLabel, 10, SpringLayout.WEST, panel);
-		panel.add(firstnameLabel);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, firstnameLabel, 10, SpringLayout.WEST, panelGauche);
+		panelGauche.add(firstnameLabel);
 		
 		lastnameLabel = new JLabel("New label");
-		sl_panel.putConstraint(SpringLayout.NORTH, lastnameLabel, 30, SpringLayout.NORTH, panel);
-		sl_panel.putConstraint(SpringLayout.WEST, lastnameLabel, 135, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, lastnameLabel, -156, SpringLayout.EAST, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, firstnameLabel, -6, SpringLayout.WEST, lastnameLabel);
-		panel.add(lastnameLabel);
+		sl_panelGauche.putConstraint(SpringLayout.NORTH, lastnameLabel, 30, SpringLayout.NORTH, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, lastnameLabel, 135, SpringLayout.WEST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.EAST, lastnameLabel, -156, SpringLayout.EAST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.EAST, firstnameLabel, -6, SpringLayout.WEST, lastnameLabel);
+		panelGauche.add(lastnameLabel);
 		
 		adressLabel = new JLabel("New label");
-		sl_panel.putConstraint(SpringLayout.NORTH, adressLabel, 6, SpringLayout.SOUTH, firstnameLabel);
-		sl_panel.putConstraint(SpringLayout.WEST, adressLabel, 10, SpringLayout.WEST, panel);
-		panel.add(adressLabel);
+		sl_panelGauche.putConstraint(SpringLayout.NORTH, adressLabel, 6, SpringLayout.SOUTH, firstnameLabel);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, adressLabel, 10, SpringLayout.WEST, panelGauche);
+		panelGauche.add(adressLabel);
 		
 		cpLabel = new JLabel("New label");
-		sl_panel.putConstraint(SpringLayout.NORTH, cpLabel, 6, SpringLayout.SOUTH, adressLabel);
-		sl_panel.putConstraint(SpringLayout.WEST, cpLabel, 10, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, cpLabel, 0, SpringLayout.EAST, adressLabel);
-		panel.add(cpLabel);
+		sl_panelGauche.putConstraint(SpringLayout.NORTH, cpLabel, 6, SpringLayout.SOUTH, adressLabel);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, cpLabel, 10, SpringLayout.WEST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.EAST, cpLabel, 0, SpringLayout.EAST, adressLabel);
+		panelGauche.add(cpLabel);
 		
 		cityLabel = new JLabel("New label");
-		sl_panel.putConstraint(SpringLayout.NORTH, cityLabel, 6, SpringLayout.SOUTH, cpLabel);
-		sl_panel.putConstraint(SpringLayout.EAST, adressLabel, 0, SpringLayout.EAST, cityLabel);
-		sl_panel.putConstraint(SpringLayout.WEST, cityLabel, 10, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, cityLabel, -156, SpringLayout.EAST, panel);
-		panel.add(cityLabel);
+		sl_panelGauche.putConstraint(SpringLayout.NORTH, cityLabel, 6, SpringLayout.SOUTH, cpLabel);
+		sl_panelGauche.putConstraint(SpringLayout.EAST, adressLabel, 0, SpringLayout.EAST, cityLabel);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, cityLabel, 10, SpringLayout.WEST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.EAST, cityLabel, -156, SpringLayout.EAST, panelGauche);
+		panelGauche.add(cityLabel);
 		
 		mailLabel = new JLabel("New label");
-		sl_panel.putConstraint(SpringLayout.NORTH, mailLabel, 6, SpringLayout.SOUTH, cityLabel);
-		sl_panel.putConstraint(SpringLayout.WEST, mailLabel, 10, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, mailLabel, 0, SpringLayout.EAST, adressLabel);
-		panel.add(mailLabel);
+		sl_panelGauche.putConstraint(SpringLayout.NORTH, mailLabel, 6, SpringLayout.SOUTH, cityLabel);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, mailLabel, 10, SpringLayout.WEST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.EAST, mailLabel, 0, SpringLayout.EAST, adressLabel);
+		panelGauche.add(mailLabel);
 		
 		JLabel lblNewLabel = new JLabel("Personnal informations");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		sl_panel.putConstraint(SpringLayout.WEST, lblNewLabel, 10, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.NORTH, firstnameLabel, 6, SpringLayout.SOUTH, lblNewLabel);
-		sl_panel.putConstraint(SpringLayout.NORTH, lblNewLabel, 10, SpringLayout.NORTH, panel);
-		panel.add(lblNewLabel);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, lblNewLabel, 10, SpringLayout.WEST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.NORTH, firstnameLabel, 6, SpringLayout.SOUTH, lblNewLabel);
+		sl_panelGauche.putConstraint(SpringLayout.NORTH, lblNewLabel, 10, SpringLayout.NORTH, panelGauche);
+		panelGauche.add(lblNewLabel);
 		
 		JButton btnUpdateProfil = new JButton("Update profil");
-		sl_panel.putConstraint(SpringLayout.WEST, btnUpdateProfil, 10, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, btnUpdateProfil, -10, SpringLayout.SOUTH, panel);
-		panel.add(btnUpdateProfil);
+		btnUpdateProfil.addActionListener(this);
+		btnUpdateProfil.setActionCommand("Update");
+		sl_panelGauche.putConstraint(SpringLayout.WEST, btnUpdateProfil, 10, SpringLayout.WEST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.SOUTH, btnUpdateProfil, -10, SpringLayout.SOUTH, panelGauche);
+		panelGauche.add(btnUpdateProfil);
 		
 		JButton btnChangePassword = new JButton("Change password");
-		sl_panel.putConstraint(SpringLayout.WEST, btnChangePassword, 10, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.SOUTH, btnChangePassword, -6, SpringLayout.NORTH, btnUpdateProfil);
-		panel.add(btnChangePassword);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, btnChangePassword, 10, SpringLayout.WEST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.SOUTH, btnChangePassword, -6, SpringLayout.NORTH, btnUpdateProfil);
+		panelGauche.add(btnChangePassword);
 		
-		panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		add(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
-		/*comboBoxRole = new JComboBox();
-		comboBoxRole.setToolTipText("Select your role");
-		panel_1.add(comboBoxRole, BorderLayout.NORTH);*/
+		panelDroit = new JPanel();
+		panelDroit.setBackground(Color.WHITE);
+		add(panelDroit);
+		panelDroit.setLayout(new BorderLayout(0, 0));
+		
+		panelButton = new JPanel();
+		panelButton.setBackground(Color.WHITE);
+		panelDroit.add(panelButton, BorderLayout.CENTER);
+		panelButton.setLayout(new GridLayout(4, 1));
+		
+		/*JComboBox comboBoxRole = new JComboBox();
+		panelDroit.add(comboBoxRole, BorderLayout.NORTH);*/
 		
 		setInfosUser();
 	}
@@ -128,7 +147,70 @@ public class AccountView extends JPanel {
 			roles= new String[] {"Member", "Simple user"};
 		
 		comboBoxRole = new JComboBox(roles);
+		comboBoxRole.addActionListener(this);
 		comboBoxRole.setToolTipText("Select your role");
-		panel_1.add(comboBoxRole, BorderLayout.NORTH);
+		panelDroit.add(comboBoxRole, BorderLayout.NORTH);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if(cmd.equals("Update")){
+			
+		}
+		
+		JComboBox cb = (JComboBox) e.getSource();
+	    String selectedRole = (String) cb.getSelectedItem();
+	    
+	    switch (selectedRole) {
+	        case "Administrator": 
+	        	System.out.println("admin");
+	        	panelButton.removeAll();
+	        	panelButton.repaint();
+	        	panelButton.revalidate();
+	        	JButton btn1 = new JButton("Create Room");
+	        	JButton btn2 = new JButton("Delete Room");
+	        	JButton btn3 = new JButton("Manage Users");
+	        	panelButton.add(btn1);
+	        	panelButton.add(btn2); 
+	        	panelButton.add(btn3); 
+	        	panelButton.repaint();
+	        	panelButton.revalidate();
+	        	break;
+	        case "Manager": 
+	        	System.out.println("Manager");
+	        	panelButton.removeAll();
+	        	panelButton.repaint();
+	        	panelButton.revalidate();
+	        	JButton btnM1 = new JButton("Manage Participant");
+	        	JButton btnM2 = new JButton("Create Activity");
+	        	panelButton.add(btnM1);
+	        	panelButton.add(btnM2); 
+	        	panelButton.repaint();
+	        	panelButton.revalidate();
+	        	break;
+	        case "Participant":
+	        	System.out.println("Participant");
+	        	panelButton.removeAll();
+	        	panelButton.repaint();
+	        	panelButton.revalidate();
+	        	JButton btnE = new JButton("Create Event");
+	        	JButton BtnE2 = new JButton("Manage Events");
+	        	panelButton.add(btnE);
+	        	panelButton.add(BtnE2);
+	        	panelButton.repaint();
+	        	panelButton.revalidate();
+	        	break;
+	        case "Member":
+	        	System.out.println("Member");
+	        	panelButton.removeAll();
+	        	panelButton.repaint();
+	        	panelButton.revalidate();
+	        	JButton btnP = new JButton("Add a product");
+	        	panelButton.add(btnP);
+	        	panelButton.repaint();
+	        	panelButton.revalidate();
+	        	break;
+	    }
+    }    
 }

@@ -84,6 +84,8 @@ public class NotificationCenterView extends JPanel {
         table.setRowHeight(20);
         table.getColumn("").setCellRenderer(new ButtonRenderer());
         table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
+        /*table.getColumn("Lu").setCellRenderer(new CheckBoxRenderer());
+        table.getColumn("Lu").setCellEditor(new ButtonEditor(new JCheckBox()));*/
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		

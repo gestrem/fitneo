@@ -25,7 +25,7 @@ public class MainView extends JFrame implements ActionListener {
 	//type de persistance choisi
 	private int persistType;
 	
-	private JPanel panelDisplay;
+	private static JPanel panelDisplay;
 	private SpringLayout springLayout;
 	private HomeView homePanel;
 	private AccountView accountPanel;
@@ -124,69 +124,40 @@ public class MainView extends JFrame implements ActionListener {
 		getContentPane().add(lblLogoFitneo);
 	}
 	
+	public static void changePanel(JPanel panel){
+		//remove ancient JPanel if exist
+		panelDisplay.removeAll();
+		panelDisplay.repaint();
+		panelDisplay.revalidate();
+		
+		//add the new JPanel
+		panelDisplay.add(panel);
+		panelDisplay.repaint();
+		panelDisplay.revalidate();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		String cmd = e.getActionCommand();
 		if(cmd.equals("Home")){
-			
-			//remove ancient JPanel if exist
-			panelDisplay.removeAll();
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
-			
-			//add the new JPanel
-			panelDisplay.add(homePanel);
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
+			changePanel(homePanel);
 		}
 		else if(cmd.equals("Account")){
 			accountPanel = new AccountView(this.persistType);
-			//remove ancient JPanel if exist
-			panelDisplay.removeAll();
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
-			
-			//add the new JPanel
-			panelDisplay.add(accountPanel);
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
+			changePanel(accountPanel);
 		}
 		else if(cmd.equals("Activity")){
 			activityPanel = new ActivityView();
-			//remove ancient JPanel if exist
-			panelDisplay.removeAll();
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
-			
-			//add the new JPanel
-			panelDisplay.add(activityPanel);
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
+			changePanel(activityPanel);
 		}
 		else if(cmd.equals("Event")){
 			eventPanel = new EventView();
-			//remove ancient JPanel if exist
-			panelDisplay.removeAll();
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
-			
-			//add the new JPanel
-			panelDisplay.add(eventPanel);
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
+			changePanel(eventPanel);
 		}
 		else if(cmd.equals("Notif")){
 			notifPanel = new NotificationCenterView(this.persistType);
-			//remove ancient JPanel if exist
-			panelDisplay.removeAll();
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
-			
-			//add the new JPanel
-			panelDisplay.add(notifPanel);
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
+			changePanel(notifPanel);
 		}
 	}
 }
