@@ -47,13 +47,9 @@ public abstract class ListRoom {
 			return listRoom;
 		}
 		
-		public void deleteRoom(int id){
-			deleteListRoomJDBC(id);
-		}
+	
 		
-		public void updateListRoom(int idRoom,String roomArea, String roomType,int capacite){
-			updateListRoomJDBC(idRoom,roomArea, roomType,capacite);
-		}
+		
 		
 		public static ListRoom getInstance(int persistType){
 			if (myRoomList == null)
@@ -63,7 +59,7 @@ public abstract class ListRoom {
 		}
 		
 		public abstract void createRoomJDBC(String roomArea, String roomType);
-		public abstract void updateListRoomJDBC(int idRoom,String roomArea, String roomType,int capacite);
+		public abstract void updateRoomJDBC(int idRoom,String roomArea, String roomType,int capacite);
 		public abstract void deleteListRoomJDBC(int idRoom);
 		public abstract Room getRoomJDBC(int idRoom);
 

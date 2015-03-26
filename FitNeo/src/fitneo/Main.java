@@ -84,19 +84,21 @@ public class Main {
          * 
          * */
         ListAccessoryType listAccessoryType= ListAccessoryType.getInstance(PersistKit.JDBC);
-        listAccessoryType.createAccessory("poids 20kg");
-    	System.out.println("test accessory");
+        //listAccessoryType.createAccessory("poids 20kg");
+    	listAccessoryType.deleteAccessoryTypeJDBC(2);
+        System.out.println("test accessory");
 
-        /*
+        
     	ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);
     	System.out.println("test");
-    	listroom.createRoom("20m", "Cours");
-    	listroom.createRoom("30m","repos");
-    	listroom.updateListRoom(1,"40m2","Concert",20);
+    	//listroom.createRoom("20m", "Cours");
+    	//listroom.createRoom("30m","repos");
+    	//listroom.updateListRoom(1,"40m2","Concert",20);
     	listroom.createListRoom(0);
     	listroom.getListRoom();
+    	
     	System.out.println("Fait");
-    	*/
+    	
         /* Choix du type de persistance */
         int typePersist = 0;
 

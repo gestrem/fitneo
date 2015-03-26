@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import core.ListAccessoryType;
 import core.AccessoryType;
-
 import core.Room;
 
 public class ListAccessoryJDBC extends ListAccessoryType{
@@ -46,12 +45,12 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 			String query = "SELECT * FROM accessoryType";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
+				
 				accessoryList.add(new AccessoryType(rs.getInt("idAccessoryType"),rs.getString("accessoryTypeName")));
             	
             }
 		this.setMyAccessoryTypeList(accessoryList);
 		
-		(listRoom);
 		}
 		catch(SQLException e){
 			e.printStackTrace();
@@ -60,5 +59,30 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 		
 	}
 	
+	public void updateAccessoryTypeJDBC(int idAccessoryType,String nameAccessoryType){
+		jdbc.openConnection();
+		try{
+			String query ="UPDATE accessoryType set accessoryName='"+nameAccessoryType+"'  WHERE idAccessoryType='"+idAccessoryType+"' ";
+						jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+	}
+
+
+	@Override
+	public void deleteAccessoryTypeJDBC(int idAccessoryType) {
+		jdbc.openConnection();
+		try{
+			String query ="DELETE from accessoryType  WHERE idAccessoryType='"+idAccessoryType+"' ";
+						jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();		
+	}
 	
 }

@@ -2,11 +2,16 @@ package core;
 
 import persist.PersistKit;
 
-public abstract class AccessoryType {
+public  class AccessoryType {
 	
 	private String accessoryTypeName;
-	
 	private int idAccessory;
+	
+	public AccessoryType(int idAccessory,String accessoryTypeName){
+		this.accessoryTypeName=accessoryTypeName;
+		this.idAccessory=idAccessory;
+		
+	}
 	
 	public int getIdAccessory() {
 		return idAccessory;
@@ -28,11 +33,7 @@ public abstract class AccessoryType {
 
 	
 	
-	public AccessoryType(int idAccessory,String accessoryTypeName){
-		this.accessoryTypeName=accessoryTypeName;
-		this.idAccessory=idAccessory;
-		
-	}
+
 	
 
 
