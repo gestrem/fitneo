@@ -32,7 +32,7 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 	
-	public void updateListRoomJDBC(int roomId,String roomArea,String roomType,int capacity){
+	public void updateRoomJDBC(int roomId,String roomArea,String roomType,int capacity){
 		jdbc.openConnection();
 		try{
 			String query ="UPDATE room set roomArea='"+roomArea+"' ,roomType='"+roomType+"',capacity='"+capacity+"' WHERE idRoom='"+roomId+"' ";
@@ -76,6 +76,7 @@ public class ListRoomJDBC extends ListRoom{
 		}
 		jdbc.close();
 	}
+
 
 	public void getAllRoomFreeJDBC(){
 		 //to do

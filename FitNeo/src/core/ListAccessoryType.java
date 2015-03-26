@@ -33,21 +33,20 @@ public abstract class ListAccessoryType {
 		
 	}
 	
-	public void createAccessory(String accessoryType){
-		createAccessoryTypeJDBC(accessoryType);
-	}
+	
 
 	public void addAccessoryToList(AccessoryType accessoryType){
 		listAccessoryType.add(accessoryType);
 	}
 
-	public void getAllAccessoryType(){
-		
-		getAllAccessoryTypeJDBC();
-	}
+	
 	
 	public abstract void createAccessoryTypeJDBC(String accessoryType);
 	public abstract void getAllAccessoryTypeJDBC();
-;
+	public abstract void updateAccessoryTypeJDBC(int idAccessoryType,String nameAccessoryType);
+	public abstract void deleteAccessoryTypeJDBC(int idAccessoryType);
+	
+
+
 
 }
