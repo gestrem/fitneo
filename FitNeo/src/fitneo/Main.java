@@ -63,7 +63,7 @@ public class Main {
     	
     	/* DELETE UNE CATEGORIE
     	 * */
-    	 ListCategory liste= ListCategory.getInstance(PersistKit.JDBC);
+    	 /*ListCategory liste= ListCategory.getInstance(PersistKit.JDBC);
     	
     	
     	try {
@@ -72,7 +72,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		
-		} 
+		} */
     	
     	
     	
@@ -83,9 +83,9 @@ public class Main {
          * 2 pour XML
          * 
          * */
-        ListAccessoryType listAccessoryType= ListAccessoryType.getInstance(PersistKit.JDBC);
+       /* ListAccessoryType listAccessoryType= ListAccessoryType.getInstance(PersistKit.JDBC);
         listAccessoryType.createAccessory("poids 20kg");
-    	System.out.println("test accessory");
+    	System.out.println("test accessory");*/
 
         /*
     	ListRoom listroom=ListRoom.getInstance(PersistKit.JDBC);

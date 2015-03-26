@@ -98,4 +98,10 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 
+	@Override
+	public Room getRoomJDBC(int idRoom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

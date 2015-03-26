@@ -1,31 +1,45 @@
 package ui;
 
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JTable;
 
+import core.CategoryProductFacade;
 import core.Notification;
 import core.NotificationFacade;
 import core.UserFacade;
 
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableCellRenderer;
+
+import persist.PersistKit;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
 public class NotificationCenterView extends JPanel {
 
 	private NotificationFacade notifFacade;
 	private UserFacade userFacade;
+	private CategoryProductFacade catFacade;
 	//type de persistance choisi
 	private int persistType;
 	
@@ -39,54 +53,131 @@ public class NotificationCenterView extends JPanel {
 		this.persistType = persistType;	
 		this.userFacade = new UserFacade(this.persistType);	
 		this.notifFacade = new NotificationFacade(this.persistType);
+		this.catFacade = new CategoryProductFacade(this.persistType);
 		this.notifFacade.load(userFacade.getIdUser());	
 		ArrayList<Notification> list = this.notifFacade.getListNotification();
-		
-		JLabel lblNewLabel = new JLabel("My notifications");
 		
 		Vector<String> columnNames = new Vector<String>();
         columnNames.add(0, "Source");
         columnNames.add(1, "Object");
         columnNames.add(2, "Date");
         columnNames.add(3, "Lu");
+        columnNames.add(4, "");
         
         Vector<Vector<String>> notifications = new Vector<Vector<String>>();
         
         JPanel notifPanel = new JPanel();
-        notifPanel.setLayout(new GridLayout(0, 3));
+        notifPanel.setLayout(new GridLayout(0, 4));
         
         for (Notification notif : list) {         
             Vector<String> vectorNotification = new Vector<String>();
             vectorNotification.add(notif.getSender());
-            vectorNotification.add(""+notif.getMessage());
-            vectorNotification.add(""+notif.getDate());
+            vectorNotification.add(notif.getMessage());
+            vectorNotification.add(notif.getDate());
             vectorNotification.add(""+notif.getIsRead());
+            vectorNotification.add("Détails");
             notifications.add(vectorNotification);
         }
 		
         JTable table = new JTable(notifications, columnNames);
-        table.getTableHeader().setBackground(Color.BLACK);
-        table.getTableHeader().setForeground(new Color(139,0,0));
-        table.getTableHeader().setFont(new Font("Arial Black", Font.BOLD, 18));
-        table.setBackground(Color.BLACK);
-        table.setForeground(Color.WHITE);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        table.setGridColor(Color.WHITE);
+        table.setFillsViewportHeight(true);
         table.setRowHeight(20);
-        table.setAutoCreateRowSorter(true);
-        
-        table.getTableHeader().setReorderingAllowed(false);
-        table.setEnabled(false);
+        table.getColumn("").setCellRenderer(new ButtonRenderer());
+        table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBackground(Color.BLACK);
-        table.setFillsViewportHeight(true);
 		
-        add(new JLabel("HIGHSCORE"), BorderLayout.NORTH);
+        add(new JLabel("My Notifications"), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
-		
+	}
+	
+	class ButtonRenderer extends JButton implements TableCellRenderer {
 
-		
+		  public ButtonRenderer() {
+		    setOpaque(true);
+		  }
 
+		  public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			  if (isSelected) {
+				  setForeground(table.getSelectionForeground());
+				  setBackground(table.getSelectionBackground());
+			  }
+			  else {
+				  setForeground(table.getForeground());
+				  setBackground(UIManager.getColor("Button.background"));
+			  }
+			  setText("Détails");
+			  return this;
+		  }
+	}
+	
+	class ButtonEditor extends DefaultCellEditor {
+		protected JButton button;
+		private String label;
+		private String categoryName;
+		private int idcategoryParent;
+		private boolean isPushed;
+		private boolean isCreationDemand;
+		private int confirm;
+
+		public ButtonEditor(JCheckBox checkBox) {
+			super(checkBox);
+		    button = new JButton();
+		    button.setOpaque(true);
+		    button.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		fireEditingStopped();
+		    	}
+		    });
+		  }
+
+		  public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+			  if (isSelected) {
+				  button.setForeground(table.getSelectionForeground());
+				  button.setBackground(table.getSelectionBackground());
+			  } 
+			  else 
+			  {
+				  button.setForeground(table.getForeground());
+				  button.setBackground(table.getBackground());
+			  }
+			  label = notifFacade.getListNotification().get(row).getMessage();
+			  isCreationDemand = notifFacade.getListNotification().get(row).getIsCreationDemand();
+			  categoryName = notifFacade.getListNotification().get(row).getCategoryName();
+			  idcategoryParent = notifFacade.getListNotification().get(row).getIdCategoryParent();
+			  button.setText("Détails");
+			  isPushed = true;
+			  return button;
+		  }
+
+		  public Object getCellEditorValue() {
+			  if (isPushed) {
+				  if(isCreationDemand){
+					  String[] labels={"Confirm", "Refuse"};
+					  confirm = JOptionPane.showOptionDialog(button, label+" "+categoryName, "Request to create category",JOptionPane.DEFAULT_OPTION,
+				                JOptionPane.INFORMATION_MESSAGE, null, labels, labels[0]);
+					  if(confirm == 0){
+						  if(!catFacade.confirmCreationCategory(categoryName, idcategoryParent))
+							  JOptionPane.showMessageDialog(null, "You have already create this category");
+					  }
+				  }				  
+				  else{
+					  JOptionPane.showMessageDialog(button, label);
+				  }
+			  }
+			  isPushed = false;
+			  return new String(label);
+		  }
+
+		  public boolean stopCellEditing() {
+			  isPushed = false;
+			  return super.stopCellEditing();
+		  }
+
+		  protected void fireEditingStopped() {
+			  super.fireEditingStopped();
+		  }
 	}
 }
+	
+	

@@ -2,7 +2,7 @@ package core;
 
 import persist.PersistKit;
 
-public abstract class AccessoryType {
+public class AccessoryType {
 	
 	private String accessoryTypeName;
 	
