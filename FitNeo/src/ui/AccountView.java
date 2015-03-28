@@ -168,8 +168,8 @@ public class AccountView extends JPanel implements ActionListener {
 	        	panelButton.removeAll();
 	        	panelButton.repaint();
 	        	panelButton.revalidate();
-	        	JButton btn1 = new JButton("Create Room");
-	        	JButton btn2 = new JButton("Delete Room");
+	        	JButton btn1 = new JButton("Manage Category");
+	        	JButton btn2 = new JButton("Manage Room");
 	        	JButton btn3 = new JButton("Manage Users");
 	        	panelButton.add(btn1);
 	        	panelButton.add(btn2); 
@@ -184,8 +184,10 @@ public class AccountView extends JPanel implements ActionListener {
 	        	panelButton.revalidate();
 	        	JButton btnM1 = new JButton("Manage Participant");
 	        	JButton btnM2 = new JButton("Create Activity");
+	        	JButton btnM3 = new JButton("Create Category Demand");
 	        	panelButton.add(btnM1);
 	        	panelButton.add(btnM2); 
+	        	panelButton.add(btnM3); 
 	        	panelButton.repaint();
 	        	panelButton.revalidate();
 	        	break;
@@ -207,7 +209,9 @@ public class AccountView extends JPanel implements ActionListener {
 	        	panelButton.repaint();
 	        	panelButton.revalidate();
 	        	JButton btnP = new JButton("Add a product");
+	        	JButton btnP2 = new JButton("Manage inscription events");
 	        	panelButton.add(btnP);
+	        	panelButton.add(btnP2);
 	        	panelButton.repaint();
 	        	panelButton.revalidate();
 	        	break;

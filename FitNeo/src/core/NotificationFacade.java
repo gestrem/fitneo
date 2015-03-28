@@ -17,4 +17,12 @@ public class NotificationFacade {
 	public ArrayList<Notification> getListNotification() {
 		return listnotification.getListNotification();
 	}
+	
+	public void setRead(int idNotif){
+		listnotification.setRead(idNotif);
+	}
+	
+	public int nbNewNotification(int idUser){
+		return listnotification.nbNewNotification(idUser);
+	}
 }

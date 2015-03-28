@@ -24,6 +24,7 @@ public class UserJDBC extends User{
 		
 		jdbc.openConnection();
 		ResultSet rs = null;
+
 		
 		try{
 			String query = "SELECT * FROM mainuser WHERE userEmail ='" + login + "'";

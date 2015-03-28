@@ -22,6 +22,7 @@ public class MainView extends JFrame implements ActionListener {
 
 	//Facade de la classe User
 	private UserFacade userFacade;
+	private NotificationFacade notifFacade;
 	//type de persistance choisi
 	private int persistType;
 	
@@ -32,6 +33,8 @@ public class MainView extends JFrame implements ActionListener {
 	private ActivityView activityPanel;
 	private EventView eventPanel;
 	private NotificationCenterView notifPanel;
+	private Button notifButton;
+	private int nbNotif;
 	
 	/**
 	 * Create the application.
@@ -40,7 +43,8 @@ public class MainView extends JFrame implements ActionListener {
 		this.persistType = persistType;
 		//On instancie une facadeUser pour la vue
 		this.userFacade = new UserFacade(this.persistType);	
-		
+		this.notifFacade = new NotificationFacade(this.persistType);
+		nbNotif=this.notifFacade.nbNewNotification(userFacade.getIdUser());	
 		setTitle("FitNeo");
 		setResizable(false);
 		initialize();
@@ -107,7 +111,9 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, accountButton, -6, SpringLayout.WEST, basketButton);
 		getContentPane().add(accountButton);
 		
-		Button notifButton = new Button("Notifications");
+		
+		
+		notifButton = new Button("Notifications : "+nbNotif);
 		notifButton.addActionListener(this);
 		notifButton.setActionCommand("Notif");
 		springLayout.putConstraint(SpringLayout.NORTH, notifButton, 0, SpringLayout.NORTH, basketButton);
@@ -140,23 +146,29 @@ public class MainView extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e)
 	{
 		String cmd = e.getActionCommand();
+		nbNotif=this.notifFacade.nbNewNotification(userFacade.getIdUser());	
 		if(cmd.equals("Home")){
+			notifButton.setLabel("Notifications : "+nbNotif);
 			changePanel(homePanel);
 		}
 		else if(cmd.equals("Account")){
 			accountPanel = new AccountView(this.persistType);
+			notifButton.setLabel("Notifications : "+nbNotif);
 			changePanel(accountPanel);
 		}
 		else if(cmd.equals("Activity")){
 			activityPanel = new ActivityView();
+			notifButton.setLabel("Notifications : "+nbNotif);
 			changePanel(activityPanel);
 		}
 		else if(cmd.equals("Event")){
 			eventPanel = new EventView();
+			notifButton.setLabel("Notifications : "+nbNotif);
 			changePanel(eventPanel);
 		}
 		else if(cmd.equals("Notif")){
 			notifPanel = new NotificationCenterView(this.persistType);
+			notifButton.setLabel("Notifications : "+nbNotif);
 			changePanel(notifPanel);
 		}
 	}

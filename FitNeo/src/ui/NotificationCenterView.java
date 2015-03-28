@@ -3,9 +3,11 @@ package ui;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
@@ -26,6 +28,7 @@ import core.NotificationFacade;
 import core.UserFacade;
 
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import persist.PersistKit;
@@ -42,6 +45,7 @@ public class NotificationCenterView extends JPanel {
 	private CategoryProductFacade catFacade;
 	//type de persistance choisi
 	private int persistType;
+	private JTable table;
 	
 	/**
 	 * Create the panel.
@@ -61,7 +65,7 @@ public class NotificationCenterView extends JPanel {
         columnNames.add(0, "Source");
         columnNames.add(1, "Object");
         columnNames.add(2, "Date");
-        columnNames.add(3, "Lu");
+        columnNames.add(3, "Checked");
         columnNames.add(4, "");
         
         Vector<Vector<String>> notifications = new Vector<Vector<String>>();
@@ -79,19 +83,28 @@ public class NotificationCenterView extends JPanel {
             notifications.add(vectorNotification);
         }
 		
-        JTable table = new JTable(notifications, columnNames);
+        table = new JTable(notifications, columnNames);
         table.setFillsViewportHeight(true);
         table.setRowHeight(20);
         table.getColumn("").setCellRenderer(new ButtonRenderer());
         table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
-        /*table.getColumn("Lu").setCellRenderer(new CheckBoxRenderer());
-        table.getColumn("Lu").setCellEditor(new ButtonEditor(new JCheckBox()));*/
+        table.getColumn("Checked").setCellRenderer(new CheckBoxRenderer());
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
         add(new JLabel("My Notifications"), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 	}
+	
+	class CheckBoxRenderer extends DefaultTableCellRenderer {
+ 
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        	JCheckBox cb = new JCheckBox();
+            cb.setSelected(Boolean.valueOf(value.toString()));
+            return cb;
+        }
+        
+    }
 	
 	class ButtonRenderer extends JButton implements TableCellRenderer {
 
@@ -121,6 +134,7 @@ public class NotificationCenterView extends JPanel {
 		private boolean isPushed;
 		private boolean isCreationDemand;
 		private int confirm;
+		private int idNotif;
 
 		public ButtonEditor(JCheckBox checkBox) {
 			super(checkBox);
@@ -149,18 +163,22 @@ public class NotificationCenterView extends JPanel {
 			  idcategoryParent = notifFacade.getListNotification().get(row).getIdCategoryParent();
 			  button.setText("Détails");
 			  isPushed = true;
+			  idNotif=notifFacade.getListNotification().get(row).getIdNotification();
+			  System.out.println(idNotif);
 			  return button;
 		  }
 
 		  public Object getCellEditorValue() {
 			  if (isPushed) {
+				  notifFacade.setRead(idNotif);
 				  if(isCreationDemand){
 					  String[] labels={"Confirm", "Refuse"};
 					  confirm = JOptionPane.showOptionDialog(button, label+" "+categoryName, "Request to create category",JOptionPane.DEFAULT_OPTION,
 				                JOptionPane.INFORMATION_MESSAGE, null, labels, labels[0]);
 					  if(confirm == 0){
-						  if(!catFacade.confirmCreationCategory(categoryName, idcategoryParent))
+						  if(!catFacade.confirmCreationCategory(categoryName, idcategoryParent)){						  
 							  JOptionPane.showMessageDialog(null, "You have already create this category");
+						  }
 					  }
 				  }				  
 				  else{

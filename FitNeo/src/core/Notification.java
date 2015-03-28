@@ -6,6 +6,7 @@ public class Notification {
 	private String sender;
 	private String date;
 	private String categoryName;
+	private int idNotification;
 	private int idCategoryParent;
 	//isRead renvoie vrai si la notification est lue
 	private Boolean isRead; 
@@ -15,7 +16,8 @@ public class Notification {
 	/*
 	 * Constructeur Notification simple
 	 */
-	public Notification(String sender, String message, boolean isRead, boolean isCreationDemand, String date){	
+	public Notification(int idNotification, String sender, String message, boolean isRead, boolean isCreationDemand, String date){	
+		this.idNotification=idNotification;
 		this.sender=sender;
 		this.message=message;
 		this.isRead=isRead;
@@ -26,7 +28,8 @@ public class Notification {
 	/*
 	 * Constructeur Notification avec demande de creation
 	 */
-	public Notification(String sender, String message, boolean isRead, boolean isCreationDemand, String date, String categoryName, int idCategoryParent){	
+	public Notification(int idNotification, String sender, String message, boolean isRead, boolean isCreationDemand, String date, String categoryName, int idCategoryParent){	
+		this.idNotification=idNotification;
 		this.sender=sender;
 		this.message=message;
 		this.isRead=isRead;
@@ -94,6 +97,14 @@ public class Notification {
 
 	public void setIdCategoryParent(int idCategoryParent) {
 		this.idCategoryParent = idCategoryParent;
+	}
+
+	public int getIdNotification() {
+		return idNotification;
+	}
+
+	public void setIdNotification(int idNotification) {
+		this.idNotification = idNotification;
 	}
 	
 }
