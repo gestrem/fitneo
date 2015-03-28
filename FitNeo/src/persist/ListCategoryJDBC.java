@@ -124,6 +124,7 @@ public class ListCategoryJDBC extends ListCategory {
 	
 
 	}
+	
 
 	@Override
 	public boolean verifyCategoryExist(String nameCat) {

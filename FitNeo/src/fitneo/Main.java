@@ -1,6 +1,9 @@
 package fitneo;
 
 import java.sql.SQLException;
+
+import core.ListCategory;
+import core.ListProduct;
 import ui.LoginUI;
 import persist.PersistKit;
 
@@ -19,6 +22,13 @@ public class Main {
          * 2 pour XML
          * 
          * */
+    	
+
+    	ListProduct liste= ListProduct.getInstance(PersistKit.JDBC);
+
+        liste.getAllProduct();
+
+        liste.updateProduct("tapis pour chaval", 10, 12, 6, 2, 4, 1);
 
     	/* Choix du type de persistance */
         int typePersist = 0;

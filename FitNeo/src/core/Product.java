@@ -7,22 +7,19 @@ public class Product {
 	private int discountMember; 
 	private int category; 
 	private int id_product;
+	private int id_seller;
 	
 
-	public Product(String productTypeName, int productPrice,int availableQuantity,int discountMember,int category){	
-		this.productTypeName= productTypeName;
-		this.productPrice= productPrice;
-		this.availableQuantity = availableQuantity;
-		this.discountMember = discountMember;
-		this.category = category;
-	}
-	public Product(String productTypeName, int productPrice,int availableQuantity,int discountMember,int category, int id_product){	
+	
+	
+	public Product(String productTypeName, int productPrice,int availableQuantity,int discountMember,int category, int id_product, int id_seller){	
 		this.productTypeName= productTypeName;
 		this.productPrice= productPrice;
 		this.availableQuantity = availableQuantity;
 		this.discountMember = discountMember;
 		this.category = category;
 		this.id_product = id_product;
+		this.id_seller = id_seller;
 	}
 	
 	public int getId_product() {
@@ -64,5 +61,11 @@ public class Product {
 	
 	public String toString(){
 		return productTypeName;
+	}
+	public int getId_seller() {
+		return id_seller;
+	}
+	public void setId_seller(int id_seller) {
+		this.id_seller = id_seller;
 	}
 }

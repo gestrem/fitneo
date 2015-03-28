@@ -26,6 +26,9 @@ public abstract class ListProduct {
 		return listAllProduct;
 	}
 	
+	
+	
+
 	public void setListProduct(ArrayList<Product> listProduct){
 		this.listAllProduct= listProduct;
 	}
@@ -37,21 +40,22 @@ public abstract class ListProduct {
 	}
 	
 	public abstract void getAllProduct();
+	public abstract void getAllProductByCategory(int idCategory);
 	
 	public void createProduct(Product aProduct)throws SQLException{
 		createProductJDBC(aProduct);
 	}
 	public abstract void createProductJDBC(Product aProduct)throws SQLException;
 
-	public void updateProduct(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product )throws SQLException{
-		updateProductJDBC( productName,productPrice,availableQuantity,discountMember,category,id_product);
+	public void updateProduct(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product,int id_seller )throws SQLException{
+		updateProductJDBC( productName,productPrice,availableQuantity,discountMember,category,id_product,id_seller);
 	}
-	public abstract void updateProductJDBC(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product)throws SQLException;
+	public abstract void updateProductJDBC(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product, int id_seller)throws SQLException;
 	
-	public void deleteListProduct(int aProductId){
+	public void deleteListProduct(int aProductId)throws SQLException{
 		deleteListProductJDBC(aProductId);
 		}
-	public abstract void deleteListProductJDBC(int aProductId);
+	public abstract void deleteListProductJDBC(int aProductId)throws SQLException;
 	
 	public Product searchWithId(int idprod){
 		Product prod = null; 

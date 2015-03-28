@@ -52,6 +52,7 @@ public abstract class ListCategory {
 	
 	public abstract void getAllCategories();
 	
+	
 	public abstract void insertCategoryWithNameJDBC(String cat) ; 
 	public abstract void insertCategoryWithNameAndSuperCategoryJDBC(String catName, int catParent);
 	public abstract void updateCategoryWithNameJDBC(int idCat, String catName) throws SQLException;
@@ -59,6 +60,7 @@ public abstract class ListCategory {
 	public abstract void updateCategoryWithNameAndSuperCategoryJDBC(int idCat, String catName,  int catIdSuperCategory) throws SQLException;
 	public abstract void deleteCategoryJDBC(int idCat) throws SQLException; 
 	public abstract boolean verifyCategoryExist(String nameCat);
+	
 	
 	public CategoryProduct searchWithId(int idcat){
 		CategoryProduct cat = null; 

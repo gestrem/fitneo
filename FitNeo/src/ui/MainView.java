@@ -33,8 +33,12 @@ public class MainView extends JFrame implements ActionListener {
 	private ActivityView activityPanel;
 	private EventView eventPanel;
 	private NotificationCenterView notifPanel;
+
 	private Button notifButton;
 	private int nbNotif;
+
+	private ProductView productPanel;
+
 	
 	/**
 	 * Create the application.
@@ -93,6 +97,8 @@ public class MainView extends JFrame implements ActionListener {
 		getContentPane().add(eventButton);
 		
 		Button productButton = new Button("Products");
+		productButton.addActionListener(this);
+		productButton.setActionCommand("Products");
 		springLayout.putConstraint(SpringLayout.WEST, productButton, 6, SpringLayout.EAST, eventButton);
 		springLayout.putConstraint(SpringLayout.SOUTH, productButton, -6, SpringLayout.NORTH, panelDisplay);
 		panelDisplay.setLayout(new CardLayout(0, 0));
@@ -170,6 +176,18 @@ public class MainView extends JFrame implements ActionListener {
 			notifPanel = new NotificationCenterView(this.persistType);
 			notifButton.setLabel("Notifications : "+nbNotif);
 			changePanel(notifPanel);
+		}
+		else if(cmd.equals("Products")){
+			productPanel = new ProductView(this.persistType);
+			//remove ancient JPanel if exist
+			panelDisplay.removeAll();
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
+			
+			//add the new JPanel
+			panelDisplay.add(productPanel);
+			panelDisplay.repaint();
+			panelDisplay.revalidate();
 		}
 	}
 }
