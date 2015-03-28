@@ -1,14 +1,12 @@
 package persist;
 
+import core.ListBasket;
 import core.ListCategory;
 import core.ListEvent;
 import core.ListNotification;
 import core.ListProduct;
-import core.AccessoryType;
-import core.Notification;
 import core.ListAccessoryType;
 import core.Activity;
-import core.Basket;
 import core.ListRoom;
 import core.User;
 
@@ -28,9 +26,9 @@ public class JDBCKit extends PersistKit {
     }
     
     @Override
-    public Basket createBasket(){
-        Basket basket = new BasketJDBC();
-        return basket;
+    public ListBasket createListBasket(){
+        ListBasket listBasket = new ListBasketJDBC();
+        return listBasket;
     }
     
     @Override

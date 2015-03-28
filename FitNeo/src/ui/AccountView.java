@@ -150,6 +150,7 @@ public class AccountView extends JPanel implements ActionListener {
 		comboBoxRole.addActionListener(this);
 		comboBoxRole.setToolTipText("Select your role");
 		panelDroit.add(comboBoxRole, BorderLayout.NORTH);
+		comboBoxRole.setSelectedIndex(0);
 	}
 
 	@Override

@@ -78,9 +78,11 @@ public class UserJDBC extends User{
 	public void registerUser(String userLastName, String userFirstName, String userAdresse, String userCity, String userCP, String userEmail, String passwordUser, String userAnswer, int idquestion){
 		jdbc.openConnection();
 		try{
-			String query ="INSERT INTO mainuser(userFirstName, userLastName, userAdresse, userCity, userCP, userEmail, passwordUser, roleAdmin, roleParticipant, rolemember, roleManager, answer, idquestion) "
+			String query1 ="INSERT INTO mainuser(userFirstName, userLastName, userAdresse, userCity, userCP, userEmail, passwordUser, roleAdmin, roleParticipant, rolemember, roleManager, answer, idquestion) "
 					+ "values('"+userFirstName+"','"+userLastName+"','"+userAdresse+"','"+userCity+"','"+userCP+"','"+userEmail+"','"+passwordUser+"', 0, 0, 0, 0, '"+userAnswer+"','"+idquestion+"')";
-			jdbc.executeRequest(query);
+			jdbc.executeRequest(query1);
+			String query2 = "INSERT INTO basket(idUser, active_basket) values("+getUserId(userEmail)+",true)";
+			jdbc.executeRequest(query2);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -88,6 +90,24 @@ public class UserJDBC extends User{
 		jdbc.close();
 	}
 
+	public int getUserId(String mail){
+		jdbc.openConnection();
+		int id=0;
+		ResultSet rs = null;
+		try{
+			String query ="SELECT idUser from mainuser WHERE userEmail ='" + mail + "'";
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				id = rs.getInt("idUser");
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+		return id;
+	}
+	
 	@Override
 	public String changePassword(String mail) {
 		jdbc.openConnection();

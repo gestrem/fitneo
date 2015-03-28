@@ -1,20 +1,61 @@
 package core;
 
-import persist.PersistKit;
+import java.util.ArrayList;
 
-public abstract class Basket {
-	private Product[] listProducts; 
+import persist.BasketJDBC;
+
+public class Basket {
 	
-	private static Basket basket = null;
+	private int idBasket;
+	private int idUser;
+	private boolean isMainBasket;
+	private ArrayList<Product> listProducts = new ArrayList<Product>(); 
 	
 	public Basket(){
 		
 	}
 	
-	public static Basket getInstance(int persistType){
-		if (basket == null)
-			basket = PersistKit.createKit(persistType).createBasket();
-		return basket;
+	public Basket(int idBasket, int idUser, boolean active_basket, ArrayList<Product> listProducts){
+		this.idBasket=idBasket;
+		this.idUser = idUser;
+		this.isMainBasket=active_basket;	
+		this.listProducts=listProducts;
 	}
 
+	public int getIdBasket() {
+		return idBasket;
+	}
+
+	public void setIdBasket(int idBasket) {
+		this.idBasket = idBasket;
+	}
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
+	public boolean isMainBasket() {
+		return isMainBasket;
+	}
+
+	public void setMainBasket(boolean isMainBasket) {
+		this.isMainBasket = isMainBasket;
+	}
+
+	public ArrayList<Product> getListProducts() {
+		return listProducts;
+	}
+
+	public void setListProducts(ArrayList<Product> listProducts) {
+		this.listProducts = listProducts;
+	}
+	
+	public void loadProducts(int idBasket){
+		BasketJDBC basketJDBC = new BasketJDBC();
+		basketJDBC.loadProducts(idBasket);
+	}
 }

@@ -1,16 +1,15 @@
 package persist;
 
+import core.ListBasket;
 import core.ListCategory;
 import core.ListEvent;
 import core.ListNotification;
 import core.ListProduct;
-import core.AccessoryType;
-import core.Notification;
 import core.ListAccessoryType;
 import core.Activity;
-import core.Basket;
 import core.User;
 import core.ListRoom;
+
 public abstract class PersistKit {
 
     /* L'instance de notre kit */
@@ -24,7 +23,7 @@ public abstract class PersistKit {
 
     /* Methodes create qui create une classe metier du bon type de persistance */
     public abstract User createUser(); 
-    public abstract Basket createBasket();  
+    public abstract ListBasket createListBasket();  
     public abstract ListCategory createListCategory();
     public abstract ListEvent createListEvent();  
     public abstract ListProduct createListProduct();
