@@ -1,8 +1,7 @@
 package core;
 
 import java.util.ArrayList;
-
-import persist.BasketJDBC;
+import java.util.Iterator;
 
 public class Basket {
 	
@@ -53,9 +52,15 @@ public class Basket {
 	public void setListProducts(ArrayList<Product> listProducts) {
 		this.listProducts = listProducts;
 	}
-	
-	public void loadProducts(int idBasket){
-		BasketJDBC basketJDBC = new BasketJDBC();
-		basketJDBC.loadProducts(idBasket);
+
+	public int getTotalPrice() {
+		int totalPrice = 0;
+		Iterator<Product> it =  this.getListProducts().iterator();	
+		while ( it.hasNext()) {
+			Product p = it.next();
+			totalPrice += p.getProductPrice()*p.getAvailableQuantity(); 
+		}
+		return totalPrice;
 	}
+
 }

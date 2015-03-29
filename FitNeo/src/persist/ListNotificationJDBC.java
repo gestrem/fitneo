@@ -54,17 +54,17 @@ public class ListNotificationJDBC extends ListNotification{
 	}
 
 	@Override
-	public int nbNewNotification(int idUser) {
+	public String nbNewNotification(int idUser) {
 		jdbc.openConnection();
 		ResultSet rs = null;
-		int nbNewNotif=0;
+		String nbNewNotif = null;
 		
 		try{
 			
 			String query = "select count(*) from notification where isRead=false and receiver="+idUser;
 			jdbc.executeRequest(query);
 			rs = jdbc.fetchArray();
-			nbNewNotif=rs.getInt("count(*)");
+			nbNewNotif=rs.getString("count(*)");
 		}
 		catch(Exception e){
 			e.printStackTrace();

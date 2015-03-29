@@ -22,7 +22,7 @@ public class NotificationFacade {
 		listnotification.setRead(idNotif);
 	}
 	
-	public int nbNewNotification(int idUser){
+	public String nbNewNotification(int idUser){
 		return listnotification.nbNewNotification(idUser);
 	}
 }

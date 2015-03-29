@@ -16,7 +16,7 @@ public class ListBasketJDBC extends ListBasket{
 	}
 
 	@Override
-	public void loadMainBAsket(int idUser) {
+	public void loadMainBasket(int idUser) {
 		jdbc.openConnection();
 		ResultSet rs = null;
 		
@@ -60,17 +60,33 @@ public class ListBasketJDBC extends ListBasket{
 		ResultSet rs = null;
 		ArrayList<Product> listProducts = new ArrayList<Product>();
 		try{
-			String query = "SELECT ProductType.* FROM CommandLine, ProductType WHERE CommandLine.id_producttype=ProductType.id_producttype AND id_basket="+idBasket;
+			String query = "SELECT ProductType.*, CommandLine.quantity FROM CommandLine, ProductType WHERE CommandLine.id_producttype=ProductType.id_producttype AND id_basket="+idBasket;
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-				listProducts.add(new Product(rs.getString("productTypeName"), rs.getInt("productPrice"), rs.getInt("availableProductQuantity"), rs.getInt("DiscountMember"), rs.getInt("id_category"), rs.getInt("id_producttype"), rs.getInt("seller"))); 	
+				listProducts.add(new Product(rs.getString("productTypeName"), rs.getInt("productPrice"), rs.getInt("quantity"), rs.getInt("DiscountMember"), rs.getInt("id_category"), rs.getInt("id_producttype"), rs.getInt("seller"))); 	
 			}
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		jdbc.close();
 		return listProducts;
+	}
+	
+	public int getPrice (int idBasket){
+		jdbc.openConnection();
+		ResultSet rs = null;
+		int totalPrice = 0;
+		try{
+			String query = "SELECT ProductType.*, CommandLine.quantity FROM CommandLine, ProductType WHERE CommandLine.id_producttype=ProductType.id_producttype AND id_basket="+idBasket;
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				totalPrice += rs.getInt("quantity")*rs.getInt("productPrice");
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return totalPrice;
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import persist.PersistKit;
 
 public abstract class ListBasket {
@@ -16,7 +18,7 @@ public abstract class ListBasket {
 		return myListBasket;
 	}
 	
-	public abstract void loadMainBAsket(int idUser);
+	public abstract void loadMainBasket(int idUser);
 	public abstract void loadOrders(int idUser);
 	public abstract void confirmOrder(int idUser);
 

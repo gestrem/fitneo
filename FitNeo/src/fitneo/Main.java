@@ -22,13 +22,6 @@ public class Main {
          * 2 pour XML
          * 
          * */
-    	
-
-    	ListProduct liste= ListProduct.getInstance(PersistKit.JDBC);
-
-        liste.getAllProduct();
-
-        liste.updateProduct("tapis pour chaval", 10, 12, 6, 2, 4, 1);
 
     	/* Choix du type de persistance */
         int typePersist = 0;

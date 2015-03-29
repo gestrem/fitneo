@@ -31,5 +31,5 @@ public abstract class ListNotification {
 	
 	public abstract void load(int idUser);
 	public abstract void setRead(int idNotif);
-	public abstract int nbNewNotification(int idUser);
+	public abstract String nbNewNotification(int idUser);
 }

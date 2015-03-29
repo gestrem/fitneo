@@ -4,16 +4,17 @@ import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
-import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.SwingConstants;
+
 import java.awt.CardLayout;
+
 import javax.swing.ImageIcon;
 
-import core.Notification;
 import core.NotificationFacade;
 import core.UserFacade;
 
@@ -33,11 +34,11 @@ public class MainView extends JFrame implements ActionListener {
 	private ActivityView activityPanel;
 	private EventView eventPanel;
 	private NotificationCenterView notifPanel;
-
-	private Button notifButton;
-	private int nbNotif;
-
+	private BasketView basketPanel;
 	private ProductView productPanel;
+	
+	private JButton notifButton;
+	private String nbNotif;
 
 	
 	/**
@@ -71,7 +72,7 @@ public class MainView extends JFrame implements ActionListener {
 		panelDisplay.add(homePanel);
 		getContentPane().add(panelDisplay);
 		
-		Button homeButton = new Button("Home");
+		JButton homeButton = new JButton("Home");
 		homeButton.addActionListener(this);
 		homeButton.setActionCommand("Home");
 		springLayout.putConstraint(SpringLayout.NORTH, panelDisplay, 6, SpringLayout.SOUTH, homeButton);
@@ -80,7 +81,7 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, homeButton, -613, SpringLayout.EAST, getContentPane());
 		getContentPane().add(homeButton);
 		
-		Button activityButton = new Button("Activities");
+		JButton activityButton = new JButton("Activities");
 		activityButton.addActionListener(this);
 		activityButton.setActionCommand("Activity");
 		springLayout.putConstraint(SpringLayout.WEST, activityButton, 6, SpringLayout.EAST, homeButton);
@@ -88,7 +89,7 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, activityButton, -412, SpringLayout.EAST, getContentPane());
 		getContentPane().add(activityButton);
 		
-		Button eventButton = new Button("Events");
+		JButton eventButton = new JButton("Events");
 		eventButton.addActionListener(this);
 		eventButton.setActionCommand("Event");
 		springLayout.putConstraint(SpringLayout.WEST, eventButton, 6, SpringLayout.EAST, activityButton);
@@ -96,7 +97,7 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, eventButton, -211, SpringLayout.EAST, getContentPane());
 		getContentPane().add(eventButton);
 		
-		Button productButton = new Button("Products");
+		JButton productButton = new JButton("Products");
 		productButton.addActionListener(this);
 		productButton.setActionCommand("Products");
 		springLayout.putConstraint(SpringLayout.WEST, productButton, 6, SpringLayout.EAST, eventButton);
@@ -104,13 +105,15 @@ public class MainView extends JFrame implements ActionListener {
 		panelDisplay.setLayout(new CardLayout(0, 0));
 		springLayout.putConstraint(SpringLayout.EAST, productButton, -10, SpringLayout.EAST, getContentPane());
 		getContentPane().add(productButton);
-		
-		Button basketButton = new Button("Basket");
+
+		JButton basketButton = new JButton(new ImageIcon("./data/shopping-cart-icon.png"));
+		basketButton.addActionListener(this);
+		basketButton.setActionCommand("Basket");
 		springLayout.putConstraint(SpringLayout.NORTH, basketButton, 10, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, basketButton, -10, SpringLayout.EAST, getContentPane());
 		getContentPane().add(basketButton);
 		
-		Button accountButton = new Button("My account");
+		JButton accountButton = new JButton("My account",new ImageIcon("./data/profile-icon.png"));
 		accountButton.addActionListener(this);
 		accountButton.setActionCommand("Account");
 		springLayout.putConstraint(SpringLayout.NORTH, accountButton, 0, SpringLayout.NORTH, basketButton);
@@ -119,7 +122,7 @@ public class MainView extends JFrame implements ActionListener {
 		
 		
 		
-		notifButton = new Button("Notifications : "+nbNotif);
+		notifButton = new JButton(nbNotif, new ImageIcon("./data/Mail-icon.png"));
 		notifButton.addActionListener(this);
 		notifButton.setActionCommand("Notif");
 		springLayout.putConstraint(SpringLayout.NORTH, notifButton, 0, SpringLayout.NORTH, basketButton);
@@ -154,40 +157,38 @@ public class MainView extends JFrame implements ActionListener {
 		String cmd = e.getActionCommand();
 		nbNotif=this.notifFacade.nbNewNotification(userFacade.getIdUser());	
 		if(cmd.equals("Home")){
-			notifButton.setLabel("Notifications : "+nbNotif);
+			notifButton.setText(nbNotif);
 			changePanel(homePanel);
 		}
 		else if(cmd.equals("Account")){
 			accountPanel = new AccountView(this.persistType);
-			notifButton.setLabel("Notifications : "+nbNotif);
+			notifButton.setText(nbNotif);
 			changePanel(accountPanel);
 		}
 		else if(cmd.equals("Activity")){
 			activityPanel = new ActivityView();
-			notifButton.setLabel("Notifications : "+nbNotif);
+			notifButton.setText(nbNotif);
 			changePanel(activityPanel);
 		}
 		else if(cmd.equals("Event")){
 			eventPanel = new EventView();
-			notifButton.setLabel("Notifications : "+nbNotif);
+			notifButton.setText(nbNotif);
 			changePanel(eventPanel);
 		}
 		else if(cmd.equals("Notif")){
 			notifPanel = new NotificationCenterView(this.persistType);
-			notifButton.setLabel("Notifications : "+nbNotif);
+			notifButton.setText(nbNotif);
 			changePanel(notifPanel);
 		}
 		else if(cmd.equals("Products")){
 			productPanel = new ProductView(this.persistType);
-			//remove ancient JPanel if exist
-			panelDisplay.removeAll();
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
-			
-			//add the new JPanel
-			panelDisplay.add(productPanel);
-			panelDisplay.repaint();
-			panelDisplay.revalidate();
+			notifButton.setText(nbNotif);
+			changePanel(productPanel);			
+		}
+		else if(cmd.equals("Basket")){
+			basketPanel = new BasketView(this.persistType);
+			notifButton.setText(nbNotif);
+			changePanel(basketPanel);			
 		}
 	}
 }

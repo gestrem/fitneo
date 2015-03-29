@@ -3,20 +3,15 @@ package ui;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -30,8 +25,6 @@ import core.UserFacade;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-
-import persist.PersistKit;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
