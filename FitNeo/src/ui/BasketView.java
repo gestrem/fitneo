@@ -92,6 +92,7 @@ public class BasketView extends JPanel implements ActionListener {
 		buttonAdd.setActionCommand("confirm");
         add(top, BorderLayout.NORTH);
         
+
         add(scrollPane, BorderLayout.CENTER);
 	}
 	

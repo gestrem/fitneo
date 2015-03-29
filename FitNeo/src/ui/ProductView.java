@@ -46,14 +46,8 @@ import javax.swing.JTable;
 
 public class ProductView extends JPanel {
 	private int persistType;
-	private Product aProduct;
-	private ListProduct aListProduct;
 	private ProductFacade aProductFacade;
-	private CategoryProduct aCategory;
-	private ListCategory aListCategory;
 	private CategoryProductFacade aCategoryFacade;
-	private ArrayList<CategoryProduct> listCat;
-	private ArrayList<Product> listProd;
 	private JPanel productPanel;
 	private BasketFacade aBasketFacade;
 	private UserFacade userFacade;
@@ -159,11 +153,7 @@ public class ProductView extends JPanel {
 		private CategoryProduct categoryChoose;
 		private Product productChoose;
 		private String label;
-		private String categoryName;
-		private int idcategoryParent;
 		private boolean isPushed;
-		private boolean isCreationDemand;
-		private int confirm;
 		private String tableSelected;
 
 		public ButtonEditor(JCheckBox checkBox) {

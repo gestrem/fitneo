@@ -1,75 +1,225 @@
 package ui;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
-import java.awt.Font;
-import javax.swing.JTextArea;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+
+import java.awt.GridLayout;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.UIManager;
+
+import javax.swing.table.TableCellRenderer;
+
+
+
+import core.EventFacade;
+import core.UserFacade;
 
 
 public class EventView extends JPanel {
+	private int persistType;
+	private EventFacade aEventFacade;
+	private UserFacade userFacade;
+	private JPanel inscriptionPanel; 
+	private String label;
 
 	/**
 	 * Create the panel.
 	 */
-	public EventView() {
-		SpringLayout springLayout = new SpringLayout();
-		setLayout(springLayout);
+	public EventView(int persistType) {
 		
-		JLabel dateOfEventLabel = new JLabel("Date Of Event");
-		springLayout.putConstraint(SpringLayout.NORTH, dateOfEventLabel, 76, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, dateOfEventLabel, 10, SpringLayout.WEST, this);
-		add(dateOfEventLabel);
+		//setBorder(new LineBorder(new Color(0, 0, 0)));
+		//setBackground(Color.WHITE);
+		setLayout(new GridLayout(1, 2, 0, 0));
+		this.persistType = persistType;	
 		
-		JLabel lblDescription = new JLabel("Description");
-		springLayout.putConstraint(SpringLayout.WEST, lblDescription, 72, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblDescription, -225, SpringLayout.SOUTH, this);
-		lblDescription.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		add(lblDescription);
-		
-		JLabel priceLabel = new JLabel("Price");
-		springLayout.putConstraint(SpringLayout.NORTH, priceLabel, 22, SpringLayout.SOUTH, dateOfEventLabel);
-		springLayout.putConstraint(SpringLayout.WEST, priceLabel, 0, SpringLayout.WEST, dateOfEventLabel);
-		add(priceLabel);
-		
-		JTextArea textAreaDescription = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, textAreaDescription, 6, SpringLayout.SOUTH, lblDescription);
-		springLayout.putConstraint(SpringLayout.WEST, textAreaDescription, 10, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, textAreaDescription, -63, SpringLayout.SOUTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, textAreaDescription, -10, SpringLayout.EAST, this);
-		add(textAreaDescription);
-		
-		JTextArea textAreaPrice = new JTextArea();
-		springLayout.putConstraint(SpringLayout.WEST, textAreaPrice, 80, SpringLayout.EAST, priceLabel);
-		springLayout.putConstraint(SpringLayout.EAST, textAreaPrice, -512, SpringLayout.EAST, this);
-		add(textAreaPrice);
-		
-		JTextArea textAreaDateOfEvent = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, textAreaPrice, 22, SpringLayout.SOUTH, textAreaDateOfEvent);
-		springLayout.putConstraint(SpringLayout.WEST, textAreaDateOfEvent, 25, SpringLayout.EAST, dateOfEventLabel);
-		springLayout.putConstraint(SpringLayout.NORTH, textAreaDateOfEvent, 0, SpringLayout.NORTH, dateOfEventLabel);
-		springLayout.putConstraint(SpringLayout.EAST, textAreaDateOfEvent, -512, SpringLayout.EAST, this);
-		add(textAreaDateOfEvent);
-		
-		JButton btnRegisterEvent = new JButton("Register To This Event");
-		springLayout.putConstraint(SpringLayout.WEST, btnRegisterEvent, 614, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.EAST, btnRegisterEvent, 0, SpringLayout.EAST, textAreaDescription);
-		add(btnRegisterEvent);
-		
-		JButton btnBackActivity = new JButton("Back To The Activity");
-		springLayout.putConstraint(SpringLayout.NORTH, btnRegisterEvent, -1, SpringLayout.NORTH, btnBackActivity);
-		springLayout.putConstraint(SpringLayout.WEST, btnBackActivity, 0, SpringLayout.WEST, dateOfEventLabel);
-		springLayout.putConstraint(SpringLayout.SOUTH, btnBackActivity, -10, SpringLayout.SOUTH, this);
-		add(btnBackActivity);
-		
-		JTextArea textAreaEventName = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, textAreaEventName, 10, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, textAreaEventName, 0, SpringLayout.WEST, dateOfEventLabel);
-		springLayout.putConstraint(SpringLayout.SOUTH, textAreaEventName, -11, SpringLayout.NORTH, dateOfEventLabel);
-		springLayout.putConstraint(SpringLayout.EAST, textAreaEventName, 259, SpringLayout.WEST, this);
-		add(textAreaEventName);
+		this.aEventFacade = new EventFacade(this.persistType);
+		this.userFacade = new UserFacade(this.persistType);
 
+		
+		
+		this.aEventFacade.getAllEventsFacade();
+		ArrayList<core.Event> listEvent = aEventFacade.getListAllEventsFacade();
+	
+		
+		Vector<String> columnNamesEvent = new Vector<String>();
+        columnNamesEvent.add(0, "EventLabel");
+        columnNamesEvent.add(1, "date");
+        columnNamesEvent.add(2, "Details");
+        
+        
+        Vector<Vector<String>> events = new Vector<Vector<String>>();
+        
+        JPanel eventPanel = new JPanel();
+        eventPanel.setLayout(new GridLayout(0, 1));
+        
+        inscriptionPanel= new JPanel();
+        inscriptionPanel.setLayout(new GridLayout(0, 1));
+        
+        for (core.Event event : listEvent) {         
+            Vector<String> vectorEvents = new Vector<String>();
+            vectorEvents.add(event.getEventName());
+            vectorEvents.add(event.getEventDate());
+            vectorEvents.add("Details");
+            
+            events.add(vectorEvents);
+        }
+		
+        JTable table = new JTable(events, columnNamesEvent);
+        table.setFillsViewportHeight(true);
+        table.setRowHeight(20);
+        table.getColumn("Details").setCellRenderer(new ButtonRenderer());
+        table.getColumn("Details").setCellEditor(new ButtonEditor(new JCheckBox()));
+        
+        
+        JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		
+		
+        /*categoryPanel.add(new JLabel("Categories"), BorderLayout.NORTH);
+        categoryPanel.add(scrollPane, BorderLayout.CENTER);
+        
+        productPanel.add(new JLabel("Products"), BorderLayout.NORTH);
+        productPanel.add(scrollPane, BorderLayout.CENTER);*/
+        
+        add(eventPanel);
+        add(inscriptionPanel);
+		
+		
+		eventPanel.add(scrollPane, BorderLayout.CENTER);
+		
+
+	}
+	
+	class ButtonRenderer extends JButton implements TableCellRenderer {
+
+		  public ButtonRenderer() {
+		    setOpaque(true);
+		  }
+
+		  public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			  if(table.getColumnName(column) == "Details"){
+			  if (isSelected) {
+				  setForeground(table.getSelectionForeground());
+				  setBackground(table.getSelectionBackground());
+			  }
+			  else {
+				  setForeground(table.getForeground());
+				  setBackground(UIManager.getColor("Button.background"));
+			  }
+			  setText("Details");
+			  }
+			  
+			  return this;
+		  }
+	}
+	
+	class ButtonEditor extends DefaultCellEditor implements ActionListener {
+		protected JButton button;
+		
+		private core.Event eventChoose;
+		private String label;
+		private boolean isPushed;
+		private String eventSelected;
+
+		public ButtonEditor(JCheckBox checkBox) {
+			super(checkBox);
+		    button = new JButton();
+		    button.setOpaque(true);
+		    button.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		fireEditingStopped();
+		    	}
+		    });
+		  }
+
+		 public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+			 if(table.getColumnName(column) == "Details"){
+			 if (isSelected) {
+				  button.setForeground(table.getSelectionForeground());
+				  button.setBackground(table.getSelectionBackground());
+			  } 
+			  else 
+			  {
+				  button.setForeground(table.getForeground());
+				  button.setBackground(table.getBackground());
+			  }
+			 
+			  eventChoose = aEventFacade.getListAllEventsFacade().get(row);
+			  label = aEventFacade.getListAllEventsFacade().get(row).getEventName();
+			  button.setText("See event");
+			  isPushed = true;
+			  eventSelected=table.getColumnName(column);
+			  }
+			 
+			  return button;
+		  }
+
+		public Object getCellEditorValue() {
+				if(eventSelected=="Details"){
+					if (isPushed) { 
+				  
+				  	
+				  	
+					JLabel eventLabelName =  new JLabel("Event Name :"+eventChoose.getEventName());
+					JLabel eventLabelDate =  new JLabel("Event Date :"+eventChoose.getEventDate());
+					JLabel eventLabelPrice =  new JLabel("Event Price :"+eventChoose.getEventPrice()+"Û");
+					JLabel eventLabelParticipant= new JLabel("Event Participant :"+eventChoose.getParticipantName());
+					JButton subscriptionButton =new JButton("Click To Subscribe");
+					subscriptionButton.addActionListener(this);
+					subscriptionButton.setActionCommand("Subscribe");
+					
+			       
+			       
+			        
+			        
+			        
+			        inscriptionPanel.removeAll();
+			        inscriptionPanel.repaint();
+			        inscriptionPanel.revalidate();
+			        inscriptionPanel.add(eventLabelName);
+			        inscriptionPanel.add(eventLabelDate);
+			        inscriptionPanel.add(eventLabelPrice);
+			        inscriptionPanel.add(eventLabelParticipant);
+			        inscriptionPanel.add(subscriptionButton);
+			        inscriptionPanel.repaint();
+			        inscriptionPanel.revalidate();
+			        
+			        
+				 
+			  }}
+			  isPushed = false;
+			  return new String(label);
+		  }
+
+		  public boolean stopCellEditing() {
+			  isPushed = false;
+			  return super.stopCellEditing();
+		  }
+
+		  protected void fireEditingStopped() {
+			  super.fireEditingStopped();
+		  }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String cmd = e.getActionCommand();
+			if(cmd.equals("Subscribe")){
+				//userFacade.subscribeEvent(eventChoose.getEventId());
+				System.out.println(eventChoose.getEventId());
+				
+			}
+			
+		}
 	}
 }

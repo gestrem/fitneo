@@ -174,7 +174,7 @@ public class MainView extends JFrame implements ActionListener {
 			changePanel(activityPanel);
 		}
 		else if(cmd.equals("Event")){
-			eventPanel = new EventView();
+			eventPanel = new EventView(this.persistType);
 			notifButton.setText(nbNotif);
 			changePanel(eventPanel);
 		}
