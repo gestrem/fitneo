@@ -7,43 +7,32 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SpringLayout;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 
-import persist.ListCategoryJDBC;
-import persist.ListProductJDBC;
-import persist.PersistKit;
-import ui.NotificationCenterView.ButtonEditor;
-import ui.NotificationCenterView.ButtonRenderer;
 import core.BasketFacade;
 import core.CategoryProduct;
 import core.CategoryProductFacade;
-import core.ListCategory;
-import core.ListProduct;
-import core.Notification;
-import core.NotificationFacade;
 import core.Product;
 import core.ProductFacade;
 import core.UserFacade;
 
 import javax.swing.JTable;
-
+/**
+ * 
+ * @author arnaud jacquez
+ *
+ */
+@SuppressWarnings("serial")
 public class ProductView extends JPanel {
 	private int persistType;
 	private ProductFacade aProductFacade;
@@ -51,9 +40,7 @@ public class ProductView extends JPanel {
 	private JPanel productPanel;
 	private BasketFacade aBasketFacade;
 	private UserFacade userFacade;
-	/**
-	 * Create the panel.
-	 */
+	
 	public ProductView(int persistType) {
 
 		setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -98,13 +85,6 @@ public class ProductView extends JPanel {
         
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
-		
-        /*categoryPanel.add(new JLabel("Categories"), BorderLayout.NORTH);
-        categoryPanel.add(scrollPane, BorderLayout.CENTER);
-        
-        productPanel.add(new JLabel("Products"), BorderLayout.NORTH);
-        productPanel.add(scrollPane, BorderLayout.CENTER);*/
         
         add(categoryPanel);
 		add(productPanel);
@@ -114,6 +94,7 @@ public class ProductView extends JPanel {
 	
 	}
 	
+
 	class ButtonRenderer extends JButton implements TableCellRenderer {
 
 		  public ButtonRenderer() {
@@ -148,6 +129,7 @@ public class ProductView extends JPanel {
 		  }
 	}
 	
+
 	class ButtonEditor extends DefaultCellEditor {
 		protected JButton button;
 		private CategoryProduct categoryChoose;
@@ -213,7 +195,6 @@ public class ProductView extends JPanel {
 				  	
 				  	aProductFacade.getAllProductByCategoryFacade(categoryChoose.getCategoryId());
 					ArrayList<Product> listProd = aProductFacade.getListAllProductFacade();
-					System.out.println(listProd);
 					Vector<String> columnNamesProducts = new Vector<String>();
 			        columnNamesProducts.add(0, "Product Name");
 			        columnNamesProducts.add(1, "Product Price");
@@ -249,7 +230,6 @@ public class ProductView extends JPanel {
 			  }}
 				else if (tableSelected=="Add"){
 					//add product productChoose
-					System.out.println("j'aimmerai ajouter "+productChoose.getProductTypeName());
 					String quantity = JOptionPane.showInputDialog(null, "Enter a quantity", "Enter a quantity", JOptionPane.QUESTION_MESSAGE);
 					aBasketFacade.insertProduct(productChoose, Integer.parseInt(quantity));
 				}

@@ -2,12 +2,16 @@ package core;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author arnaud jacquez
+ *
+ */
 public class EventFacade {
 	private ListEvent listevent;
 	
 	public EventFacade(int persistType){
-		//On crée une room du type de persistance choisi
+		//On cree une room du type de persistance choisi
 		listevent = ListEvent.getInstance(persistType);
 	}
 	public void getAllEventsFacade(){

@@ -25,30 +25,30 @@ import javax.swing.table.TableCellRenderer;
 
 import core.EventFacade;
 import core.UserFacade;
-
+/**
+ * 
+ * @author arnaud jacquez
+ *
+ */
 
 public class EventView extends JPanel {
 	private int persistType;
 	private EventFacade aEventFacade;
 	private UserFacade userFacade;
 	private JPanel inscriptionPanel; 
-	private String label;
+
 
 	/**
 	 * Create the panel.
 	 */
 	public EventView(int persistType) {
-		
-		//setBorder(new LineBorder(new Color(0, 0, 0)));
-		//setBackground(Color.WHITE);
+	
 		setLayout(new GridLayout(1, 2, 0, 0));
 		this.persistType = persistType;	
 		
 		this.aEventFacade = new EventFacade(this.persistType);
 		this.userFacade = new UserFacade(this.persistType);
 
-		
-		
 		this.aEventFacade.getAllEventsFacade();
 		ArrayList<core.Event> listEvent = aEventFacade.getListAllEventsFacade();
 	
@@ -64,8 +64,6 @@ public class EventView extends JPanel {
         JPanel eventPanel = new JPanel();
         eventPanel.setLayout(new GridLayout(0, 1));
         
-        inscriptionPanel= new JPanel();
-        inscriptionPanel.setLayout(new GridLayout(0, 1));
         
         for (core.Event event : listEvent) {         
             Vector<String> vectorEvents = new Vector<String>();
@@ -84,19 +82,16 @@ public class EventView extends JPanel {
         
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
-		
-        /*categoryPanel.add(new JLabel("Categories"), BorderLayout.NORTH);
-        categoryPanel.add(scrollPane, BorderLayout.CENTER);
         
-        productPanel.add(new JLabel("Products"), BorderLayout.NORTH);
-        productPanel.add(scrollPane, BorderLayout.CENTER);*/
+        inscriptionPanel= new JPanel();
+        inscriptionPanel.setLayout(new GridLayout(0, 1));
+		
+
         
         add(eventPanel);
         add(inscriptionPanel);
 		
-		
-		eventPanel.add(scrollPane, BorderLayout.CENTER);
+        eventPanel.add(scrollPane, BorderLayout.CENTER);
 		
 
 	}
@@ -216,7 +211,6 @@ public class EventView extends JPanel {
 			String cmd = e.getActionCommand();
 			if(cmd.equals("Subscribe")){
 				//userFacade.subscribeEvent(eventChoose.getEventId());
-				System.out.println(eventChoose.getEventId());
 				
 			}
 			

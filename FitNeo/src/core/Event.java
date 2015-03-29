@@ -1,7 +1,9 @@
 package core;
-
-import java.util.Iterator;
-
+/**
+ * 
+ * @author arnaud jacquez
+ *
+ */
 public class Event {
 	
 	

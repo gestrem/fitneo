@@ -2,12 +2,16 @@ package core;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author arnaud jacquez
+ *
+ */
 public class ProductFacade {
 	private ListProduct listproduct;
 	
 	public ProductFacade(int persistType){
-		//On crée une listProduct du type de persistance choisi
+		//On cree une listProduct du type de persistance choisi
 		listproduct = ListProduct.getInstance(persistType);
 	}
 	

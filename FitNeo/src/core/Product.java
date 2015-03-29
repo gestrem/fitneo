@@ -1,5 +1,9 @@
 package core;
-
+/**
+ * 
+ * @author arnaud jacquez
+ *
+ */
 public class Product {
 	private String productTypeName; 
 	private int productPrice; 

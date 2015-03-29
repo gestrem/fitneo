@@ -6,8 +6,12 @@ import java.util.ArrayList;
 
 import core.Event;
 import core.ListEvent;
-import core.Product;
 
+/**
+ * 
+ * @author arnaud jacquez
+ *
+ */
 public class ListEventJDBC extends ListEvent{
 	
 	private JdbcConnection jdbc = null;
@@ -16,6 +20,9 @@ public class ListEventJDBC extends ListEvent{
 		jdbc = new JdbcConnection();
 	}
 	
+	/**
+	 * getAllEvents permet de charger dans la liste d evenement tous les evenements de la BD
+	 */
 	public void getAllEvents(){
 		jdbc.openConnection(); 
 		ResultSet rs = null; 
@@ -37,26 +44,43 @@ public class ListEventJDBC extends ListEvent{
 		}
 		jdbc.close();
 	}
-	
+	/**
+	 * createEventJDBC permet d inserer un evenement dans la BD a partir d un object evenement 
+	 * @param aEvent
+	 * @throws SQLException
+	 */
 	public void createEventJDBC(Event aEvent) throws SQLException{
 		
 		jdbc.openConnection();
-		ResultSet rs = null;
 		
 		String query = "INSERT INTO event(eventName, eventDate, eventPrice, idroom, participant ,id_activity) values('"+aEvent.getEventName()+"','"+aEvent.getEventDate()+"','"+aEvent.getEventPrice()+"','"+aEvent.getEventRoom()+"','"+aEvent.getEventParticipant()+"','"+aEvent.getEventActivity()+"')";
 		jdbc.executeRequest(query);
 		jdbc.close();
 	}
+	/**
+	 * updateEventJDBC permet de mettre a jour un evenement dans la BD 
+	 * @param aEventDate doit etre de type string
+	 * @param aEventName doit etre de type string
+	 * @param aEventPrice doit etre de type double
+	 * @param aEventRoom doit etre de type int
+	 * @param aEventActivity doit etre de type int
+	 * @param aEventParticipant doit etre de type int
+	 * @param aEventId doit etre de type int 
+	 * @throws SQLException
+	 */
 	public void updateEventJDBC(String aEventDate, String aEventName, Double aEventPrice, int aEventRoom, int aEventActivity, int aEventParticipant, int aEventId) throws SQLException{
 		
 		jdbc.openConnection();
-		ResultSet rs = null;
 		
 		String query = "UPDATE event SET eventName='"+aEventName+"',eventDate='"+aEventDate+"',eventPrice='"+aEventPrice+"',idroom='"+aEventRoom+"',participant='"+aEventParticipant+"',id_activity='"+aEventActivity+"' WHERE idEvent='"+aEventId+"'";
 		jdbc.executeRequest(query);
 		jdbc.close();
 	}
 	
+	/**
+	 * deleteListEventJDBC permet de supprimer un evenement de la bd 
+	 * @param aEventId
+	 */
 	public void deleteListEventJDBC(int aEventId){
 		jdbc.openConnection();
 		try{
