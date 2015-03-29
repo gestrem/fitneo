@@ -121,8 +121,6 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, accountButton, -6, SpringLayout.WEST, basketButton);
 		getContentPane().add(accountButton);
 		
-		
-		
 		notifButton = new JButton(nbNotif, new ImageIcon("./data/Mail-icon.png"));
 		notifButton.addActionListener(this);
 		notifButton.setActionCommand("Notif");
