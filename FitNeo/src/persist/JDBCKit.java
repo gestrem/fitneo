@@ -1,5 +1,6 @@
 package persist;
 
+import core.ListActivity;
 import core.ListBasket;
 import core.ListCategory;
 import core.ListEvent;
@@ -63,10 +64,12 @@ public class JDBCKit extends PersistKit {
   
     
     @Override
-    public Activity createActivity(){
-    	Activity activity = new ActivityJDBC();
-        return activity;
+    public ListActivity createListActivity(){
+    	ListActivity listActivity = new ListActivityJDBC();
+        return listActivity;
     }
+    
+
     
     @Override
     public ListNotification createListNotification(){    	

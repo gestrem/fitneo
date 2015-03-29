@@ -14,10 +14,12 @@ public class ActivityFormView extends JPanel {
 	private JTextField tf_ActivityManager;
 	private JTextField tf_DetailedDesc;
 
+	//type de persistance choisi
+		private int persistType;
 	/**
 	 * Create the panel.
 	 */
-	public ActivityFormView() {
+	public ActivityFormView(int persistType, Activity actchoisie) {
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
 		

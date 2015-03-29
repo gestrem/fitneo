@@ -31,7 +31,7 @@ public class MainView extends JFrame implements ActionListener {
 	private SpringLayout springLayout;
 	private HomeView homePanel;
 	private AccountView accountPanel;
-	private ActivityView activityPanel;
+	private ListActivityView activityPanel;
 	private EventView eventPanel;
 	private NotificationCenterView notifPanel;
 	private BasketView basketPanel;
@@ -166,7 +166,7 @@ public class MainView extends JFrame implements ActionListener {
 			changePanel(accountPanel);
 		}
 		else if(cmd.equals("Activity")){
-			activityPanel = new ActivityView();
+			activityPanel = new ListActivityView(this.persistType);
 			notifButton.setText(nbNotif);
 			changePanel(activityPanel);
 		}

@@ -41,6 +41,8 @@ public class AccountView extends JPanel implements ActionListener {
 	private JComboBox comboBoxRole;
 	private JPanel panelButton;
 	
+	private ActivityFormView activityPanel;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -156,8 +158,9 @@ public class AccountView extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		if(cmd.equals("Update")){
-			
+		if(cmd.equals("CreateActivity")){
+			//ActivityFormView activitypanel = new ActivityFormView(persistType);
+			MainView.changePanel(activitypanel);
 		}
 		
 		JComboBox cb = (JComboBox) e.getSource();

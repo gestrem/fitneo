@@ -1,5 +1,6 @@
 package persist;
 
+import core.ListActivity;
 import core.ListBasket;
 import core.ListCategory;
 import core.ListEvent;
@@ -30,7 +31,7 @@ public abstract class PersistKit {
     public abstract ListRoom createListRoom();
     //reste � modifier ici
     public abstract ListAccessoryType createListAccessory();
-    public abstract Activity createActivity();
+    public abstract ListActivity createListActivity();
     public abstract ListNotification createListNotification();
     
 

@@ -1,50 +1,97 @@
 package ui;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+
+import core.Activity;
+import core.ActivityFacade;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class ActivityView extends JPanel {
+public class ActivityView extends JPanel implements ActionListener{
 
+	
+	private ActivityFacade activityFacade;
+	//type de persistance choisi
+	private int persistType;
+	private Activity actchoisi; 
+	
+	private ListActivityView listactivityPanel;
 	/**
 	 * Create the panel.
 	 */
-	public ActivityView() {
+	public ActivityView(int persistType,Activity act) {
+		this.persistType = persistType;
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
 		
-		JTextArea textAreaActivityName = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, textAreaActivityName, 30, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, textAreaActivityName, 10, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, textAreaActivityName, 88, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, textAreaActivityName, 260, SpringLayout.WEST, this);
-		add(textAreaActivityName);
+
+		JLabel activityNameLabel = new JLabel();
+		activityNameLabel.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 18));
+		activityNameLabel.setText(act.getActivityName());
+
+		springLayout.putConstraint(SpringLayout.NORTH, activityNameLabel, 30, SpringLayout.NORTH, this);
+		springLayout.putConstraint(SpringLayout.WEST, activityNameLabel, 10, SpringLayout.WEST, this);
+		springLayout.putConstraint(SpringLayout.SOUTH, activityNameLabel, 88, SpringLayout.NORTH, this);
+		springLayout.putConstraint(SpringLayout.EAST, activityNameLabel, 260, SpringLayout.WEST, this);
+		add(activityNameLabel);
 		
-		JLabel activityDescriptionLabel = new JLabel("Detailled Description");
-		springLayout.putConstraint(SpringLayout.NORTH, activityDescriptionLabel, 6, SpringLayout.SOUTH, textAreaActivityName);
-		springLayout.putConstraint(SpringLayout.WEST, activityDescriptionLabel, 0, SpringLayout.WEST, textAreaActivityName);
-		springLayout.putConstraint(SpringLayout.SOUTH, activityDescriptionLabel, 48, SpringLayout.SOUTH, textAreaActivityName);
-		springLayout.putConstraint(SpringLayout.EAST, activityDescriptionLabel, 260, SpringLayout.WEST, this);
-		activityDescriptionLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		add(activityDescriptionLabel);
+		JLabel activityShortDescriptionLabel = new JLabel();
+		activityShortDescriptionLabel.setText(act.getActivityShortDescription()); 
+
+		springLayout.putConstraint(SpringLayout.NORTH, activityShortDescriptionLabel, 6, SpringLayout.SOUTH, activityNameLabel);
+		springLayout.putConstraint(SpringLayout.WEST, activityShortDescriptionLabel, 0, SpringLayout.WEST, activityNameLabel);
+		springLayout.putConstraint(SpringLayout.SOUTH, activityShortDescriptionLabel, 48, SpringLayout.SOUTH, activityNameLabel);
+		springLayout.putConstraint(SpringLayout.EAST, activityShortDescriptionLabel, 260, SpringLayout.WEST, this);
+		activityShortDescriptionLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+
+		add(activityShortDescriptionLabel);
 		
-		JTextArea textAreaActivityDescription = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, textAreaActivityDescription, 0, SpringLayout.SOUTH, activityDescriptionLabel);
-		springLayout.putConstraint(SpringLayout.WEST, textAreaActivityDescription, 10, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, textAreaActivityDescription, -136, SpringLayout.SOUTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, textAreaActivityDescription, 764, SpringLayout.WEST, this);
-		add(textAreaActivityDescription);
+		JLabel activityDetailedDescriptionLabel = new JLabel();
+		activityDetailedDescriptionLabel.setText(act.getActivityDetailedDescription());
+		springLayout.putConstraint(SpringLayout.NORTH, activityDetailedDescriptionLabel, 0, SpringLayout.SOUTH, activityShortDescriptionLabel);
+		springLayout.putConstraint(SpringLayout.WEST, activityDetailedDescriptionLabel, 10, SpringLayout.WEST, this);
+		springLayout.putConstraint(SpringLayout.SOUTH, activityDetailedDescriptionLabel, -136, SpringLayout.SOUTH, this);
+		springLayout.putConstraint(SpringLayout.EAST, activityDetailedDescriptionLabel, 764, SpringLayout.WEST, this);
+		add(activityDetailedDescriptionLabel);
 		
-		JTextArea textAreaActivitySEvent = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, textAreaActivitySEvent, 17, SpringLayout.SOUTH, textAreaActivityDescription);
-		springLayout.putConstraint(SpringLayout.WEST, textAreaActivitySEvent, 10, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, textAreaActivitySEvent, 40, SpringLayout.SOUTH, textAreaActivityDescription);
-		springLayout.putConstraint(SpringLayout.EAST, textAreaActivitySEvent, 534, SpringLayout.WEST, this);
-		add(textAreaActivitySEvent);
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(this);
+		backButton.setActionCommand("Back");
+		springLayout.putConstraint(SpringLayout.WEST, backButton, 29, SpringLayout.WEST, this);
+		springLayout.putConstraint(SpringLayout.SOUTH, backButton, -28, SpringLayout.SOUTH, this);
+		add(backButton);
+		
+		JButton seeEventsButton = new JButton("See Events");
+		seeEventsButton.addActionListener(this);
+		seeEventsButton.setActionCommand("See Events");
+		springLayout.putConstraint(SpringLayout.NORTH, seeEventsButton, 0, SpringLayout.NORTH, backButton);
+		springLayout.putConstraint(SpringLayout.EAST, seeEventsButton, -10, SpringLayout.EAST, this);
+		add(seeEventsButton);
 
 	}
+	
+
+	public void actionPerformed(ActionEvent e)
+	{
+		String cmd = e.getActionCommand();
+		if(cmd.equals("Back")){
+		listactivityPanel = new ListActivityView(persistType);
+		MainView.changePanel(listactivityPanel);
+		
+		}
+		if(cmd.equals("See Events")){
+			
+			
+			}
+
+}
+
 
 }
