@@ -1,5 +1,7 @@
 package persist;
-
+/**
+ * @author gestrem
+ */
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +19,9 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 	}
 	
 
-	@Override
+	/**createAccessoryTypeJDBC
+	 * @param String accessoryType
+	 */
 	public void createAccessoryTypeJDBC(String accessoryType) {
 		jdbc.openConnection();
 		
@@ -34,7 +38,10 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 	}
 
 
-	@Override
+	/**GetAllAccessoryTypeJDBC
+	 * @param String accessoryType
+	 * 
+	 */	
 	public void getAllAccessoryTypeJDBC() {
 
 		jdbc.openConnection();
@@ -58,7 +65,11 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 		jdbc.close();
 		
 	}
-	
+	/**
+	 * updateAccessoryTypeJDBC met à jour un accessoire
+	 * @param idAccessoryType
+	 * @param String nameAccessory
+	 */
 	public void updateAccessoryTypeJDBC(int idAccessoryType,String nameAccessoryType){
 		jdbc.openConnection();
 		try{
@@ -72,7 +83,10 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 	}
 
 
-	@Override
+	/**
+	 * deleteAccessoryTypeJDBC
+	 * @param idAccessoryType
+	 */
 	public void deleteAccessoryTypeJDBC(int idAccessoryType) {
 		jdbc.openConnection();
 		try{

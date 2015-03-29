@@ -1,6 +1,4 @@
-/**
- * @author Maite AINCIBURU
- */
+
 package ui;
 
 import java.awt.event.ActionEvent;
@@ -14,14 +12,14 @@ import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 
 import core.Activity;
 import core.ActivityFacade;
-
+/**
+ * @author Maite AINCIBURU
+ */
+@SuppressWarnings("serial")
 public class UpdateActivityFormView extends JPanel implements ActionListener{
 	
 	private ActivityFacade activityFacade;
@@ -36,7 +34,7 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 		private JTextField textFieldShortDescription;
 		private JTextField textFieldDetailedDescription;
 		private JTextField textFieldActivityName;
-		
+
 		private Activity actchoisie; 
 		JComboBox <ComboItem> comboBoxManager;
 		private ComboItem comboitem; 
@@ -47,7 +45,7 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 	public UpdateActivityFormView (int persistType, Activity actchoisie){
 			this.persistType = persistType;
 			this.actchoisie = actchoisie; 
-		
+
 			SpringLayout springLayout = new SpringLayout();
 			setLayout(springLayout);
 			
@@ -86,6 +84,7 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 			this.activityFacade = new ActivityFacade(this.persistType);	
 			this.activityFacade.loadListActivities();
 			ArrayList<String> listManager = this.activityFacade.loadManagers();
+
 			comboBoxManager = new JComboBox<ComboItem>();
 			Iterator<String> it =  listManager.iterator();
 	
@@ -95,7 +94,7 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 				this.comboitem = new ComboItem(id, label);
 				comboBoxManager.addItem(this.comboitem);
 			}
-			
+
 			springLayout.putConstraint(SpringLayout.NORTH, comboBoxManager, 73, SpringLayout.SOUTH, lblTitle);
 			springLayout.putConstraint(SpringLayout.WEST, comboBoxManager, 52, SpringLayout.EAST, lblManager);
 			springLayout.putConstraint(SpringLayout.SOUTH, comboBoxManager, 102, SpringLayout.SOUTH, lblTitle);
@@ -157,7 +156,6 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 			try {
 				this.activityFacade.updateActivityFacade(actchoisie.getActivityId(), nameAct, idManager, shortDescAct, lgDescAct);
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			

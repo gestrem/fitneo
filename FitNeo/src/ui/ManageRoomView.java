@@ -1,5 +1,7 @@
 package ui;
-
+/**
+ * @author gestrem
+ */
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,8 +29,10 @@ public class ManageRoomView extends JPanel {
 	private int persistType;
 	private JTextField tf_roomArea2;
 	private JTextField tf_maxNbParticipants2;
-
-
+	private JComboBox cb_roomType1;
+	private JComboBox cb_roomToUpdate;
+	private JComboBox cb_roomType2;
+	private ArrayList<Room> listRoom;
 	/**
 	 * Create the panel.
 	 */
@@ -92,7 +96,7 @@ public class ManageRoomView extends JPanel {
 		
 		String[] roomTypes={"Office","Class Room"};
 		
-		JComboBox cb_roomType1 = new JComboBox(roomTypes);
+		this.cb_roomType1 = new JComboBox(roomTypes);
 		springLayout.putConstraint(SpringLayout.NORTH, tf_NbMaxParticipants1, 23, SpringLayout.SOUTH, cb_roomType1);
 		springLayout.putConstraint(SpringLayout.NORTH, cb_roomType1, 0, SpringLayout.NORTH, lblType);
 		springLayout.putConstraint(SpringLayout.WEST, cb_roomType1, 0, SpringLayout.WEST, tf_RoomArea1);
@@ -112,9 +116,9 @@ public class ManageRoomView extends JPanel {
 		// on instance la liste de toutes les room disponibles
 		roomFacade.createListRoomComboBox(0);
 		// on la recupere
-		ArrayList<Room> listRoom=roomFacade.getListRoom();
+		this.listRoom=roomFacade.getListRoom();
 		String[] listRoomCombo=roomFacade.listRoomToArrayStringListRoom(listRoom);
-		JComboBox cb_roomToUpdate = new JComboBox(listRoomCombo);
+		this.cb_roomToUpdate = new JComboBox(listRoomCombo);
 		springLayout.putConstraint(SpringLayout.NORTH, cb_roomToUpdate, 68, SpringLayout.NORTH, this);
 		cb_roomToUpdate.setToolTipText("Room to update");
 		springLayout.putConstraint(SpringLayout.WEST, cb_roomToUpdate, 158, SpringLayout.EAST, lblFillRoomInformations);
@@ -142,7 +146,7 @@ public class ManageRoomView extends JPanel {
 		add(tf_roomArea2);
 		tf_roomArea2.setColumns(10);
 		
-		JComboBox cb_roomType2 = new JComboBox(roomTypes);
+		this.cb_roomType2 = new JComboBox(roomTypes);
 		springLayout.putConstraint(SpringLayout.NORTH, cb_roomType2, -4, SpringLayout.NORTH, lblType);
 		springLayout.putConstraint(SpringLayout.WEST, cb_roomType2, 6, SpringLayout.EAST, label_2);
 		add(cb_roomType2);
@@ -161,8 +165,10 @@ public class ManageRoomView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// on recupere les données sur formulaire
 				if (!(tf_RoomArea1.getText().equals("") )|| (!tf_NbMaxParticipants1.getText().equals(""))){
+					
 					String roomName=tf_RoomArea1.getText();
 					int capacity= Integer.parseInt(tf_NbMaxParticipants1.getText());
+					
 					String roomType=(String) cb_roomType1.getSelectedItem();
 					roomFacade.createRoom(roomName, roomType, capacity);
 					System.out.println("Room "+ roomName +" créé");

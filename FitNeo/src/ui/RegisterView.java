@@ -24,7 +24,11 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 @SuppressWarnings("serial")
 public class RegisterView extends JDialog implements ActionListener {
 
@@ -39,7 +43,7 @@ public class RegisterView extends JDialog implements ActionListener {
 	private JTextField cityField;
 	private JTextField answerField;
 	private JTextArea adressField;
-	private JComboBox questionBox;
+	private JComboBox<String> questionBox;
 	//JFrame a partir de laquelle on crée cette fenetre
 	private LoginUI owner;
 
@@ -174,7 +178,7 @@ public class RegisterView extends JDialog implements ActionListener {
 		contentPanel.add(lblNewLabel);
 		
 		String[] questions = {"Place of birth of my mother", "Name of my favorite professor", "Name of my pet" };
-		questionBox = new JComboBox(questions);
+		questionBox = new JComboBox<String>(questions);
 		sl_contentPanel.putConstraint(SpringLayout.NORTH, questionBox, 6, SpringLayout.SOUTH, lblNewLabel);
 		sl_contentPanel.putConstraint(SpringLayout.WEST, questionBox, -1, SpringLayout.WEST, lblCreateAn);
 		sl_contentPanel.putConstraint(SpringLayout.EAST, questionBox, 0, SpringLayout.EAST, LastNameField);
@@ -232,6 +236,11 @@ public class RegisterView extends JDialog implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Methode isValidMail, verifie si mail est un mail valide
+	 * @param mail
+	 * @return true si correct, false sinon
+	 */
 	public boolean isValidMail(String mail){
 		boolean result = true;
 		try {
@@ -243,10 +252,21 @@ public class RegisterView extends JDialog implements ActionListener {
 		   return result;
 	}
 	
+	/**
+	 * Methode isValidZipCode, verifie que le Cp est valide
+	 * @param zip
+	 * @return boolean
+	 */
 	public boolean isValidZipCode(String zip){
 		return zip.matches("[0-9]{5}");
 	}
 	
+	/**
+	 * Methode isMatchPasswords, verifie que les 2 mots de passe correspondent
+	 * @param pwd
+	 * @param pwdConfirm
+	 * @return boolean
+	 */
 	public boolean isMatchPasswords(char[] pwd, char[] pwdConfirm){
 		boolean result = false;
 		String p1 = new String(pwd);
@@ -258,10 +278,19 @@ public class RegisterView extends JDialog implements ActionListener {
 		return result;
 	}
 	
+	/**
+	 * Methode isMailAvailable, verifie si le mail est disponible
+	 * @param mail
+	 * @return true si correct, false sinon
+	 */
 	public boolean isMailAvailable(String mail){
 		return this.owner.getUserFacade().isMailAvailable(mail);
 	}
 	
+	/**
+	 * Methode verifymandatoryFields, verifie si les champs sont correctement remplis
+	 * @return boolean
+	 */
 	public boolean verifyMandatoryFields(){
 		boolean result = true;
 		

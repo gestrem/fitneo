@@ -5,7 +5,11 @@ import java.util.ArrayList;
 
 import core.ListNotification;
 import core.Notification;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public class ListNotificationJDBC extends ListNotification{
 	
 	private JdbcConnection jdbc = null;
@@ -14,6 +18,10 @@ public class ListNotificationJDBC extends ListNotification{
 		jdbc = new JdbcConnection();
 	}
 	
+	/**
+	 * Methode load, charge toutes les notification d'un utilisateur
+	 * @param idUser l'id de l'utilisateur
+	 */
 	public void load(int idUser){
 		
 		jdbc.openConnection();
@@ -37,6 +45,10 @@ public class ListNotificationJDBC extends ListNotification{
 		jdbc.close();
 	}
 
+	/**
+	 * Methode setRead, update une notification pour dire qu'elle a ete lue
+	 * @param idNotif l'id de la notification
+	 */
 	@Override
 	public void setRead(int idNotif) {
 		jdbc.openConnection();
@@ -53,6 +65,11 @@ public class ListNotificationJDBC extends ListNotification{
 		
 	}
 
+	/**
+	 * Methode nbNEwNotification, renvoi le nombre de notification non lue. Cette valeur est affichee dans la fenetre principale a cote du bouton
+	 * @param idUser l'id de l'utilisateur
+	 * @return nbNewNotif, le nombre de notification non lues
+	 */
 	@Override
 	public String nbNewNotification(int idUser) {
 		jdbc.openConnection();

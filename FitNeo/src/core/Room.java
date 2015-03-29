@@ -1,5 +1,7 @@
 package core;
-
+/**
+ * @author gestrem
+ */
 public class Room {
 	
 	private int roomId;

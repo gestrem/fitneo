@@ -1,7 +1,11 @@
 package core;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public class BasketFacade {
 	private ListBasket basket;
 	

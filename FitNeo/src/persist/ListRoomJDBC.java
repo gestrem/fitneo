@@ -1,5 +1,7 @@
 package persist;
-
+/**
+ * @author gestrem
+ */
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +17,11 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc = new JdbcConnection();
 		System.out.println("jdbclist");
 	}
-	
+	/**
+	 *CreateRoomJDBC creer une room
+	 * @param String roomArea, String roomType,int capacite
+	 * @return 
+	 */
 	public void createRoomJDBC(String roomArea, String roomType,int capacity){
 		
 		jdbc.openConnection();
@@ -31,7 +37,14 @@ public class ListRoomJDBC extends ListRoom{
 		}
 		jdbc.close();
 	}
-	
+	/**
+	 * updateRoomJDBC met à une Room dans une liste
+	 * @param roomAreaOld
+	 * @param roomArea
+
+	 * @param roomType
+	 * @param capacity
+	 */
 	public void updateRoomJDBC(String roomAreaOld,String roomArea,String roomType,int capacity){
 		jdbc.openConnection();
 		try{
@@ -43,7 +56,10 @@ public class ListRoomJDBC extends ListRoom{
 		}
 		jdbc.close();
 	}
-	
+	/**
+	 * DeleteRoom detruit une room
+	 * @param RoomArea
+	 */
 	public void deleteRoomJDBC(String roomArea){
 		jdbc.openConnection();
 		try{
@@ -55,7 +71,9 @@ public class ListRoomJDBC extends ListRoom{
 		}
 		jdbc.close();
 	}
-
+	/** GetAllRoomJDBC instancie une listRoom
+	 * @param 
+	 */
 	public void getAllRoomJDBC(){
 		
 		jdbc.openConnection();
@@ -79,28 +97,11 @@ public class ListRoomJDBC extends ListRoom{
 	}
 
 
-	public void getAllRoomFreeJDBC(){
-		 //to do
-		jdbc.openConnection();
-		ResultSet rs = null;
-		ArrayList<Room> listRoom=new ArrayList<Room>();
-		
-		try{
-			String query = "SELECT * FROM room ";
-			jdbc.executeRequest(query);
-			while ((rs = jdbc.fetchArray()) != null) {
-				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType"),rs.getInt("capacity")));
-	        	
-	        }
-		this.setListRoom(listRoom);
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
-		jdbc.close();
-	}
-
-	@Override
+	/**
+	 * getRoom
+	 * @String roomArea
+	 * @return Room
+	 */
 	public Room getRoomJDBC(String roomArea) {
 		jdbc.openConnection();
 		ResultSet rs = null;

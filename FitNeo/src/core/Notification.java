@@ -1,5 +1,9 @@
 package core;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public class Notification {
 
 	private String message;
@@ -13,7 +17,7 @@ public class Notification {
 	//is Demand renvoie vrai si la notification correspond a une demande a valider 
 	private Boolean isCreationDemand;
 	
-	/*
+	/**
 	 * Constructeur Notification simple
 	 */
 	public Notification(int idNotification, String sender, String message, boolean isRead, boolean isCreationDemand, String date){	
@@ -25,7 +29,7 @@ public class Notification {
 		this.date = date;
 	}
 	
-	/*
+	/**
 	 * Constructeur Notification avec demande de creation
 	 */
 	public Notification(int idNotification, String sender, String message, boolean isRead, boolean isCreationDemand, String date, String categoryName, int idCategoryParent){	

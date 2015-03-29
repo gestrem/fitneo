@@ -1,5 +1,9 @@
 package core;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public class Inscription {
 
 	private String eventName;
@@ -7,6 +11,13 @@ public class Inscription {
 	private String eventDateInscription;
 	private int eventId;
 	
+	/**
+	 * Constructeur Inscription
+	 * @param event
+	 * @param date
+	 * @param dateI
+	 * @param id
+	 */
 	public Inscription(String event, String date, String dateI, int id){
 		this.eventId=id;
 		this.eventName=event;

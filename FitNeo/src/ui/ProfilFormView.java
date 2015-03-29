@@ -3,11 +3,18 @@ package ui;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
+@SuppressWarnings("serial")
 public class ProfilFormView extends JPanel {
 	private JTextField tf_FirstName;
 	private JTextField tf_LastName;

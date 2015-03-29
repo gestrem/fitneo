@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import core.ActivityFacade;
+@SuppressWarnings("serial")
 public class ActivityFormView extends JPanel implements ActionListener{
 	
 		private ActivityFacade activityFacade;
@@ -80,6 +81,7 @@ public class ActivityFormView extends JPanel implements ActionListener{
 			this.activityFacade = new ActivityFacade(this.persistType);	
 			this.activityFacade.loadListActivities();
 			ArrayList<String> listManager = this.activityFacade.loadManagers();
+
 			comboBoxManager = new JComboBox<ComboItem>();
 			Iterator<String> it =  listManager.iterator();
 			while ( it.hasNext()) {
@@ -147,7 +149,6 @@ public class ActivityFormView extends JPanel implements ActionListener{
 			try {
 				this.activityFacade.createActivityFacade(nameAct, idManager, shortDescAct, lgDescAct);
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			

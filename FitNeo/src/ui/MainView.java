@@ -17,7 +17,11 @@ import javax.swing.ImageIcon;
 
 import core.NotificationFacade;
 import core.UserFacade;
-
+/**
+ * 
+ * @author groupe entier
+ *
+ */
 @SuppressWarnings("serial")
 public class MainView extends JFrame implements ActionListener {
 
@@ -32,7 +36,6 @@ public class MainView extends JFrame implements ActionListener {
 	private HomeView homePanel;
 	private AccountView accountPanel;
 	private ListActivityView activityPanel;
-	private ActivityFormView activityFormPanel;
 	private EventView eventPanel;
 	private NotificationCenterView notifPanel;
 	private BasketView basketPanel;
@@ -138,6 +141,10 @@ public class MainView extends JFrame implements ActionListener {
 		getContentPane().add(lblLogoFitneo);
 	}
 	
+	/**
+	 * Methode qui change le panel en fonction des actions
+	 * @param panel
+	 */
 	public static void changePanel(JPanel panel){
 		//remove ancient JPanel if exist
 		panelDisplay.removeAll();

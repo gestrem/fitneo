@@ -7,7 +7,7 @@ public class CategoryProductFacade {
 	private ListCategory listcat;
 	
 	public CategoryProductFacade(int persistType){
-		//On cr�e une room du type de persistance choisi
+		//On cree une room du type de persistance choisi
 		listcat = ListCategory.getInstance(persistType);
 	}
 	
@@ -40,11 +40,8 @@ public class CategoryProductFacade {
 		return listcat.verifyCategoryExist(nameCat); 
 	}
 	
-	
 	public ArrayList<String> loadCategories(){
-		  
-		ArrayList<String> categories = new ArrayList<String>(); 
-		return categories = listcat.getListCatNameJDBC	(); 
+		return listcat.getListCatNameJDBC	(); 
 
 	}
 

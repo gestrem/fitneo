@@ -17,9 +17,7 @@ import java.util.Vector;
 
 import javax.swing.JTable;
 
-import core.BasketFacade;
 import core.Inscription;
-import core.Product;
 import core.UserFacade;
 
 import javax.swing.border.LineBorder;
@@ -32,7 +30,11 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 @SuppressWarnings("serial")
 public class InscriptionView extends JPanel {
 

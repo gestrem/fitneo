@@ -25,7 +25,11 @@ import javax.swing.SpringLayout;
 import java.awt.Color;
 
 import javax.swing.SwingConstants;
-
+/**
+ * 
+ * @author Groupe entier
+ *
+ */
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
 
@@ -136,14 +140,28 @@ public class LoginUI extends JFrame implements ActionListener {
 		getContentPane().add(btnForgottenPassword);
 	}
 	
+	/**
+	 * Methode getLoginText, retourne le login
+	 * @return le login
+	 */
 	public String getLoginText(){ 
 		return fieldLogin.getText(); 
 	}
 
+	/**
+	 * Methode getpasswdtext
+	 * @return le mot de passe
+	 */
 	public String getPasswdText(){
 		return new String( fieldPassword.getPassword() );
 	}
 	
+	/**
+	 * Methode setLabelMsg, change le label pour afficher des messages d'erreur ou de succès
+	 * @param msg
+	 * @param c
+	 * @param b
+	 */
 	public void setLabelMsg(String msg, Color c, boolean b){
 		labelMsg.setText(msg);
 		labelMsg.setForeground(c);

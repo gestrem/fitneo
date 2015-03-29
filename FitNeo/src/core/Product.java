@@ -1,5 +1,9 @@
 package core;
-
+/**
+ * 
+ * @author arnaud jacquez
+ *
+ */
 public class Product {
 	private String productTypeName; 
 	private int productPrice; 
@@ -21,7 +25,14 @@ public class Product {
 		this.id_product = id_product;
 		this.id_seller = id_seller;
 	}
-	
+	public Product(String productTypeName, int productPrice,int availableQuantity,int discountMember,int category, int id_seller){	
+		this.productTypeName= productTypeName;
+		this.productPrice= productPrice;
+		this.availableQuantity = availableQuantity;
+		this.discountMember = discountMember;
+		this.category = category;
+		this.id_seller = id_seller;
+	}
 	public int getId_product() {
 		return id_product;
 	}

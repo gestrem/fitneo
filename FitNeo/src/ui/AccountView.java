@@ -15,12 +15,17 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 
 import javax.swing.JComboBox;
+
 import core.UserFacade;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * 
+ * @author Groupe entier
+ *
+ */
 @SuppressWarnings("serial")
 public class AccountView extends JPanel implements ActionListener {
 
@@ -36,13 +41,9 @@ public class AccountView extends JPanel implements ActionListener {
 	private JLabel cpLabel;
 	private JLabel cityLabel;
 	private JLabel mailLabel;
-	private JComboBox comboBoxRole;
+	private JComboBox<String> comboBoxRole;
 	private JPanel panelButton;
-	
-	private ManageActView manageactivityPanel;
-	private ManageRoomView roomPanel;
 
-	
 	/**
 	 * Create the panel.
 	 */
@@ -131,12 +132,12 @@ public class AccountView extends JPanel implements ActionListener {
 		panelDroit.add(panelButton, BorderLayout.CENTER);
 		panelButton.setLayout(new GridLayout(4, 1));
 		
-		JComboBox comboBoxRole = new JComboBox();
-		panelDroit.add(comboBoxRole, BorderLayout.NORTH);
-		
 		setInfosUser();
 	}
 	
+	/**
+	 * Charge les roles de l'utilisateur
+	 */
 	public void setInfosUser(){
 		firstnameLabel.setText(userFacade.getUserFirstName());
 		lastnameLabel.setText(userFacade.getUserLastName());
@@ -155,7 +156,7 @@ public class AccountView extends JPanel implements ActionListener {
 		else if(userFacade.isRoleMember())
 			roles= new String[] {"Member", "Simple user"};
 		
-		comboBoxRole = new JComboBox(roles);
+		comboBoxRole = new JComboBox<String>(roles);
 		comboBoxRole.addActionListener(this);
 		comboBoxRole.setToolTipText("Select your role");
 		panelDroit.add(comboBoxRole, BorderLayout.NORTH);
@@ -193,10 +194,15 @@ public class AccountView extends JPanel implements ActionListener {
 					MainView.changePanel(categoryPanel);
 				}
 
+			else if(cmd.equals("Add a product")){
+				System.out.println("clique prod");
+				ProductFormView productFormPanel = new ProductFormView(persistType);
+				MainView.changePanel(productFormPanel);
+			}
 		}
 		else if(e.getSource() instanceof JComboBox){
 		
-			JComboBox cb = (JComboBox) e.getSource();
+			JComboBox<String> cb = (JComboBox<String>) e.getSource();
 		    String selectedRole = (String) cb.getSelectedItem();
 		    switch (selectedRole) {
 		        case "Administrator": 
@@ -260,6 +266,8 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.add(btnP2);
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
+		         	btnP.addActionListener(this);
+		        	btnP.setActionCommand("Add a product");
 		        	break;
 		    }
 		}
