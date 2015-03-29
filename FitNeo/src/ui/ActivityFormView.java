@@ -3,6 +3,8 @@ package ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -14,6 +16,11 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 
+
+
+
+
+import core.Activity;
 import core.ActivityFacade;
 
 public class ActivityFormView extends JPanel implements ActionListener{
@@ -30,7 +37,9 @@ public class ActivityFormView extends JPanel implements ActionListener{
 		private JTextField textFieldShortDescription;
 		private JTextField textFieldDetailedDescription;
 		private JTextField textFieldActivityName;
-		private ComboItem comboItem; 
+		
+		private ComboItem comboitem; 
+	
 
 	/**
 	 * Create the panel.
@@ -75,11 +84,17 @@ public class ActivityFormView extends JPanel implements ActionListener{
 			
 			this.activityFacade = new ActivityFacade(this.persistType);	
 			this.activityFacade.loadListActivities();
-			String[] listManager = this.activityFacade.loadManagers(); 
+			ArrayList<String> listManager = this.activityFacade.loadManagers();
+			JComboBox <ComboItem> comboBoxManager = new JComboBox<ComboItem>();
+			Iterator<String> it =  listManager.iterator();
+			while ( it.hasNext()) {
+				String id = it.next().toString();
+				String  label = it.next().toString();
+				this.comboitem = new ComboItem(id, label);
+				comboBoxManager.addItem(this.comboitem);
+			}
 			
-			JComboBox comboBoxManager = new JComboBox();
-			this.comboItem = new ComboItem(listManager[0],listManager[1]); 
-			comboBoxManager.addItem(this.comboItem);
+			
 			springLayout.putConstraint(SpringLayout.NORTH, comboBoxManager, 73, SpringLayout.SOUTH, lblTitle);
 			springLayout.putConstraint(SpringLayout.WEST, comboBoxManager, 52, SpringLayout.EAST, lblManager);
 			springLayout.putConstraint(SpringLayout.SOUTH, comboBoxManager, 102, SpringLayout.SOUTH, lblTitle);
@@ -128,7 +143,7 @@ public class ActivityFormView extends JPanel implements ActionListener{
 		}
 		if(cmd.equals("Valid")){
 			nameAct = textFieldActivityName.getText();
-			idManager = Integer.parseInt(comboItem.getValue()); 
+			idManager = Integer.parseInt(comboitem.getValue()); 
 			shortDescAct = textFieldShortDescription.getText(); 
 			lgDescAct = textFieldDetailedDescription.getText(); 
 			
@@ -149,29 +164,4 @@ public class ActivityFormView extends JPanel implements ActionListener{
 	}
 }
 
-	
 
-
-  class ComboItem {
-
-    private String value;
-    private String label;
-
-    public ComboItem(String value, String label) {
-        this.value = value;
-        this.label = label;
-    }
-
-    public String getValue() {
-        return this.value;
-    }
-
-    public String getLabel() {
-        return this.label;
-    }
-
-    @Override
-    public String toString() {
-        return label;
-    }
-  }

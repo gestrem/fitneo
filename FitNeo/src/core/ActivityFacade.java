@@ -31,14 +31,12 @@ public class ActivityFacade {
 		listActivity.deleteActivityJDBC(actId); 
 	}	
 	
-	public String[] loadManagers(){
+	
+	public ArrayList<String> loadManagers(){
 		  
 		ArrayList<String> managers = new ArrayList<String>(); 
-		managers = listActivity.getListManagersJDBC(); 
-		/*ArrayList to Array Conversion */
-		String managersString[]=managers.toArray(new String[managers.size()]);
-
-		return managersString; 
+		return managers = listActivity.getListManagersJDBC(); 
+		
 
 	}
 

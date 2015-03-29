@@ -7,13 +7,14 @@ public class CategoryProductFacade {
 	private ListCategory listcat;
 	
 	public CategoryProductFacade(int persistType){
-		//On crée une room du type de persistance choisi
+		//On crï¿½e une room du type de persistance choisi
 		listcat = ListCategory.getInstance(persistType);
 	}
 	
 	public boolean confirmCreationCategory(String category, int idParent){
 		return listcat.confirmCreationCategory(category, idParent);
 	}
+	
 	public ArrayList<CategoryProduct> getAllCategoriesFacade(){
 		return this.listcat.getListAllCategories();
 		}
@@ -21,5 +22,30 @@ public class CategoryProductFacade {
 		listcat.getAllCategories();
 	}
 	
+	public void createCategoryFacade(String catName, int catParentId) throws SQLException{
+		listcat.insertCategoryWithNameAndSuperCategoryJDBC(catName, catParentId);
+	}
+	public void updateCategoryFacade(int idAct, String actName, int catParentId) throws SQLException{
+		listcat.updateCategoryWithNameAndSuperCategoryJDBC(idAct, actName,catParentId);
+	}
+	public void deleteCategory(int catId)throws SQLException{
+		listcat.deleteCategoryJDBC(catId); 
+	}	
+	
+	public String searchName (int catId) {
+		return listcat.searchNameWithId(catId); 
+	}
+	
+	public boolean verifyCategoryExist(String nameCat){
+		return listcat.verifyCategoryExist(nameCat); 
+	}
+	
+	
+	public ArrayList<String> loadCategories(){
+		  
+		ArrayList<String> categories = new ArrayList<String>(); 
+		return categories = listcat.getListCatNameJDBC	(); 
+
+	}
 
 }

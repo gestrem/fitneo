@@ -176,10 +176,17 @@ public class AccountView extends JPanel implements ActionListener {
 				OrderView orderPanel = new OrderView(persistType);
 				MainView.changePanel(orderPanel);
 			}
+
 			else if(cmd.equals("Manage Room")){
 				ManageRoomView roomPanel = new ManageRoomView(persistType);
 				MainView.changePanel(roomPanel);
 			}
+
+			else if(cmd.equals("manage category")){
+					ManageCatView categoryPanel = new ManageCatView(persistType);
+					MainView.changePanel(categoryPanel);
+				}
+
 		}
 		else if(e.getSource() instanceof JComboBox){
 		
@@ -199,8 +206,11 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.add(btn3); 
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
+
 		        	btn2.addActionListener(this);
 		        	btn2.setActionCommand("Manage Room");
+		        	btn1.addActionListener(this);
+		        	btn1.setActionCommand("manage category");
 		        	break;
 		        case "Manager": 
 		        	System.out.println("Manager");
@@ -247,4 +257,5 @@ public class AccountView extends JPanel implements ActionListener {
 		}
 	}
 }
+
 		        

@@ -143,6 +143,40 @@ public class ListCategoryJDBC extends ListCategory {
 		return result;
 	}
 	
+	public ArrayList<String> getListCatNameJDBC (){
+		 
+		ArrayList<String> categories = new ArrayList<String>();
+		jdbc.openConnection(); 
+		ResultSet rs = null; 
+		
+		try{
+			
+			String query = "SELECT id_category, categoryLabel FROM categoryProduct";
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				int catId = rs.getInt(1);
+			    System.out.println("category id =" + catId);
+			    String categoryLabel = rs.getString(2);
+			    System.out.println(" category label =" + categoryLabel);
+	
+			    categories.add(Integer.toString(catId)+" "+categoryLabel); 
+			   
+			}
+			
+		}
+		
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+		
+		return categories;
+	}
+			
+		
+	
+	
+	
 	
 	
 	

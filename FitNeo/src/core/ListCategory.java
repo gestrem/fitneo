@@ -53,6 +53,8 @@ public abstract class ListCategory {
 	public abstract void getAllCategories();
 	
 	
+	
+	
 	public abstract void insertCategoryWithNameJDBC(String cat) ; 
 	public abstract void insertCategoryWithNameAndSuperCategoryJDBC(String catName, int catParent);
 	public abstract void updateCategoryWithNameJDBC(int idCat, String catName) throws SQLException;
@@ -75,5 +77,21 @@ public abstract class ListCategory {
 		}
 		return cat; 
 	}
+
+	public String searchNameWithId(int idcat){
+		CategoryProduct cat = null; 
+		Iterator<CategoryProduct> it =  this.getListAllCategories().iterator();
+		
+		boolean find = false; 
+		while ( it.hasNext() && !(find)) {
+			if(it.next().getCategoryId() == idcat){
+				find=true;
+				cat = ((CategoryProduct) it);
+			}
+		}
+		return cat.getCategoryName(); 
+	}
 	
+	public abstract ArrayList<String> getListCatNameJDBC(); 
+
 }

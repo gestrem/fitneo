@@ -1,5 +1,7 @@
 package core;
 
+import java.util.Iterator;
+
 public class CategoryProduct {
 	
 	private int categoryId;
@@ -53,6 +55,10 @@ public class CategoryProduct {
 		
 	public int getSuperCategoryId(){
 		return this.superCategory.categoryId;
+	}
+	
+	public String getSuperCategoryName(){
+		return this.superCategory.categoryLabel;
 	}
 
 

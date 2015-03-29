@@ -22,8 +22,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 
-import ui.ListActivityView.ButtonEditor;
-import ui.ListActivityView.ButtonRenderer;
+
 import core.Activity;
 import core.ActivityFacade;
 
