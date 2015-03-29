@@ -127,7 +127,6 @@ public class UserJDBC extends User{
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		jdbc.close();
 		return id;
 	}
 	
