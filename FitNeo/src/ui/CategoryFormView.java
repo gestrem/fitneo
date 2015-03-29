@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+@SuppressWarnings("serial")
 public class CategoryFormView extends JPanel implements ActionListener {
 	
 		private CategoryProductFacade categoryFacade;

@@ -7,7 +7,6 @@ import core.ListEvent;
 import core.ListNotification;
 import core.ListProduct;
 import core.ListAccessoryType;
-import core.Activity;
 import core.ListRoom;
 import core.User;
 

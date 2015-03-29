@@ -19,8 +19,9 @@ public abstract class ListRoom {
 	
 		/**
 		 *CreateRoom creer une room
-		 * @param String roomArea, String roomType,int capacite
-		 * @return 
+		 * @param roomArea 
+		 * @param roomType 
+		 * @param capacite
 		 */
 		public void createRoom(String roomArea, String roomType,int capacite){
 			createRoomJDBC(roomArea, roomType,capacite);
@@ -29,7 +30,7 @@ public abstract class ListRoom {
 
 		/**
 		 *GetRoom  renvoie un objet Room avec une roomName
-		 * @param String roomArea
+		 * @param roomArea
 		 * @return Room
 		 */
 		public Room getRoom(String roomArea){
@@ -39,13 +40,9 @@ public abstract class ListRoom {
 		}
 		/**
 		 *GetRoom  instancie une ListRoom 
-		 * @param Choix 
-		 * @return Room
-		 */
-	
-		
-		public void createListRoom(int choice){
-			
+		 * @param choice 
+		 */	
+		public void createListRoom(int choice){			
 			switch (choice) {
             case 0: getAllRoomJDBC();
             default : getAllRoomJDBC();
@@ -66,7 +63,6 @@ public abstract class ListRoom {
 		 * listRoomToArrayStringListRoom transforme une arrayList<Room> en String[] de nom de room
 		 * pour une comboBox
 		 * @param listRoom
-		 * @return
 		 */
 		public String[] listRoomToArrayStringListRoom(ArrayList<Room> listRoom){
 			
@@ -86,7 +82,6 @@ public abstract class ListRoom {
 			
 	 * @param listRoom
 	 * @param roomName
-	 * @return
 	 */
 	public int getIndexRoomUpdated(ArrayList<Room> listRoom, String roomName){
 			
@@ -105,7 +100,6 @@ public abstract class ListRoom {
 		/**
 		 * getInstance(int persistType) retourne une instance de la liste en fct de la persistance
 		 * @param persistType
-		 * @return
 		 */
 		public static ListRoom getInstance(int persistType){
 			if (myRoomList == null)
@@ -171,24 +165,15 @@ public abstract class ListRoom {
 		 * @param RoomArea
 		 */
 		public abstract void deleteRoomJDBC(String RoomArea);
-/**
- * getRoomJDBC retourne une room
- * @param roomArea
- * @return
- */
+
 		/** GetAllRoomJDBC instancie une listRoom
-		 * @param 
 		 */
 		public abstract void getAllRoomJDBC();
-		/** GetAllRoomJDBC instancie une listRoom
-		 * @param 
-		 */
 
-		/** GetRoomJDBC retourne une Room
-		 * @param 
+		/**
+		 * getRoomJDBC retourne une room
+		 * @param RoomArea
 		 */
 		public abstract Room getRoomJDBC(String RoomArea);
-
-
 
 	}

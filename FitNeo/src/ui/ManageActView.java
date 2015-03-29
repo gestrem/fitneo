@@ -27,9 +27,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 
 
+
 import core.Activity;
 import core.ActivityFacade;
 
+@SuppressWarnings("serial")
 public class ManageActView extends JPanel implements ActionListener {
 
 	private ActivityFacade activityFacade;

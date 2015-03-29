@@ -39,8 +39,7 @@ public abstract class ListAccessoryType {
 	
 	/**
 	 *addAccessoryToList
-	 * @param AccessoryType
-	 * @return 
+	 * @param accessoryType
 	 */
 	public void addAccessoryToList(AccessoryType accessoryType){
 		listAccessoryType.add(accessoryType);
@@ -49,30 +48,23 @@ public abstract class ListAccessoryType {
 	
 	/**
 	 *createAccessoryTypeJDBC crée un accessoire dans la bd
-	 * @param  String AccessoryType
-	 * @return 
+	 * @param accessoryType
 	 */
 	public abstract void createAccessoryTypeJDBC(String accessoryType);
 	/**
 	 *getAllAccessoryTypeJDBC instancie une liste d'accessoire
-	 * @param  String AccessoryType
-	 * @return 
 	 */
 	public abstract void getAllAccessoryTypeJDBC();
 	/**
 	 *updateAccessoryTypeJDBC  met à jour un accessoire
-	 * @param  int IdAccessoryType String Name
-	 * @return 
+	 * @param idAccessoryType 
+	 * @param nameAccessoryType
 	 */
 	public abstract void updateAccessoryTypeJDBC(int idAccessoryType,String nameAccessoryType);
 	/**
 	 *deleteAccessoryTypeJDBC  supprime un accessoire
-	 * @param  int IdAccessoryType
-	 * @return 
+	 * @param idAccessoryType 
 	 */
 	public abstract void deleteAccessoryTypeJDBC(int idAccessoryType);
 	
-
-
-
 }

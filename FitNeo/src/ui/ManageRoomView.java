@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -20,8 +18,8 @@ import javax.swing.JComboBox;
 
 import core.Room;
 import core.RoomFacade;
-import core.UserFacade;
 
+@SuppressWarnings("serial")
 public class ManageRoomView extends JPanel {
 	private JTextField tf_RoomArea1;
 	private JTextField tf_NbMaxParticipants1;
@@ -171,7 +169,7 @@ public class ManageRoomView extends JPanel {
 					
 					String roomType=(String) cb_roomType1.getSelectedItem();
 					roomFacade.createRoom(roomName, roomType, capacity);
-					System.out.println("Room "+ roomName +" créé");
+					//System.out.println("Room "+ roomName +" créé");
 					roomFacade.addRoomToListRoom(listRoom, roomName, roomType, capacity);
 					cb_roomToUpdate.removeAllItems();
 		    		String[] newListRoom=roomFacade.listRoomToArrayStringListRoom(listRoom);
@@ -213,7 +211,7 @@ public class ManageRoomView extends JPanel {
     		String roomType=(String) cb_roomType2.getSelectedItem();
     		roomFacade.updateRoom(roomToUpdateNameOld, roomArea, roomType, capacity);
     		int index=roomFacade.getIndexRoomUpdated(listRoom,roomToUpdateNameOld);
-    		System.out.println("index "+index);
+    		//System.out.println("index "+index);
     		roomFacade.updateRoomListRoom(listRoom, index, roomArea, roomType, capacity);
     		cb_roomToUpdate.removeAllItems();
     		String[] newListRoom=roomFacade.listRoomToArrayStringListRoom(listRoom);
@@ -234,7 +232,7 @@ public class ManageRoomView extends JPanel {
     		
     		roomFacade.deleteRoomJDBC(roomToUpdateNameOld);
     		int index=roomFacade.getIndexRoomUpdated(listRoom,roomToUpdateNameOld);
-    		System.out.println("index "+index);
+    		//System.out.println("index "+index);
     		roomFacade.deleteRoomListRoom(listRoom, index);
     		cb_roomToUpdate.removeAllItems();
     		String[] newListRoom=roomFacade.listRoomToArrayStringListRoom(listRoom);

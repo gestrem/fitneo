@@ -43,7 +43,7 @@ public abstract class ListCategory {
 	/**
 	 * getInstance
 	 * on instancie une ListCategorie dans un type de persistance
-	 * @param persistType, type de persistance
+	 * @param persistType type de persistance
 	 * @return une liste ListCategory
 	 */
 	public static ListCategory getInstance (int persistType){

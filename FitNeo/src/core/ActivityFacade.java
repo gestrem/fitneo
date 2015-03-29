@@ -2,15 +2,14 @@ package core;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 
 public class ActivityFacade {
 	private ListActivity listActivity;
 	
 	public ActivityFacade(int persistType){
-		//On cr�e une liste d'activite du type de persistance choisi
-		listActivity = listActivity.getInstance(persistType);
+		//On creee une liste d'activite du type de persistance choisi
+		listActivity = ListActivity.getInstance(persistType);
 	}
 
 	public ArrayList<Activity> getListAllActivities() {
@@ -33,10 +32,8 @@ public class ActivityFacade {
 	
 	
 	public ArrayList<String> loadManagers(){
-		  
-		ArrayList<String> managers = new ArrayList<String>(); 
-		return managers = listActivity.getListManagersJDBC(); 
-		
+		   
+		return listActivity.getListManagersJDBC(); 
 
 	}
 

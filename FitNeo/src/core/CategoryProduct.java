@@ -1,7 +1,10 @@
 package core;
 
-import java.util.Iterator;
-
+/**
+ * 
+ * @author Maite
+ *
+ */
 public class CategoryProduct {
 	
 	private int categoryId;

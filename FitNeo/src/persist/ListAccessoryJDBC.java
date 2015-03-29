@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import core.ListAccessoryType;
 import core.AccessoryType;
-import core.Room;
 
 public class ListAccessoryJDBC extends ListAccessoryType{
 	
@@ -20,7 +19,7 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 	
 
 	/**createAccessoryTypeJDBC
-	 * @param String accessoryType
+	 * @param accessoryType
 	 */
 	public void createAccessoryTypeJDBC(String accessoryType) {
 		jdbc.openConnection();
@@ -39,8 +38,6 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 
 
 	/**GetAllAccessoryTypeJDBC
-	 * @param String accessoryType
-	 * 
 	 */	
 	public void getAllAccessoryTypeJDBC() {
 
@@ -68,7 +65,7 @@ public class ListAccessoryJDBC extends ListAccessoryType{
 	/**
 	 * updateAccessoryTypeJDBC met à jour un accessoire
 	 * @param idAccessoryType
-	 * @param String nameAccessory
+	 * @param nameAccessoryType
 	 */
 	public void updateAccessoryTypeJDBC(int idAccessoryType,String nameAccessoryType){
 		jdbc.openConnection();

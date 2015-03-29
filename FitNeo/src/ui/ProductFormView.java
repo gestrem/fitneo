@@ -17,11 +17,11 @@ import javax.swing.JButton;
 
 import core.CategoryProductFacade;
 import core.ProductFacade;
-import core.RoomFacade;
 import core.UserFacade;
 import core.CategoryProduct;
 import core.Product;
 
+@SuppressWarnings("serial")
 public class ProductFormView extends JPanel implements ActionListener {
 	private JTextField tf_qtyAvailable;
 	private JTextField tf_discountMember;
@@ -53,10 +53,10 @@ public class ProductFormView extends JPanel implements ActionListener {
 		this.cb_Category = new JComboBox();
 		categoryProductFacade.loadListCategories();
 		ArrayList<CategoryProduct> listCategory =categoryProductFacade.getAllCategoriesFacade();
-		System.out.println("siez : "+listCategory.size());
+		//System.out.println("siez : "+listCategory.size());
 
 		for (int i=0;i<listCategory.size();i++){
-			System.out.println("id : "+listCategory.get(i).getCategoryId());
+			//System.out.println("id : "+listCategory.get(i).getCategoryId());
 			String id=Integer.toString(listCategory.get(i).getCategoryId());
 			String categoryName=listCategory.get(i).getCategoryName();
 			cb_Category.addItem(new ComboItem(id, categoryName));
@@ -124,7 +124,7 @@ public class ProductFormView extends JPanel implements ActionListener {
 		 cb_Category.addActionListener (new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
 		    	ComboItem co=(ComboItem) cb_Category.getSelectedItem();
-		    	System.out.println("id"+co.getValue());
+		    	//System.out.println("id"+co.getValue());
 		    	
 		    }
 		});
@@ -134,13 +134,13 @@ public class ProductFormView extends JPanel implements ActionListener {
 		    	if((!tf_qtyAvailable.getText().equals("")) || (!tf_discountMember.getText().equals("")) ||(!tf_productType.getText().equals("")) || (!tf_price.getText().equals("")) ){ 
 			    	ComboItem categoryItem=(ComboItem) cb_Category.getSelectedItem();
 			    	int id_Cat=Integer.parseInt(categoryItem.getValue());
-			    	System.out.println("id "+id_Cat);
+			    	//System.out.println("id "+id_Cat);
 		    		String productName=tf_productType.getText();
 		    		int qty_available=Integer.parseInt(tf_qtyAvailable.getText());
 		    		int discountMember=Integer.parseInt(tf_discountMember.getText());
 		    		int price = Integer.parseInt(tf_price.getText());
 		    		int id_user=userFacade.getIdUser();
-			    	System.out.println("id user "+id_user);
+			    	//System.out.println("id user "+id_user);
 
 		    		Product product= new Product(productName, price,qty_available,discountMember,id_Cat, id_user);
 		    		try {

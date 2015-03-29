@@ -26,11 +26,11 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 
-import core.Activity;
 import core.CategoryProduct;
 import core.CategoryProductFacade;
 
 
+@SuppressWarnings("serial")
 public class ManageCatView extends JPanel implements ActionListener {
 
 	private CategoryProductFacade categoryFacade;

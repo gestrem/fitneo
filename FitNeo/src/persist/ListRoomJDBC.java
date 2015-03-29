@@ -15,12 +15,12 @@ public class ListRoomJDBC extends ListRoom{
 	
 	public ListRoomJDBC(){
 		jdbc = new JdbcConnection();
-		System.out.println("jdbclist");
 	}
 	/**
 	 *CreateRoomJDBC creer une room
-	 * @param String roomArea, String roomType,int capacite
-	 * @return 
+	 * @param roomArea
+	 * @param roomType
+	 * @param capacity
 	 */
 	public void createRoomJDBC(String roomArea, String roomType,int capacity){
 		
@@ -38,10 +38,9 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 	/**
-	 * updateRoomJDBC met à une Room dans une liste
+	 * updateRoomJDBC met une Room dans une liste
 	 * @param roomAreaOld
 	 * @param roomArea
-
 	 * @param roomType
 	 * @param capacity
 	 */
@@ -58,7 +57,7 @@ public class ListRoomJDBC extends ListRoom{
 	}
 	/**
 	 * DeleteRoom detruit une room
-	 * @param RoomArea
+	 * @param roomArea
 	 */
 	public void deleteRoomJDBC(String roomArea){
 		jdbc.openConnection();
@@ -72,7 +71,6 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 	/** GetAllRoomJDBC instancie une listRoom
-	 * @param 
 	 */
 	public void getAllRoomJDBC(){
 		
@@ -84,7 +82,7 @@ public class ListRoomJDBC extends ListRoom{
 			String query = "SELECT * FROM room";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-				System.out.println("capacite :"+rs.getInt("capacity"));
+				//System.out.println("capacite :"+rs.getInt("capacity"));
 				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType"),rs.getInt("capacity")));
             	
             }
@@ -98,8 +96,8 @@ public class ListRoomJDBC extends ListRoom{
 
 
 	/**
-	 * getRoom
-	 * @String roomArea
+	 * getRoomJDBC
+	 * @param roomArea
 	 * @return Room
 	 */
 	public Room getRoomJDBC(String roomArea) {

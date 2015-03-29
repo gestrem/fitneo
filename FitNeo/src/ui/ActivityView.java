@@ -6,17 +6,20 @@ package ui;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
-import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
 import core.Activity;
-import core.ActivityFacade;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * 
+ * @author Maite
+ *
+ */
+@SuppressWarnings("serial")
 public class ActivityView extends JPanel implements ActionListener{
 	
 	//type de persistance choisi

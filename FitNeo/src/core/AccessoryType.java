@@ -2,7 +2,7 @@ package core;
 /**
  * @author gestrem
  */
-import persist.PersistKit;
+
 
 public class AccessoryType {
 
@@ -33,6 +33,14 @@ public class AccessoryType {
 
 	public void setAccessoryTypeName(String accessoryTypeName) {
 		this.accessoryTypeName = accessoryTypeName;
+	}
+
+	public static AccessoryType getAccessory() {
+		return accessory;
+	}
+
+	public static void setAccessory(AccessoryType accessory) {
+		AccessoryType.accessory = accessory;
 	}
 
 	

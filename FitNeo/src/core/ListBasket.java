@@ -3,7 +3,11 @@ package core;
 import java.util.ArrayList;
 
 import persist.PersistKit;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public abstract class ListBasket {
 
 	private static ListBasket myListBasket = null;

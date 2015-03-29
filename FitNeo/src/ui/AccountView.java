@@ -195,7 +195,7 @@ public class AccountView extends JPanel implements ActionListener {
 				}
 
 			else if(cmd.equals("Add a product")){
-				System.out.println("clique prod");
+				//System.out.println("clique prod");
 				ProductFormView productFormPanel = new ProductFormView(persistType);
 				MainView.changePanel(productFormPanel);
 			}
@@ -206,7 +206,7 @@ public class AccountView extends JPanel implements ActionListener {
 		    String selectedRole = (String) cb.getSelectedItem();
 		    switch (selectedRole) {
 		        case "Administrator": 
-		        	System.out.println("admin");
+		        	//System.out.println("admin");
 		        	panelButton.removeAll();
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
@@ -225,7 +225,7 @@ public class AccountView extends JPanel implements ActionListener {
 		        	btn1.setActionCommand("manage category");
 		        	break;
 		        case "Manager": 
-		        	System.out.println("Manager");
+		        	//System.out.println("Manager");
 		        	panelButton.removeAll();
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
@@ -242,7 +242,7 @@ public class AccountView extends JPanel implements ActionListener {
 	
 		        	break;
 		        case "Participant":
-		        	System.out.println("Participant");
+		        	//System.out.println("Participant");
 		        	panelButton.removeAll();
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
@@ -254,7 +254,7 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.revalidate();
 		        	break;
 		        case "Member":
-		        	System.out.println("Member");
+		        	//System.out.println("Member");
 		        	panelButton.removeAll();
 		        	panelButton.repaint();
 		        	panelButton.revalidate();

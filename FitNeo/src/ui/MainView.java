@@ -110,21 +110,21 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, productButton, -10, SpringLayout.EAST, getContentPane());
 		getContentPane().add(productButton);
 
-		JButton basketButton = new JButton(new ImageIcon("./data/shopping-cart-icon.png"));
+		JButton basketButton = new JButton(new ImageIcon(getClass().getResource("/shopping-cart-icon.png")));
 		basketButton.addActionListener(this);
 		basketButton.setActionCommand("Basket");
 		springLayout.putConstraint(SpringLayout.NORTH, basketButton, 10, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, basketButton, -10, SpringLayout.EAST, getContentPane());
 		getContentPane().add(basketButton);
 		
-		JButton accountButton = new JButton("My account",new ImageIcon("./data/profile-icon.png"));
+		JButton accountButton = new JButton(new ImageIcon(getClass().getResource("/profile-icon.png")));
 		accountButton.addActionListener(this);
 		accountButton.setActionCommand("Account");
 		springLayout.putConstraint(SpringLayout.NORTH, accountButton, 0, SpringLayout.NORTH, basketButton);
 		springLayout.putConstraint(SpringLayout.EAST, accountButton, -6, SpringLayout.WEST, basketButton);
 		getContentPane().add(accountButton);
 		
-		notifButton = new JButton(nbNotif, new ImageIcon("./data/Mail-icon.png"));
+		notifButton = new JButton(new ImageIcon(getClass().getResource("/Mail-icon.png")));
 		notifButton.addActionListener(this);
 		notifButton.setActionCommand("Notif");
 		springLayout.putConstraint(SpringLayout.NORTH, notifButton, 0, SpringLayout.NORTH, basketButton);
@@ -136,7 +136,8 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, lblLogoFitneo, 10, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, lblLogoFitneo, -6, SpringLayout.NORTH, homeButton);
 		springLayout.putConstraint(SpringLayout.EAST, lblLogoFitneo, -2, SpringLayout.EAST, homeButton);
-		lblLogoFitneo.setIcon(new ImageIcon("./data/petitlogo.png"));
+
+		lblLogoFitneo.setIcon(new ImageIcon(getClass().getResource("/petitlogo.png")));
 		lblLogoFitneo.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblLogoFitneo);
 	}

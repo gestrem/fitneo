@@ -12,7 +12,6 @@ public class UserFacade {
 	public UserFacade(int persistType){
 		//On crée un user du type de persistance choisi
 		user = User.getInstance(persistType);
-		System.out.println(user.getUserEmail());
 	}
 	
 	public User login(String login, String pwd){

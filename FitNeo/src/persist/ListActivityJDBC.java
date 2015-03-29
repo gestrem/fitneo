@@ -57,7 +57,10 @@ public class ListActivityJDBC extends ListActivity {
 	}
 	/**
      * Methode insertActivityJDBC 
-     * @param unNomActivite (string), unIdResponsable (string), uneCourteDescription (string), uneLongueDescription (string)
+     * @param actName (string), 
+     * @param managerId (string), 
+     * @param shortDescription (string), 
+     * @param lgDescription (string)
      * insere une Activite dans la BD
      */
 	
@@ -72,7 +75,11 @@ public class ListActivityJDBC extends ListActivity {
 	
 	/**
      * Methode updateActivityJDBC 
-     * @param un IDActivite, unNomActivite (string), unIdResponsable (string), uneCourteDescription (string), uneLongueDescription (string)
+     * @param actName (string), 
+     * @param managerId (string), 
+     * @param shortDescription (string), 
+     * @param lgDescription (string) 
+     * @param idAct (int)
      * modifie une Activite dans la BD grace aux parametres
      */
 	public void updateActivityJDBC(int idAct,String actName, int managerId, String shortDescription, String lgDescription) throws SQLException{
@@ -87,7 +94,7 @@ public class ListActivityJDBC extends ListActivity {
 	
 	/**
      * Methode deleteActivityJDBC 
-     * @param un IDActivite int
+     * @param idAct int
      * supprime l'activite --> IDActivite de la BD
      */
 	public void deleteActivityJDBC(int idAct) throws SQLException{

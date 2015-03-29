@@ -32,11 +32,11 @@ public class ListCategoryJDBC extends ListCategory {
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
 				  int id = rs.getInt(1);
-			      System.out.println("id=" + id);
+			      //System.out.println("id=" + id);
 			      String name = rs.getString(2);
-			      System.out.println("name=" + name);
+			      //System.out.println("name=" + name);
 			      int idParent = rs.getInt(3);
-			      System.out.println("id Parent=" + idParent);
+			      //System.out.println("id Parent=" + idParent);
 			      if (rs.wasNull()) {
 					listAllCategories.add(new CategoryProduct(id,name)); 
 					}
@@ -55,7 +55,7 @@ public class ListCategoryJDBC extends ListCategory {
 	
 	/**
 	 * insertCategory WithNameJDBC
-	 * @param unNomCategorie
+	 * @param catName
 	 * insere une categorie dans la BD avec un nom et une categorie Parent nulle
 	 * 
 	 */
@@ -68,7 +68,7 @@ public class ListCategoryJDBC extends ListCategory {
 			jdbc.executeRequest(query);
 		}
 		catch(Exception e){
-			System.out.println("Duplicate entry");
+			//System.out.println("Duplicate entry");
 		}
 		jdbc.close();
 	
@@ -76,7 +76,8 @@ public class ListCategoryJDBC extends ListCategory {
 	
 	/**
 	 * insertCategory WithNameAndSuperCategoryJDBC
-	 * @param unNomCategorie (string), un IdParent (int)
+	 * @param catName (string)
+	 * @param catParent (int)
 	 * insere une categorie dans la BDavec un Nom et une Categorie Parent nulle
 	 * 
 	 */
@@ -90,7 +91,8 @@ public class ListCategoryJDBC extends ListCategory {
 	}
 	/**
 	 * updateCategoryWithNameJDBC
-	 * @param un IDCat (int), unNomCat (string)
+	 * @param idCat (int)
+	 * @param catName (string)
 	 * met a jour une categorie dans la BD avec un nouveau nom
 	 */
 	public void updateCategoryWithNameJDBC(int idCat, String catName) throws SQLException{
@@ -104,7 +106,8 @@ public class ListCategoryJDBC extends ListCategory {
 	
 	/**
 	 * updateCategoryWithSuperCategoryJDBC
-	 * @param un IDCat (int), unIDSuperCategory (int)
+	 * @param idCat (int)
+	 * @param catIdSuperCategory (int)
 	 * met a jour une categorie dans la BD avec une nouvelle categorie Parent
 	 */
 	public void updateCategoryWithSuperCategoryJDBC(int idCat, int catIdSuperCategory) throws SQLException{
@@ -118,7 +121,9 @@ public class ListCategoryJDBC extends ListCategory {
 	
 	/**
 	 * updateCategoryWithNameAndSuperCategoryJDBC
-	 * @param un IDCat (int), unNomCat (string), unIDSuperCategory (int)
+	 * @param idCat (int)
+	 * @param catName (string)
+	 * @param catIdSuperCategory (int)
 	 * met a jour une categorie dans la BD avec un nouveau nom & une nouvelle categorie Parent
 	 */
 	public void updateCategoryWithNameAndSuperCategoryJDBC(int idCat, String catName,  int catIdSuperCategory) throws SQLException{
@@ -132,7 +137,7 @@ public class ListCategoryJDBC extends ListCategory {
 	
 	/**
 	 * deleteCategoryJDBC
-	 * @param un IDCat (int)
+	 * @param idCat (int)
 	 * supprime une categorie dans la BD
 	 */
 	public void deleteCategoryJDBC(int idCat) throws SQLException{
@@ -147,7 +152,7 @@ public class ListCategoryJDBC extends ListCategory {
 
 	/**
 	 * verifyCategoryExist(String nameCat)
-	 * @param unNomCategorie
+	 * @param nameCat
 	 * cherche si la categorie est presente dans la BD
 	 * @return vrai si la categorie existe, faux sinon
 	 */
@@ -182,9 +187,9 @@ public class ListCategoryJDBC extends ListCategory {
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
 				int catId = rs.getInt(1);
-			    System.out.println("category id =" + catId);
+			    //System.out.println("category id =" + catId);
 			    String categoryLabel = rs.getString(2);
-			    System.out.println(" category label =" + categoryLabel);
+			    //System.out.println(" category label =" + categoryLabel);
 			    categories.add(Integer.toString(catId)+" "+categoryLabel); 
 			 }
 			

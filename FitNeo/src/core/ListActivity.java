@@ -22,7 +22,6 @@ public abstract class ListActivity {
 
 	/**
 	 * Accesseurs et Modificateurs
-	 * @return
 	 */
 	public ArrayList<Activity> getListAllActivities() {
 		return listAllActivities;
@@ -44,7 +43,7 @@ public abstract class ListActivity {
 	/**
 	 * getInstance
 	 * on instancie une ListActivity dans un type de persistance
-	 * @param persistType, type de persistance
+	 * @param persistType type de persistance
 	 * @return une liste ListActivity
 	 */
 	public static ListActivity getInstance(int persistType){
