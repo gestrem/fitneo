@@ -2,7 +2,11 @@ package persist;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import core.Event;
+import core.Inscription;
+import core.Notification;
 import core.User;
 
 public class UserJDBC extends User{
@@ -125,5 +129,49 @@ public class UserJDBC extends User{
 		}
 		jdbc.close();
 		return newpass;
+	}
+
+	@Override
+	public void loadInscription() {
+		jdbc.openConnection();
+		ResultSet rs = null;
+		
+		try{
+			ArrayList<Inscription> listInscription = new ArrayList<Inscription>();
+			String query = "SELECT eventName, dateinscription, event.eventDate, event.idEvent FROM inscription, event WHERE event.idEvent=inscription.idevent AND idmember="+this.getIdUser();
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				listInscription.add(new Inscription(rs.getString("eventName"), rs.getString("eventDate"), rs.getString("dateinscription"), rs.getInt("idEvent"))); 	
+			}
+			this.setInscriptions(listInscription);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+	}
+	
+	public void subscribeEvent(int idevent){
+		jdbc.openConnection();		
+		try{
+			String query = "INSERT INTO inscription VALUES ("+this.getIdUser()+","+idevent+",curdate())";
+			jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+	}
+	
+	public void unscribeEvent(int idevent){
+		jdbc.openConnection();		
+		try{
+			String query = "DELETE FROM inscription WHERE idmember="+this.getIdUser()+" AND idevent="+idevent;
+			jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		jdbc.close();
 	}
 }
