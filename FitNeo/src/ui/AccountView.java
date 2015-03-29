@@ -157,70 +157,75 @@ public class AccountView extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String cmd = e.getActionCommand();
-		if(cmd.equals("create activity")){
-			activityPanel = new ActivityFormView(persistType);
-			MainView.changePanel(activityPanel);
-		}
 		
-		JComboBox cb = (JComboBox) e.getSource();
-	    String selectedRole = (String) cb.getSelectedItem();
-	    switch (selectedRole) {
-	        case "Administrator": 
-	        	System.out.println("admin");
-	        	panelButton.removeAll();
-	        	panelButton.repaint();
-	        	panelButton.revalidate();
-	        	JButton btn1 = new JButton("Manage Category");
-	        	JButton btn2 = new JButton("Manage Room");
-	        	JButton btn3 = new JButton("Manage Users");
-	        	panelButton.add(btn1);
-	        	panelButton.add(btn2); 
-	        	panelButton.add(btn3); 
-	        	panelButton.repaint();
-	        	panelButton.revalidate();
-	        	break;
-	        case "Manager": 
-	        	System.out.println("Manager");
-	        	panelButton.removeAll();
-	        	panelButton.repaint();
-	        	panelButton.revalidate();
-	        	JButton btnM1 = new JButton("Manage Participant");
-	        	JButton btnM2 = new JButton("Create Activity");
-	        	JButton btnM3 = new JButton("Create Category Demand");
-	        	panelButton.add(btnM1);
-	        	panelButton.add(btnM2); 
-	        	panelButton.add(btnM3); 
-	        	panelButton.repaint();
-	        	panelButton.revalidate();
-	        	btnM2.addActionListener(this);
-	        	btnM2.setActionCommand("create activity");
-
-	        	break;
-	        case "Participant":
-	        	System.out.println("Participant");
-	        	panelButton.removeAll();
-	        	panelButton.repaint();
-	        	panelButton.revalidate();
-	        	JButton btnE = new JButton("Create Event");
-	        	JButton BtnE2 = new JButton("Manage Events");
-	        	panelButton.add(btnE);
-	        	panelButton.add(BtnE2);
-	        	panelButton.repaint();
-	        	panelButton.revalidate();
-	        	break;
-	        case "Member":
-	        	System.out.println("Member");
-	        	panelButton.removeAll();
-	        	panelButton.repaint();
-	        	panelButton.revalidate();
-	        	JButton btnP = new JButton("Add a product");
-	        	JButton btnP2 = new JButton("Manage inscription events");
-	        	panelButton.add(btnP);
-	        	panelButton.add(btnP2);
-	        	panelButton.repaint();
-	        	panelButton.revalidate();
-	        	break;
+		if(e.getSource() instanceof JButton){
+			String cmd = e.getActionCommand();
+			if(cmd.equals("create activity")){
+				activityPanel = new ActivityFormView(persistType);
+				MainView.changePanel(activityPanel);
+			}
+		}
+		else if(e.getSource() instanceof JComboBox){
+		
+			JComboBox cb = (JComboBox) e.getSource();
+		    String selectedRole = (String) cb.getSelectedItem();
+		    switch (selectedRole) {
+		        case "Administrator": 
+		        	System.out.println("admin");
+		        	panelButton.removeAll();
+		        	panelButton.repaint();
+		        	panelButton.revalidate();
+		        	JButton btn1 = new JButton("Manage Category");
+		        	JButton btn2 = new JButton("Manage Room");
+		        	JButton btn3 = new JButton("Manage Users");
+		        	panelButton.add(btn1);
+		        	panelButton.add(btn2); 
+		        	panelButton.add(btn3); 
+		        	panelButton.repaint();
+		        	panelButton.revalidate();
+		        	break;
+		        case "Manager": 
+		        	System.out.println("Manager");
+		        	panelButton.removeAll();
+		        	panelButton.repaint();
+		        	panelButton.revalidate();
+		        	JButton btnM1 = new JButton("Manage Participant");
+		        	JButton btnM2 = new JButton("Create Activity");
+		        	JButton btnM3 = new JButton("Create Category Demand");
+		        	panelButton.add(btnM1);
+		        	panelButton.add(btnM2); 
+		        	panelButton.add(btnM3); 
+		        	panelButton.repaint();
+		        	panelButton.revalidate();
+		        	btnM2.addActionListener(this);
+		        	btnM2.setActionCommand("create activity");
+	
+		        	break;
+		        case "Participant":
+		        	System.out.println("Participant");
+		        	panelButton.removeAll();
+		        	panelButton.repaint();
+		        	panelButton.revalidate();
+		        	JButton btnE = new JButton("Create Event");
+		        	JButton BtnE2 = new JButton("Manage Events");
+		        	panelButton.add(btnE);
+		        	panelButton.add(BtnE2);
+		        	panelButton.repaint();
+		        	panelButton.revalidate();
+		        	break;
+		        case "Member":
+		        	System.out.println("Member");
+		        	panelButton.removeAll();
+		        	panelButton.repaint();
+		        	panelButton.revalidate();
+		        	JButton btnP = new JButton("Add a product");
+		        	JButton btnP2 = new JButton("Manage inscription events");
+		        	panelButton.add(btnP);
+		        	panelButton.add(btnP2);
+		        	panelButton.repaint();
+		        	panelButton.revalidate();
+		        	break;
+		    }
 	    }
     }    
 }
