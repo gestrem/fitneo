@@ -1,5 +1,7 @@
 package ui;
-
+/**
+ * @author gestrem
+ */
 public   class ComboItem {
 
     private String value;

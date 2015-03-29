@@ -1,5 +1,7 @@
 package core;
-
+/**
+ * @author gestrem
+ */
 import persist.PersistKit;
 
 public class AccessoryType {
@@ -8,6 +10,7 @@ public class AccessoryType {
 	private String accessoryTypeName;
 	private int idAccessory;
 	
+
 	public AccessoryType(int idAccessory,String accessoryTypeName){
 		this.accessoryTypeName=accessoryTypeName;
 		this.idAccessory=idAccessory;

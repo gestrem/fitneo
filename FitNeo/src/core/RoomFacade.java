@@ -1,5 +1,7 @@
 package core;
-
+/**
+ * @author gestrem
+ */
 import java.util.ArrayList;
 public class RoomFacade {
 	private ListRoom listroom;
