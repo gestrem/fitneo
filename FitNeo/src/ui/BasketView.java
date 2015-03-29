@@ -3,6 +3,7 @@ package ui;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -24,12 +25,14 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 
 
+
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
-public class BasketView extends JPanel {
+public class BasketView extends JPanel implements ActionListener {
 
 	private BasketFacade basketFacade;
 	private UserFacade userFacade;
@@ -80,8 +83,25 @@ public class BasketView extends JPanel {
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-        add(new JLabel("My Shopping cart : "+this.basketFacade.getMainBasket().getTotalPrice()+" €"), BorderLayout.NORTH);
+        JPanel top = new JPanel();
+        top.setLayout(new GridLayout(0,4));
+        top.add(new JLabel("My Shopping cart : "+this.basketFacade.getMainBasket().getTotalPrice()+" €"), BorderLayout.NORTH);
+        JButton buttonAdd = new JButton("Confirm Order");
+        top.add(buttonAdd);
+        buttonAdd.addActionListener(this);
+		buttonAdd.setActionCommand("confirm");
+        add(top, BorderLayout.NORTH);
+        
         add(scrollPane, BorderLayout.CENTER);
+	}
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		String cmd = e.getActionCommand();
+		if(cmd.equals("confirm")){ 
+			this.basketFacade.confirmOrder(this.userFacade.getIdUser(), this.basketFacade.getMainBasket().getIdBasket());
+			JOptionPane.showMessageDialog(null, "Your command has been confirmed", "Order confirmed", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -108,6 +128,7 @@ public class BasketView extends JPanel {
 		protected JButton button;
 		private String label;
 		private boolean isPushed;
+		private Product p;
 
 		public ButtonEditor(JCheckBox checkBox) {
 			super(checkBox);
@@ -132,13 +153,18 @@ public class BasketView extends JPanel {
 			  }
 			  label = value.toString();
 			  button.setText("Détails");
+			  p=basketFacade.getMainBasket().getListProducts().get(row);
 			  isPushed = true;
 			  return button;
 		  }
 
 		  public Object getCellEditorValue() {
 			  if (isPushed) {
-				 
+				 int confirm;
+				 confirm = JOptionPane.showConfirmDialog(button, "Are you sur ?", "Delete confirmation", JOptionPane.YES_NO_OPTION);
+				 if(confirm == 0){
+					 basketFacade.deleteProduct(p);
+				 }
 			  }
 			  isPushed = false;
 			  return new String(label);

@@ -91,12 +91,14 @@ public class ListBasketJDBC extends ListBasket{
 	}
 
 	@Override
-	public void confirmOrder(int idBasket) {
+	public void confirmOrder(int idUser, int idBasket) {
 		jdbc.openConnection();
 		
 		try{
 			String query = "UPDATE basket SET active_basket=false WHERE idBasket ="+idBasket;
 			jdbc.executeRequest(query);
+			String query2 = "INSERT INTO basket(idUser,active_basket) VALUES("+idUser+", true)";
+			jdbc.executeRequest(query2);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -105,13 +107,13 @@ public class ListBasketJDBC extends ListBasket{
 		jdbc.close();	
 	}
 	
-	public void insertProduct(Product p){
+	public void insertProduct(Product p, int quantity){
 		jdbc.openConnection();	
 		try{
-			String query = "INSERT INTO CommandLine values("+p.getId_product()+this.getMainBasket().getIdBasket()+",1)";
+			String query = "INSERT INTO CommandLine VALUES("+p.getId_product()+","+this.getMainBasket().getIdBasket()+","+quantity;
 			jdbc.executeRequest(query);
-			int quantity = p.getAvailableQuantity()-1;
-			String query2 = "UPDATE ProductType SET availableProductQuantity="+quantity+")";
+			int Newquantity = p.getAvailableQuantity()-1;
+			String query2 = "UPDATE ProductType SET availableProductQuantity="+Newquantity+" WHERE id_producttype="+p.getId_product();
 			jdbc.executeRequest(query2);
 		}
 		catch(Exception e){
@@ -119,5 +121,18 @@ public class ListBasketJDBC extends ListBasket{
 		}
 		
 		jdbc.close();	
+	}
+	
+	public void deleteProduct(Product p){
+		jdbc.openConnection();	
+		try{
+			String query = "DELETE FROM CommandLine WHERE id_producttype="+p.getId_product()+" AND id_basket="+this.getMainBasket().getIdBasket();
+			jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		jdbc.close();
 	}
 }

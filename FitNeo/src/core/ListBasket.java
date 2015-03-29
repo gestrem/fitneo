@@ -18,10 +18,11 @@ public abstract class ListBasket {
 		return myListBasket;
 	}
 	
+	public abstract void deleteProduct(Product p);
 	public abstract void loadMainBasket(int idUser);
 	public abstract void loadOrders(int idUser);
-	public abstract void confirmOrder(int idUser);
-	public abstract void insertProduct(Product p);
+	public abstract void confirmOrder(int idUser, int idBasket);
+	public abstract void insertProduct(Product p, int quantity);
 
 	public Basket getMainBasket() {
 		return mainBasket;

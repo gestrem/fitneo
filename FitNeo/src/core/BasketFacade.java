@@ -18,8 +18,8 @@ public class BasketFacade {
 		basket.loadOrders(idUser);
 	}
 	
-	public void confirmOrder(int idUser){
-		basket.confirmOrder(idUser);
+	public void confirmOrder(int idUser, int idBasket){
+		basket.confirmOrder(idUser, idBasket);
 	}
 	
 	public Basket getMainBasket(){
@@ -29,8 +29,12 @@ public class BasketFacade {
 	public ArrayList<Basket> getOrders() {
 		return basket.getOrders();
 	}
-/*
-	public int getBasketPrice() {
-		return basket.getBasketPrice();
-	}*/
+
+	public void deleteProduct(Product p){
+		basket.deleteProduct(p);
+	}
+	
+	public void insertProduct(Product p, int quantity){
+		basket.insertProduct(p, quantity);
+	}
 }

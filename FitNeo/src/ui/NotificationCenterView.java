@@ -72,7 +72,7 @@ public class NotificationCenterView extends JPanel {
             vectorNotification.add(notif.getMessage());
             vectorNotification.add(notif.getDate());
             vectorNotification.add(""+notif.getIsRead());
-            vectorNotification.add("D�tails");
+            vectorNotification.add("Details");
             notifications.add(vectorNotification);
         }
 		
@@ -84,12 +84,7 @@ public class NotificationCenterView extends JPanel {
         table.getColumn("Checked").setCellRenderer(new CheckBoxRenderer());
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
-        JPanel b = new JPanel();
-        b.setLayout(new GridLayout(0,4));
-        b.add(new JLabel("My Notifications"));
-        b.add(new JButton("Create"));
-        add(b, BorderLayout.NORTH);
+
         add(scrollPane, BorderLayout.CENTER);
 	}
 	
@@ -118,7 +113,7 @@ public class NotificationCenterView extends JPanel {
 				  setForeground(table.getForeground());
 				  setBackground(UIManager.getColor("Button.background"));
 			  }
-			  setText("D�tails");
+			  setText("Details");
 			  return this;
 		  }
 	}
@@ -158,7 +153,7 @@ public class NotificationCenterView extends JPanel {
 			  isCreationDemand = notifFacade.getListNotification().get(row).getIsCreationDemand();
 			  categoryName = notifFacade.getListNotification().get(row).getCategoryName();
 			  idcategoryParent = notifFacade.getListNotification().get(row).getIdCategoryParent();
-			  button.setText("D�tails");
+			  button.setText("Details");
 			  isPushed = true;
 			  idNotif=notifFacade.getListNotification().get(row).getIdNotification();
 			  System.out.println(idNotif);
