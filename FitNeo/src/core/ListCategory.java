@@ -68,9 +68,9 @@ public abstract class ListCategory {
 		
 		boolean find = false; 
 		while ( it.hasNext() && !(find)) {
-			if(it.next().getCategoryId() == idcat){
+			cat=it.next();
+			if(cat.getCategoryId() == idcat){
 				find=true;
-				cat = ((CategoryProduct) it);
 			}
 		}
 		return cat; 

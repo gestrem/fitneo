@@ -29,8 +29,8 @@ public class BasketFacade {
 	public ArrayList<Basket> getOrders() {
 		return basket.getOrders();
 	}
-/*
-	public int getBasketPrice() {
-		return basket.getBasketPrice();
-	}*/
+
+	public void insertProduct(Product p, int quantity){
+		basket.insertProduct(p, quantity);
+	}
 }
