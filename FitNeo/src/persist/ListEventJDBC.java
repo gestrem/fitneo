@@ -22,10 +22,10 @@ public class ListEventJDBC extends ListEvent{
 		
 		try{
 			ArrayList<Event> listEvents= new ArrayList<Event>();	
-			String query = "SELECT * FROM event e";
+			String query = "SELECT e.idEvent, e.eventDate, e.eventName, e.eventPrice, e.idroom, e.id_activity, e.participant, u.userFirstName , u.userLastName FROM event e, mainuser u Where e.participant=u.idUser";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-            	listEvents.add(new Event(rs.getString("eventDate"),rs.getString("eventName"),rs.getDouble("eventPrice"),rs.getInt("idroom"),rs.getInt("id_activity"), rs.getInt("participant"))); 
+            	listEvents.add(new Event(rs.getInt("idEvent"), rs.getString("eventDate"),rs.getString("eventName"),rs.getDouble("eventPrice"),rs.getInt("idroom"),rs.getInt("id_activity"), rs.getInt("participant"), rs.getString("userFirstName")+" "+rs.getString("userLastName"))); 
             }
 			
 			this.setListEvent(listEvents); 

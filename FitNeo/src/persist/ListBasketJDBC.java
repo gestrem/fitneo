@@ -39,13 +39,11 @@ public class ListBasketJDBC extends ListBasket{
 	public void loadOrders(int idUser) {
 		jdbc.openConnection();
 		ResultSet rs = null;
-		
-		try{
-			ArrayList<Basket> listBasket = new ArrayList<Basket>();
+		ArrayList<Basket> listBasket = new ArrayList<Basket>();
+		try{		
 			String query = "SELECT idBasket, idUser, active_basket FROM basket WHERE active_basket=false AND idUser="+idUser;
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-				System.out.println(rs.getInt("idBasket"));
 				listBasket.add(new Basket(rs.getInt("idBasket"), rs.getInt("idUser"), rs.getBoolean("active_basket"), loadProducts(rs.getInt("idBasket")))); 	
 			}
 			this.setOrders(listBasket);
@@ -110,9 +108,9 @@ public class ListBasketJDBC extends ListBasket{
 	public void insertProduct(Product p, int quantity){
 		jdbc.openConnection();	
 		try{
-			String query = "INSERT INTO CommandLine VALUES("+p.getId_product()+","+this.getMainBasket().getIdBasket()+","+quantity;
+			String query = "INSERT INTO CommandLine VALUES("+p.getId_product()+","+this.getMainBasket().getIdBasket()+","+quantity+")";
 			jdbc.executeRequest(query);
-			int Newquantity = p.getAvailableQuantity()-1;
+			int Newquantity = p.getAvailableQuantity()-quantity;
 			String query2 = "UPDATE ProductType SET availableProductQuantity="+Newquantity+" WHERE id_producttype="+p.getId_product();
 			jdbc.executeRequest(query2);
 		}

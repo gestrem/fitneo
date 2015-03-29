@@ -18,6 +18,7 @@ import java.util.Vector;
 import javax.swing.JTable;
 
 import core.BasketFacade;
+import core.Inscription;
 import core.Product;
 import core.UserFacade;
 
@@ -27,14 +28,14 @@ import javax.swing.table.TableCellRenderer;
 
 
 
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
-public class BasketView extends JPanel implements ActionListener {
+public class InscriptionView extends JPanel {
 
-	private BasketFacade basketFacade;
 	private UserFacade userFacade;
 	//type de persistance choisi
 	private int persistType;
@@ -43,39 +44,36 @@ public class BasketView extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public BasketView(int persistType) {
+	public InscriptionView(int persistType) {
 		setBackground(Color.WHITE);
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(new BorderLayout());
 		this.persistType = persistType;	
 		this.userFacade = new UserFacade(this.persistType);	
-		this.basketFacade = new BasketFacade(this.persistType);
-		this.basketFacade.loadMainBasket(userFacade.getIdUser());	
-		ArrayList<Product> list = this.basketFacade.getMainBasket().getListProducts();
+		this.userFacade.loadInscriptions();
+		ArrayList<Inscription> list = this.userFacade.getInscriptions(); 
 		
 		Vector<String> columnNames = new Vector<String>();
-        columnNames.add(0, "Name");
-        columnNames.add(1, "Price");
-        columnNames.add(2, "Quantity");
-        columnNames.add(3, "Discount");
-        columnNames.add(4, "");
+        columnNames.add(0, "Event name");
+        columnNames.add(1, "Date of the event");
+        columnNames.add(2, "Date Inscription");
+        columnNames.add(3, "");
         
-        Vector<Vector<String>> products = new Vector<Vector<String>>();
+        Vector<Vector<String>> inscriptions = new Vector<Vector<String>>();
         
-        JPanel productPanel = new JPanel();
-        productPanel.setLayout(new GridLayout(0, 4));
+        JPanel inscriptionPanel = new JPanel();
+        inscriptionPanel.setLayout(new GridLayout(0, 3));
         
-        for (Product product : list) {         
-            Vector<String> vectorNotification = new Vector<String>();
-            vectorNotification.add(product.getProductTypeName());
-            vectorNotification.add(""+product.getProductPrice());
-            vectorNotification.add(""+product.getAvailableQuantity());
-            vectorNotification.add(""+product.getDiscountMember());
-            vectorNotification.add("Delete");
-            products.add(vectorNotification);
+        for (Inscription insc : list) {         
+            Vector<String> vectorInscription = new Vector<String>();
+            vectorInscription.add(insc.getEventName());
+            vectorInscription.add(insc.getEventDate());
+            vectorInscription.add(insc.getEventDateInscription());
+            vectorInscription.add("");
+            inscriptions.add(vectorInscription);
         }
 		
-        table = new JTable(products, columnNames);
+        table = new JTable(inscriptions, columnNames);
         table.setFillsViewportHeight(true);
         table.setRowHeight(20);
         table.getColumn("").setCellRenderer(new ButtonRenderer());
@@ -83,26 +81,8 @@ public class BasketView extends JPanel implements ActionListener {
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-        JPanel top = new JPanel();
-        top.setLayout(new GridLayout(0,4));
-        top.add(new JLabel("My Shopping cart : "+this.basketFacade.getMainBasket().getTotalPrice()+" €"), BorderLayout.NORTH);
-        JButton buttonAdd = new JButton("Confirm Order");
-        top.add(buttonAdd);
-        buttonAdd.addActionListener(this);
-		buttonAdd.setActionCommand("confirm");
-        add(top, BorderLayout.NORTH);
-        
-
+        add(new JLabel("My inscriptions : "), BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
-	}
-	
-	public void actionPerformed(ActionEvent e)
-	{
-		String cmd = e.getActionCommand();
-		if(cmd.equals("confirm")){ 
-			this.basketFacade.confirmOrder(this.userFacade.getIdUser(), this.basketFacade.getMainBasket().getIdBasket());
-			JOptionPane.showMessageDialog(null, "Your command has been confirmed", "Order confirmed", JOptionPane.INFORMATION_MESSAGE);
-		}
 	}
 	
 	class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -129,7 +109,7 @@ public class BasketView extends JPanel implements ActionListener {
 		protected JButton button;
 		private String label;
 		private boolean isPushed;
-		private Product p;
+		private Inscription i;
 
 		public ButtonEditor(JCheckBox checkBox) {
 			super(checkBox);
@@ -154,7 +134,7 @@ public class BasketView extends JPanel implements ActionListener {
 			  }
 			  label = value.toString();
 			  button.setText("Détails");
-			  p=basketFacade.getMainBasket().getListProducts().get(row);
+			  i=userFacade.getInscriptions().get(row);
 			  isPushed = true;
 			  return button;
 		  }
@@ -164,7 +144,7 @@ public class BasketView extends JPanel implements ActionListener {
 				 int confirm;
 				 confirm = JOptionPane.showConfirmDialog(button, "Are you sur ?", "Delete confirmation", JOptionPane.YES_NO_OPTION);
 				 if(confirm == 0){
-					 basketFacade.deleteProduct(p);
+					 userFacade.unscribeEvent(i.getEventId());
 				 }
 			  }
 			  isPushed = false;

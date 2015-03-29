@@ -12,18 +12,21 @@ public class Event {
 	private int eventRoom; 
 	private int eventActivity; 
 	private int eventParticipant; 
+	private String participantName;
 	private User[] eventMembers = null; 
 	
 	public Event(){	
 	}
 	
-	public Event(String aEventDate, String aEventName,Double aEventPrice, int aEventRoom, int aEventActivity, int aEventParticipant){
+	public Event(int eventId, String aEventDate, String aEventName,Double aEventPrice, int aEventRoom, int aEventActivity, int aEventParticipant, String aParticipantName){
+		this.eventId = eventId;
 		this.eventDate = aEventDate; 
 		this.eventName = aEventName; 
 		this.eventPrice = aEventPrice;
 		this.eventRoom = aEventRoom; 
 		this.eventActivity = aEventActivity; 
 		this.eventParticipant = aEventParticipant; 
+		this.participantName = aParticipantName;
 	
 	}
 	public String getEventDate() {
@@ -88,6 +91,15 @@ public class Event {
 	public void setEventMembers(User[] eventMembers) {
 		this.eventMembers = eventMembers;
 	}
+
+	public String getParticipantName() {
+		return participantName;
+	}
+
+	public void setParticipantName(String participantName) {
+		this.participantName = participantName;
+	}
+	
 	
 	
 }

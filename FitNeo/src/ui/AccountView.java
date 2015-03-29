@@ -177,6 +177,12 @@ public class AccountView extends JPanel implements ActionListener {
 				MainView.changePanel(orderPanel);
 			}
 
+
+		else if(cmd.equals("inscriptions")){
+				InscriptionView inscriptionPanel = new InscriptionView(persistType);
+				MainView.changePanel(inscriptionPanel);
+			}
+
 			else if(cmd.equals("Manage Room")){
 				ManageRoomView roomPanel = new ManageRoomView(persistType);
 				MainView.changePanel(roomPanel);
@@ -248,6 +254,8 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.revalidate();
 		        	JButton btnP = new JButton("Add a product");
 		        	JButton btnP2 = new JButton("Manage inscription events");
+		        	btnP2.addActionListener(this);
+		        	btnP2.setActionCommand("inscriptions");
 		        	panelButton.add(btnP);
 		        	panelButton.add(btnP2);
 		        	panelButton.repaint();

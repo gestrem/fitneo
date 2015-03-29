@@ -1,5 +1,7 @@
 package core;
 
+import java.util.ArrayList;
+
 public class UserFacade {
 	private User user;
 	
@@ -67,6 +69,22 @@ public class UserFacade {
 	
 	public int getIdUser(){
 		return user.getIdUser();
+	}
+	
+	public void loadInscriptions(){
+		user.loadInscription();
+	}
+	
+	public ArrayList<Inscription> getInscriptions(){
+		return user.getInscriptions();
+	}
+	
+	public void unscribeEvent(int idevent){
+		user.unscribeEvent(idevent);
+	}
+	
+	public void subscribeEvent(int idevent){
+		user.subscribeEvent(idevent);
 	}
 	
 }

@@ -16,6 +16,12 @@ public class Basket {
 		this.isMainBasket=active_basket;	
 		this.listProducts=listProducts;
 	}
+	
+	public Basket(int idBasket, int idUser, boolean active_basket){
+		this.idBasket=idBasket;
+		this.idUser = idUser;
+		this.isMainBasket=active_basket;	
+	}
 
 	public int getIdBasket() {
 		return idBasket;

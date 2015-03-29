@@ -1,5 +1,7 @@
 package core;
 
+import java.util.ArrayList;
+
 import persist.PersistKit;
 
 public abstract class User {
@@ -14,7 +16,7 @@ public abstract class User {
 	private String passwordUser;
 	private String userAnswer;
 	private int idquestion;
-	
+	private ArrayList<Inscription> inscriptions = new ArrayList<Inscription>();
 	private boolean roleAdmin;
 	private boolean roleManager;
 	private boolean roleMember;
@@ -184,7 +186,10 @@ public abstract class User {
 	public abstract void setUser(String login);
 	public abstract boolean verifyMail(String mail);
 	public abstract void registerUser(String userLastName, String userFirstName, String userAdresse, String userCity, String userCP, String userEmail, String passwordUser, String userAnswer, int idquestion);
-
+	public abstract void loadInscription();
+	public abstract void unscribeEvent(int idevent);
+	public abstract void subscribeEvent(int idevent);
+	
 	public int getIdUser() {
 		return idUser;
 	}
@@ -192,5 +197,14 @@ public abstract class User {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
+
+	public ArrayList<Inscription> getInscriptions() {
+		return inscriptions;
+	}
+
+	public void setInscriptions(ArrayList<Inscription> inscriptions) {
+		this.inscriptions = inscriptions;
+	}
+	
 	
 }
