@@ -34,13 +34,14 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 		private JTextField textFieldDetailedDescription;
 		private JTextField textFieldActivityName;
 		private ComboItem comboItem; 
+		private Activity actchoisie;
 
 	/**
 	 * Create the panel.
 	 */
 	public UpdateActivityFormView (int persistType, Activity actchoisie){
 			this.persistType = persistType;
-		
+			this.actchoisie=actchoisie;
 			SpringLayout springLayout = new SpringLayout();
 			setLayout(springLayout);
 			
@@ -146,7 +147,7 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 			
 			
 			try {
-				this.activityFacade.createActivityFacade(nameAct, idManager, shortDescAct, lgDescAct);
+				this.activityFacade.updateActivityFacade(actchoisie.getActivityId(), nameAct, idManager, shortDescAct, lgDescAct);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
