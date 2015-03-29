@@ -3,6 +3,8 @@ package ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -76,11 +78,16 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 			
 			this.activityFacade = new ActivityFacade(this.persistType);	
 			this.activityFacade.loadListActivities();
-			String[] listManager = this.activityFacade.loadManagers(); 
-			
-			JComboBox comboBoxManager = new JComboBox();
-			this.comboItem = new ComboItem(listManager[0],listManager[1]); 
-			comboBoxManager.addItem(this.comboItem);
+			ArrayList<String> listManager = this.activityFacade.loadManagers();
+			JComboBox <ComboItem> comboBoxManager = new JComboBox<ComboItem>();
+			Iterator<String> it =  listManager.iterator();
+			while ( it.hasNext()) {
+				String id = it.next().toString();
+				String  label = it.next().toString();
+				this.comboItem = new ComboItem(id, label);
+				comboBoxManager.addItem(this.comboItem);
+			}
+
 			springLayout.putConstraint(SpringLayout.NORTH, comboBoxManager, 73, SpringLayout.SOUTH, lblTitle);
 			springLayout.putConstraint(SpringLayout.WEST, comboBoxManager, 52, SpringLayout.EAST, lblManager);
 			springLayout.putConstraint(SpringLayout.SOUTH, comboBoxManager, 102, SpringLayout.SOUTH, lblTitle);
