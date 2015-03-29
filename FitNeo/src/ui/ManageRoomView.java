@@ -1,5 +1,7 @@
 package ui;
-
+/**
+ * @author gestrem
+ */
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -163,8 +165,10 @@ public class ManageRoomView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// on recupere les données sur formulaire
 				if (!(tf_RoomArea1.getText().equals("") )|| (!tf_NbMaxParticipants1.getText().equals(""))){
+					
 					String roomName=tf_RoomArea1.getText();
 					int capacity= Integer.parseInt(tf_NbMaxParticipants1.getText());
+					
 					String roomType=(String) cb_roomType1.getSelectedItem();
 					roomFacade.createRoom(roomName, roomType, capacity);
 					System.out.println("Room "+ roomName +" créé");
