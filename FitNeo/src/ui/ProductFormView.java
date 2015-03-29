@@ -80,7 +80,7 @@ public class ProductFormView extends JPanel implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, lblQuantityAvailable, 0, SpringLayout.WEST, lblChooseACategory);
 		add(lblQuantityAvailable);
 		
-		JLabel lblDiscountMember = new JLabel("Discount member");
+		JLabel lblDiscountMember = new JLabel("Discount member (%)");
 		springLayout.putConstraint(SpringLayout.WEST, lblDiscountMember, 0, SpringLayout.WEST, lblChooseACategory);
 		add(lblDiscountMember);
 		
@@ -113,6 +113,11 @@ public class ProductFormView extends JPanel implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, tf_price, 0, SpringLayout.WEST, tf_qtyAvailable);
 		add(tf_price);
 		tf_price.setColumns(10);
+		
+		JLabel lblPrice = new JLabel("Price");
+		springLayout.putConstraint(SpringLayout.NORTH, lblPrice, 6, SpringLayout.NORTH, tf_price);
+		springLayout.putConstraint(SpringLayout.EAST, lblPrice, 0, SpringLayout.EAST, lblChooseACategory);
+		add(lblPrice);
 		
 		 cb_Category.addActionListener (new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
