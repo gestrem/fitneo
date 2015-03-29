@@ -32,7 +32,7 @@ public class MainView extends JFrame implements ActionListener {
 	private HomeView homePanel;
 	private AccountView accountPanel;
 	private ListActivityView activityPanel;
-	//private ActivityFormView activityFormPanel;
+	private ActivityFormView activityFormPanel;
 	private EventView eventPanel;
 	private NotificationCenterView notifPanel;
 	private BasketView basketPanel;
@@ -186,7 +186,7 @@ public class MainView extends JFrame implements ActionListener {
 		else if(cmd.equals("Products")){
 			productPanel = new ProductView(this.persistType);
 			notifButton.setText(nbNotif);
-			changePanel(productPanel);			
+			changePanel(productPanel);
 		}
 		else if(cmd.equals("Basket")){
 			basketPanel = new BasketView(this.persistType);

@@ -33,7 +33,7 @@ public class BasketFacade {
 	public void deleteProduct(Product p){
 		basket.deleteProduct(p);
 	}
-	
+
 	public void insertProduct(Product p, int quantity){
 		basket.insertProduct(p, quantity);
 	}
