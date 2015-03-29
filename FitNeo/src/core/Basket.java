@@ -10,10 +10,6 @@ public class Basket {
 	private boolean isMainBasket;
 	private ArrayList<Product> listProducts = new ArrayList<Product>(); 
 	
-	public Basket(){
-		
-	}
-	
 	public Basket(int idBasket, int idUser, boolean active_basket, ArrayList<Product> listProducts){
 		this.idBasket=idBasket;
 		this.idUser = idUser;

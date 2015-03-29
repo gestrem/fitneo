@@ -69,7 +69,6 @@ public class JdbcConnection implements JdbcConstants {
 	public ResultSet fetchArray() {  
         try {
             if (this.streamResponse.next()) {
-            	System.out.println("hello");
             	return this.streamResponse;              
             } 
             else {

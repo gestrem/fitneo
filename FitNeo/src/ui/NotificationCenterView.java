@@ -85,7 +85,11 @@ public class NotificationCenterView extends JPanel {
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-        add(new JLabel("My Notifications"), BorderLayout.NORTH);
+        JPanel b = new JPanel();
+        b.setLayout(new GridLayout(0,4));
+        b.add(new JLabel("My Notifications"));
+        b.add(new JButton("Create"));
+        add(b, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 	}
 	

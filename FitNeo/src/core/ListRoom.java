@@ -16,13 +16,13 @@ public abstract class ListRoom {
 
 	
 
-		public void createRoom(String roomArea, String roomType){
-			createRoomJDBC(roomArea, roomType);
+		public void createRoom(String roomArea, String roomType,int capacite){
+			createRoomJDBC(roomArea, roomType,capacite);
 		}
 		
-		public Room getRoom(int idRoom){
+		public Room getRoom(String roomArea){
 			
-			return (getRoomJDBC(idRoom));
+			return (getRoomJDBC(roomArea));
 			
 		}
 		public void addRoomToList(Room room){
@@ -48,7 +48,33 @@ public abstract class ListRoom {
 		}
 		
 	
+		public String[] listRoomToArrayStringListRoom(ArrayList<Room> listRoom){
+			
+			String[] listRoomString=new String[listRoom.size()];
+			
+			for(int i=0;listRoom.size()>i;i++){
+				String roomArea=listRoom.get(i).getRoomArea();
+				listRoomString[i]=roomArea;
+				
+			}
+			
+			return listRoomString;
+		}
 		
+		
+	public int getIndexRoomUpdated(ArrayList<Room> listRoom, String roomName){
+			
+			int res=-1;	
+			for(int i=0;listRoom.size()>i;i++){
+				if (listRoom.get(i).getRoomArea().equals(roomName)){
+					res=i;
+				}
+				
+			}
+			
+			return res;
+		}
+	
 		
 		
 		public static ListRoom getInstance(int persistType){
@@ -57,11 +83,22 @@ public abstract class ListRoom {
 			
 			return myRoomList;
 		}
+		public void updateRoomListRoom(ArrayList<Room> listRoom,int index,String roomArea, String roomType,int capacity ){
+			Room roomToUpdate=listRoom.get(index);
+			roomToUpdate.setRoomArea(roomArea);
+			roomToUpdate.setRoomType(roomType);
+			roomToUpdate.setCapacity(capacity);
+			
+		}
 		
-		public abstract void createRoomJDBC(String roomArea, String roomType);
-		public abstract void updateRoomJDBC(int idRoom,String roomArea, String roomType,int capacite);
-		public abstract void deleteListRoomJDBC(int idRoom);
-		public abstract Room getRoomJDBC(int idRoom);
+		public void deleteRoom(ArrayList<Room> listRoom,int index){
+			listRoom.remove(index);
+			
+		}
+		public abstract void createRoomJDBC(String roomArea, String roomType,int capacite);
+		public abstract void updateRoomJDBC(String roomAreaOld,String roomArea, String roomType,int capacite);
+		public abstract void deleteRoomJDBC(String RoomArea);
+		public abstract Room getRoomJDBC(String roomArea);
 
 		public abstract void getAllRoomJDBC();
 		public abstract void getAllRoomFreeJDBC();

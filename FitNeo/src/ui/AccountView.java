@@ -15,8 +15,6 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 
 import javax.swing.JComboBox;
-
-import persist.PersistKit;
 import core.UserFacade;
 
 import java.awt.Font;
@@ -102,17 +100,24 @@ public class AccountView extends JPanel implements ActionListener {
 		sl_panelGauche.putConstraint(SpringLayout.NORTH, lblNewLabel, 10, SpringLayout.NORTH, panelGauche);
 		panelGauche.add(lblNewLabel);
 		
-		JButton btnUpdateProfil = new JButton("Update profil");
+		JButton btnUpdateProfil = new JButton("Update profile");
+		sl_panelGauche.putConstraint(SpringLayout.WEST, btnUpdateProfil, 0, SpringLayout.WEST, firstnameLabel);
+		sl_panelGauche.putConstraint(SpringLayout.SOUTH, btnUpdateProfil, -10, SpringLayout.SOUTH, panelGauche);
 		btnUpdateProfil.addActionListener(this);
 		btnUpdateProfil.setActionCommand("Update");
-		sl_panelGauche.putConstraint(SpringLayout.WEST, btnUpdateProfil, 10, SpringLayout.WEST, panelGauche);
-		sl_panelGauche.putConstraint(SpringLayout.SOUTH, btnUpdateProfil, -10, SpringLayout.SOUTH, panelGauche);
 		panelGauche.add(btnUpdateProfil);
 		
 		JButton btnChangePassword = new JButton("Change password");
-		sl_panelGauche.putConstraint(SpringLayout.WEST, btnChangePassword, 10, SpringLayout.WEST, panelGauche);
+		sl_panelGauche.putConstraint(SpringLayout.WEST, btnChangePassword, 0, SpringLayout.WEST, firstnameLabel);
 		sl_panelGauche.putConstraint(SpringLayout.SOUTH, btnChangePassword, -6, SpringLayout.NORTH, btnUpdateProfil);
 		panelGauche.add(btnChangePassword);
+		
+		JButton btnOrders = new JButton("My Orders");
+		btnOrders.addActionListener(this);
+		btnOrders.setActionCommand("orders");
+		sl_panelGauche.putConstraint(SpringLayout.WEST, btnOrders, 0, SpringLayout.WEST, firstnameLabel);
+		sl_panelGauche.putConstraint(SpringLayout.SOUTH, btnOrders, -6, SpringLayout.NORTH, btnChangePassword);
+		panelGauche.add(btnOrders);
 		
 		panelDroit = new JPanel();
 		panelDroit.setBackground(Color.WHITE);
@@ -124,8 +129,8 @@ public class AccountView extends JPanel implements ActionListener {
 		panelDroit.add(panelButton, BorderLayout.CENTER);
 		panelButton.setLayout(new GridLayout(4, 1));
 		
-		/*JComboBox comboBoxRole = new JComboBox();
-		panelDroit.add(comboBoxRole, BorderLayout.NORTH);*/
+		JComboBox comboBoxRole = new JComboBox();
+		panelDroit.add(comboBoxRole, BorderLayout.NORTH);
 		
 		setInfosUser();
 	}
@@ -164,6 +169,10 @@ public class AccountView extends JPanel implements ActionListener {
 			if(cmd.equals("manage activity")){
 				ManageActView activityPanel = new ManageActView(persistType);
 				MainView.changePanel(activityPanel);
+			}
+			else if(cmd.equals("orders")){
+				OrderView orderPanel = new OrderView(persistType);
+				MainView.changePanel(orderPanel);
 			}
 		}
 		else if(e.getSource() instanceof JComboBox){

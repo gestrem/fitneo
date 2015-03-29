@@ -21,6 +21,7 @@ public abstract class ListBasket {
 	public abstract void loadMainBasket(int idUser);
 	public abstract void loadOrders(int idUser);
 	public abstract void confirmOrder(int idUser);
+	public abstract void insertProduct(Product p);
 
 	public Basket getMainBasket() {
 		return mainBasket;
