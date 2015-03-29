@@ -19,7 +19,7 @@ public class ActivityFormView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ActivityFormView(int persistType, Activity actchoisie) {
+	public ActivityFormView(int persistType) {
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
 		

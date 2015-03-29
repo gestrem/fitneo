@@ -157,6 +157,7 @@ public class MainView extends JFrame implements ActionListener {
 		String cmd = e.getActionCommand();
 		nbNotif=this.notifFacade.nbNewNotification(userFacade.getIdUser());	
 		if(cmd.equals("Home")){
+			homePanel = new HomeView();
 			notifButton.setText(nbNotif);
 			changePanel(homePanel);
 		}

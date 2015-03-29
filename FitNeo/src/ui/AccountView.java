@@ -158,14 +158,13 @@ public class AccountView extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		if(cmd.equals("CreateActivity")){
+		if(cmd.equals("create activity")){
 			//ActivityFormView activitypanel = new ActivityFormView(persistType);
-			MainView.changePanel(activitypanel);
+			MainView.changePanel(activityPanel);
 		}
 		
 		JComboBox cb = (JComboBox) e.getSource();
 	    String selectedRole = (String) cb.getSelectedItem();
-	    
 	    switch (selectedRole) {
 	        case "Administrator": 
 	        	System.out.println("admin");
@@ -194,6 +193,9 @@ public class AccountView extends JPanel implements ActionListener {
 	        	panelButton.add(btnM3); 
 	        	panelButton.repaint();
 	        	panelButton.revalidate();
+	        	btnM2.addActionListener(this);
+	        	btnM2.setActionCommand("create activity");
+
 	        	break;
 	        case "Participant":
 	        	System.out.println("Participant");
