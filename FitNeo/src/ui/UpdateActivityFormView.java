@@ -1,8 +1,13 @@
+/**
+ * @author Maite AINCIBURU
+ */
 package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -19,7 +24,7 @@ import core.ActivityFacade;
 
 public class UpdateActivityFormView extends JPanel implements ActionListener{
 	
-		private ActivityFacade activityFacade;
+	private ActivityFacade activityFacade;
 	//type de persistance choisi
 		private int persistType;
 		
@@ -31,13 +36,17 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 		private JTextField textFieldShortDescription;
 		private JTextField textFieldDetailedDescription;
 		private JTextField textFieldActivityName;
-		private ComboItem comboItem; 
+		
+		private Activity actchoisie; 
+		JComboBox <ComboItem> comboBoxManager;
+		private ComboItem comboitem; 
 
 	/**
 	 * Create the panel.
 	 */
 	public UpdateActivityFormView (int persistType, Activity actchoisie){
 			this.persistType = persistType;
+			this.actchoisie = actchoisie; 
 		
 			SpringLayout springLayout = new SpringLayout();
 			setLayout(springLayout);
@@ -73,14 +82,20 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 			springLayout.putConstraint(SpringLayout.NORTH, lblManager, 26, SpringLayout.SOUTH, lblActivityName);
 			springLayout.putConstraint(SpringLayout.WEST, lblManager, 0, SpringLayout.WEST, lblActivityName);
 			add(lblManager);
-			
+
 			this.activityFacade = new ActivityFacade(this.persistType);	
 			this.activityFacade.loadListActivities();
-			String[] listManager = this.activityFacade.loadManagers(); 
+			ArrayList<String> listManager = this.activityFacade.loadManagers();
+			comboBoxManager = new JComboBox<ComboItem>();
+			Iterator<String> it =  listManager.iterator();
+	
+			while ( it.hasNext()) {
+				String id = it.next().toString();
+				String  label = it.next().toString();
+				this.comboitem = new ComboItem(id, label);
+				comboBoxManager.addItem(this.comboitem);
+			}
 			
-			JComboBox comboBoxManager = new JComboBox();
-			this.comboItem = new ComboItem(listManager[0],listManager[1]); 
-			comboBoxManager.addItem(this.comboItem);
 			springLayout.putConstraint(SpringLayout.NORTH, comboBoxManager, 73, SpringLayout.SOUTH, lblTitle);
 			springLayout.putConstraint(SpringLayout.WEST, comboBoxManager, 52, SpringLayout.EAST, lblManager);
 			springLayout.putConstraint(SpringLayout.SOUTH, comboBoxManager, 102, SpringLayout.SOUTH, lblTitle);
@@ -133,13 +148,14 @@ public class UpdateActivityFormView extends JPanel implements ActionListener{
 		}
 		if(cmd.equals("Valid")){
 			nameAct = textFieldActivityName.getText();
-			idManager = Integer.parseInt(comboItem.getValue()); 
+			comboitem = (ComboItem) comboBoxManager.getSelectedItem();  
+			idManager = Integer.parseInt(comboitem.getValue()); 
 			shortDescAct = textFieldShortDescription.getText(); 
 			lgDescAct = textFieldDetailedDescription.getText(); 
 			
 			
 			try {
-				this.activityFacade.createActivityFacade(nameAct, idManager, shortDescAct, lgDescAct);
+				this.activityFacade.updateActivityFacade(actchoisie.getActivityId(), nameAct, idManager, shortDescAct, lgDescAct);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

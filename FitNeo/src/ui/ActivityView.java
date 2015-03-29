@@ -1,3 +1,6 @@
+/**
+ * @author Maite AINCIBURU
+ */
 package ui;
 
 import javax.swing.JButton;
@@ -15,12 +18,9 @@ import java.awt.event.ActionListener;
 
 
 public class ActivityView extends JPanel implements ActionListener{
-
 	
-	private ActivityFacade activityFacade;
 	//type de persistance choisi
-	private int persistType;
-	private Activity actchoisi; 
+	private int persistType; 
 	
 	private ListActivityView listactivityPanel;
 	/**
@@ -87,11 +87,6 @@ public class ActivityView extends JPanel implements ActionListener{
 		
 		}
 		if(cmd.equals("See Events")){
-			
-			
 			}
-
-}
-
-
+		}
 }

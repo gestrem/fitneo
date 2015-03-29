@@ -1,3 +1,6 @@
+/**
+ * @author Maite AINCIBURU
+ */
 package ui;
 
 import java.awt.event.ActionEvent;
@@ -11,18 +14,9 @@ import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 
-
-
-
-
-import core.Activity;
 import core.ActivityFacade;
-
 public class ActivityFormView extends JPanel implements ActionListener{
 	
 		private ActivityFacade activityFacade;
@@ -39,6 +33,7 @@ public class ActivityFormView extends JPanel implements ActionListener{
 		private JTextField textFieldActivityName;
 		
 		private ComboItem comboitem; 
+		JComboBox <ComboItem> comboBoxManager;
 	
 
 	/**
@@ -85,7 +80,7 @@ public class ActivityFormView extends JPanel implements ActionListener{
 			this.activityFacade = new ActivityFacade(this.persistType);	
 			this.activityFacade.loadListActivities();
 			ArrayList<String> listManager = this.activityFacade.loadManagers();
-			JComboBox <ComboItem> comboBoxManager = new JComboBox<ComboItem>();
+			comboBoxManager = new JComboBox<ComboItem>();
 			Iterator<String> it =  listManager.iterator();
 			while ( it.hasNext()) {
 				String id = it.next().toString();
@@ -143,6 +138,7 @@ public class ActivityFormView extends JPanel implements ActionListener{
 		}
 		if(cmd.equals("Valid")){
 			nameAct = textFieldActivityName.getText();
+			comboitem = (ComboItem) comboBoxManager.getSelectedItem(); 
 			idManager = Integer.parseInt(comboitem.getValue()); 
 			shortDescAct = textFieldShortDescription.getText(); 
 			lgDescAct = textFieldDetailedDescription.getText(); 
@@ -157,7 +153,6 @@ public class ActivityFormView extends JPanel implements ActionListener{
 			
 			AccountView accountPanel = new AccountView(this.persistType);
 			MainView.changePanel(accountPanel);
-			
 			
 			}
 

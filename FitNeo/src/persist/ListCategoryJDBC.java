@@ -1,3 +1,4 @@
+/**@author Maite AINCIBURU **/
 package persist;
 
 import java.sql.ResultSet;
@@ -14,9 +15,10 @@ public class ListCategoryJDBC extends ListCategory {
 		jdbc = new JdbcConnection();
 	}
 	
-	/* On recupere toutes les categories cad un ensemble de (int idCat, string categoryLabel, int idSuperCategorie)
-	 * pour instancier une categorie de type CategorieProduct, il nous faut (int idCat, string categoryLabel, CategorieProduct superCategorie 
-	 * si la SuperCategorie n'est pas nulle on utilise l'int idSuperCategorie pour acceder a l'instance de CategoryProduct grace a la methode searchWithId
+	/**
+     * Methode getAllCategories() 
+     * On recupere les categories : un ensemble (int idCat, string categoryLabel, int idSuperCategorie)
+	 * on charge la liste des categories : liste de (int idCat, string categoryLabel, CategorieProduct superCategorie 
 	 * */ 
 	
 	public void getAllCategories(){
@@ -51,11 +53,15 @@ public class ListCategoryJDBC extends ListCategory {
 		jdbc.close();
 	}
 	
-	
+	/**
+	 * insertCategory WithNameJDBC
+	 * @param unNomCategorie
+	 * insere une categorie dans la BD avec un nom et une categorie Parent nulle
+	 * 
+	 */
 	public void insertCategoryWithNameJDBC(String catName){
 
 		jdbc.openConnection();
-		ResultSet rs = null; 
 		try{
 			//String query = "INSERT INTO categoryProduct (categoryLabel, id_super_category)values ('" +cat.getCategoryName()+ "', "+cat.getSuperCategoryId()+")"; 
 			String query = "INSERT INTO categoryProduct (categoryLabel)values ('" +catName+ "')"; 
@@ -68,44 +74,55 @@ public class ListCategoryJDBC extends ListCategory {
 	
 	}
 	
+	/**
+	 * insertCategory WithNameAndSuperCategoryJDBC
+	 * @param unNomCategorie (string), un IdParent (int)
+	 * insere une categorie dans la BDavec un Nom et une Categorie Parent nulle
+	 * 
+	 */
 	public void insertCategoryWithNameAndSuperCategoryJDBC(String catName, int catParent){
 
 		jdbc.openConnection();
-		ResultSet rs = null; 
-		
 		String query = "INSERT INTO categoryProduct (categoryLabel, id_super_category)values ('" +catName+ "', "+catParent+")"; 
 		jdbc.executeRequest(query);
 		jdbc.close();
 	
 	}
+	/**
+	 * updateCategoryWithNameJDBC
+	 * @param un IDCat (int), unNomCat (string)
+	 * met a jour une categorie dans la BD avec un nouveau nom
+	 */
 	public void updateCategoryWithNameJDBC(int idCat, String catName) throws SQLException{
 
 		jdbc.openConnection();
-		ResultSet rs = null; 
-		
 		String query = "UPDATE categoryProduct SET categoryLabel= '"+catName+"' WHERE id_category ='"+idCat+"'"; 
 		jdbc.executeRequest(query);
 		jdbc.close();
 	
 	}
 	
+	/**
+	 * updateCategoryWithSuperCategoryJDBC
+	 * @param un IDCat (int), unIDSuperCategory (int)
+	 * met a jour une categorie dans la BD avec une nouvelle categorie Parent
+	 */
 	public void updateCategoryWithSuperCategoryJDBC(int idCat, int catIdSuperCategory) throws SQLException{
 
 		jdbc.openConnection();
-		ResultSet rs = null; 
-		
-		
 		String query = "UPDATE categoryProduct SET id_super_category= '"+catIdSuperCategory+"' WHERE id_category ='"+idCat+"'"; 
 		jdbc.executeRequest(query);
 		jdbc.close();
 	
 	}
 	
+	/**
+	 * updateCategoryWithNameAndSuperCategoryJDBC
+	 * @param un IDCat (int), unNomCat (string), unIDSuperCategory (int)
+	 * met a jour une categorie dans la BD avec un nouveau nom & une nouvelle categorie Parent
+	 */
 	public void updateCategoryWithNameAndSuperCategoryJDBC(int idCat, String catName,  int catIdSuperCategory) throws SQLException{
 		jdbc.openConnection();
-		ResultSet rs = null; 
-		
-		
 		String query = "UPDATE categoryProduct SET categoryLabel= '"+catName+"',id_super_category= '"+catIdSuperCategory+"' WHERE id_category ='"+idCat+"'"; 
 		jdbc.executeRequest(query);
 		jdbc.close();
@@ -113,11 +130,13 @@ public class ListCategoryJDBC extends ListCategory {
 
 	}
 	
+	/**
+	 * deleteCategoryJDBC
+	 * @param un IDCat (int)
+	 * supprime une categorie dans la BD
+	 */
 	public void deleteCategoryJDBC(int idCat) throws SQLException{
 		jdbc.openConnection();
-		ResultSet rs = null; 
-		
-		
 		String query = "DELETE FROM categoryProduct WHERE id_category ='"+idCat+"'"; 
 		jdbc.executeRequest(query);
 		jdbc.close();
@@ -126,7 +145,12 @@ public class ListCategoryJDBC extends ListCategory {
 	}
 	
 
-	@Override
+	/**
+	 * verifyCategoryExist(String nameCat)
+	 * @param unNomCategorie
+	 * cherche si la categorie est presente dans la BD
+	 * @return vrai si la categorie existe, faux sinon
+	 */
 	public boolean verifyCategoryExist(String nameCat) {
 		jdbc.openConnection();
 		boolean result = true;
@@ -143,14 +167,17 @@ public class ListCategoryJDBC extends ListCategory {
 		return result;
 	}
 	
+	/**
+     * Methode getListCatNameJDBC 
+     * @return les categories de la BD sous forme de liste de string 
+     * 
+     */
 	public ArrayList<String> getListCatNameJDBC (){
 		 
 		ArrayList<String> categories = new ArrayList<String>();
 		jdbc.openConnection(); 
 		ResultSet rs = null; 
-		
 		try{
-			
 			String query = "SELECT id_category, categoryLabel FROM categoryProduct";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
@@ -158,28 +185,14 @@ public class ListCategoryJDBC extends ListCategory {
 			    System.out.println("category id =" + catId);
 			    String categoryLabel = rs.getString(2);
 			    System.out.println(" category label =" + categoryLabel);
-	
 			    categories.add(Integer.toString(catId)+" "+categoryLabel); 
-			   
-			}
+			 }
 			
 		}
-		
 		catch(SQLException e){
 			e.printStackTrace();
 		}
 		jdbc.close();
-		
 		return categories;
 	}
-			
-		
-	
-	
-	
-	
-	
-	
-	
-
 }

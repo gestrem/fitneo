@@ -1,12 +1,13 @@
+/**@author Maite AINCIBURU **/
+
 package persist;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import core.Activity;
-import core.CategoryProduct;
 import core.ListActivity;
-import core.ListCategory;
+
 
 public class ListActivityJDBC extends ListActivity {
 	private JdbcConnection jdbc = null;
@@ -14,11 +15,13 @@ public class ListActivityJDBC extends ListActivity {
 	public ListActivityJDBC(){
 		jdbc = new JdbcConnection();
 	}
-	/* On recupere toutes les activités cad un ensemble de (int idAct, string activityName, string activityDesc, int idManager)
-	 * pour instancier une categorie de type CategorieProduct, il nous faut(int idAct, string activityName, string activityDesc, User Manager)
-	 * si le Manager n'est pas nul on utilise l'int idManager pour acceder a l'instance de User grace a la methode searchWithId
-	 * */ 
 	
+	/**
+     * Methode getListActivities
+     */
+	/* On recupere toutes les activités de la BD : (int idAct, string activityName, string activityDesc, int idManager)
+	 * on charge la Liste des activites : (int idAct, string activityName, string activityDesc, User Manager)
+	 * */ 
 	public void getListActivities(){
 		jdbc.openConnection(); 
 		ResultSet rs = null; 
@@ -52,33 +55,43 @@ public class ListActivityJDBC extends ListActivity {
 		}
 		jdbc.close();
 	}
+	/**
+     * Methode insertActivityJDBC 
+     * @param unNomActivite (string), unIdResponsable (string), uneCourteDescription (string), uneLongueDescription (string)
+     * insere une Activite dans la BD
+     */
 	
 	public void insertActivityJDBC(String actName, int managerId, String shortDescription, String lgDescription) throws SQLException{
 
 		jdbc.openConnection();
-		ResultSet rs = null; 
-		
 		String query = "INSERT INTO activity (activityName, shortActivityDesc, detailedActivityDesc, manager)values ('" +actName+ "','" +shortDescription+ "','" +lgDescription+ "','" +managerId+ "' )"; 
 		jdbc.executeRequest(query);
 		jdbc.close();
 	
 	}
+	
+	/**
+     * Methode updateActivityJDBC 
+     * @param un IDActivite, unNomActivite (string), unIdResponsable (string), uneCourteDescription (string), uneLongueDescription (string)
+     * modifie une Activite dans la BD grace aux parametres
+     */
 	public void updateActivityJDBC(int idAct,String actName, int managerId, String shortDescription, String lgDescription) throws SQLException{
 
 		jdbc.openConnection();
-		ResultSet rs = null; 
-		
 		String query = "UPDATE activity SET activityName = '" +actName+ "', shortActivityDesc='" +shortDescription+ "', detailedActivityDesc ='" +lgDescription+ "' , manager='" +managerId+ "'WHERE idActivity ='"+idAct+"' "; 
 		jdbc.executeRequest(query);
 		jdbc.close();
 	
 	}
 	
+	
+	/**
+     * Methode deleteActivityJDBC 
+     * @param un IDActivite int
+     * supprime l'activite --> IDActivite de la BD
+     */
 	public void deleteActivityJDBC(int idAct) throws SQLException{
 		jdbc.openConnection();
-		ResultSet rs = null; 
-		
-		
 		String query = "DELETE FROM activity WHERE idActivity='"+idAct+"'"; 
 		jdbc.executeRequest(query);
 		jdbc.close();
@@ -86,6 +99,11 @@ public class ListActivityJDBC extends ListActivity {
 
 	}
 	
+	/**
+     * Methode getListManagersJDBC 
+     * @return les Managers de la BD sous forme de liste de string 
+     * 
+     */
 	public ArrayList<String> getListManagersJDBC (){
 		 
 		ArrayList<String> managers = new ArrayList<String>();
@@ -104,10 +122,8 @@ public class ListActivityJDBC extends ListActivity {
 			    String managerLastName = rs.getString(3);
 			    System.out.println(" first name manager=" + managerLastName);
 			    managers.add(Integer.toString(managerId)); 
-			    managers.add(managerFirstName+" "+managerLastName); 
-			   
+			    managers.add(managerFirstName+" "+managerLastName);  
 			}
-			
 		}
 		
 		catch(SQLException e){

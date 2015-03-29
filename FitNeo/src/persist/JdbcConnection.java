@@ -16,7 +16,7 @@ public class JdbcConnection implements JdbcConstants {
     		// Charge le driver JDBC pour mysql
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             
-            // Creation de la connection à la base
+            // Creation de la connection ï¿½ la base
             Connection con = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
             this.streamConnection = con.createStatement();
         } 
@@ -29,7 +29,7 @@ public class JdbcConnection implements JdbcConstants {
     }
     
     /**
-     * Methode close qui ferme la connexion SQL
+     * Methode ferme la connexion SQL
      */
 	public void close() {
 		try{

@@ -1,3 +1,7 @@
+/**
+ * @author Maite AINCIBURU
+ */
+
 package ui;
 
 import java.awt.BorderLayout;

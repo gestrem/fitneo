@@ -1,3 +1,6 @@
+/**
+ * @author Maite AINCIBURU
+ */
 package ui;
 
 import javax.swing.DefaultCellEditor;

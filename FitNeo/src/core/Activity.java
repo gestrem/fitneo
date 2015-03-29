@@ -1,7 +1,5 @@
 package core;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Activity {
 	
@@ -11,6 +9,9 @@ public class Activity {
 	private String detailedActivityDescription;
 	private String activityManager;  
 	
+	/**
+	 * Constructeurs
+	 */
 	public Activity (){	
 	}
 	
@@ -22,6 +23,9 @@ public class Activity {
 		this.detailedActivityDescription = aDetailedActivityDescription;
 	}
 	
+	/** 
+	 * Accesseurs et Modificateurs
+	 */
 	public int getActivityId() {
 		return activityId;
 	}
@@ -53,9 +57,4 @@ public class Activity {
 		this.activityManager = activityManager;
 	}
 	
-	
-	public String toString(){
-		return this.activityName;
-	}
-
 }

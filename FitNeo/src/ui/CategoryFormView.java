@@ -1,3 +1,6 @@
+/**
+ * @author Maite AINCIBURU
+ */
 package ui;
 
 import javax.swing.JPanel;
@@ -7,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
-import core.ActivityFacade;
 import core.CategoryProductFacade;
 
 import java.awt.event.ActionListener;
@@ -28,7 +30,7 @@ public class CategoryFormView extends JPanel implements ActionListener {
 	
 		private JTextField textFieldName;
 		
-		JComboBox <ComboItem> comboBox = new JComboBox<ComboItem>();
+		JComboBox <ComboItem> comboBox;
 		private ComboItem comboitem; 
 	/**
 	 * Create the panel.
@@ -62,7 +64,7 @@ public class CategoryFormView extends JPanel implements ActionListener {
 		this.categoryFacade = new CategoryProductFacade(this.persistType);	
 		this.categoryFacade.loadListCategories();
 		ArrayList<String> listCategory = this.categoryFacade.loadCategories();; 
-		
+		JComboBox <ComboItem> comboBox = new JComboBox<ComboItem>();
 		Iterator<String> it =  listCategory.iterator();
 		while ( it.hasNext()) {
 			String id = it.next().toString();
@@ -108,6 +110,7 @@ public class CategoryFormView extends JPanel implements ActionListener {
 		}
 		if(cmd.equals("Validate")){
 			name = textFieldName.getText(); 
+			comboitem = (ComboItem) comboBox.getSelectedItem(); 
 			idCatParent = Integer.parseInt(comboitem.getValue()); 
 			
 			try {
