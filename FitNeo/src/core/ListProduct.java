@@ -16,40 +16,22 @@ public abstract class ListProduct {
 	
 	private ArrayList <Product> listAllProduct = new ArrayList<Product>();
 	
-
-
 	public ListProduct(){
 		
 	}
 	
-	/**
-	 * add permet d ajouter un produit a la liste 
-	 * @param prod
-	 */
 	public void add(Product prod){
 		listAllProduct.add(prod);
-	}
-	
-	/**
-	 * getListAllProduct permet de retourner la liste de produits
-	 * @return listAllProduct
-	 */
+	}	
+
 	public ArrayList<Product> getListAllProduct() {
 		return listAllProduct;
-	}
-	
-	
-	
+	}	
 
 	public void setListProduct(ArrayList<Product> listProduct){
 		this.listAllProduct= listProduct;
 	}
 	
-	/**
-	 * getInstance retourne une instance de la liste de produit en fonction du type de persistance
-	 * @param persistType doit etre un int (represente le type de persistance)
-	 * @return listProduct est une instance de liste de produits
-	 */
 	public static ListProduct getInstance(int persistType){
 		if (listProduct == null)
 			listProduct = PersistKit.createKit(persistType).createListProduct();
@@ -60,6 +42,7 @@ public abstract class ListProduct {
 	 * getAllProduct permet de charger dans une liste de produits tous les produits
 	 */
 	public abstract void getAllProduct();
+	
 	/**
 	 * getAllProductByCategory permet de charger dans une liste de produits tous les produits d'une categorie
 	 * @param idCategory doit etre de type int 
