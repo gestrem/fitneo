@@ -32,6 +32,7 @@ public class MainView extends JFrame implements ActionListener {
 	private HomeView homePanel;
 	private AccountView accountPanel;
 	private ListActivityView activityPanel;
+	//private ActivityFormView activityFormPanel;
 	private EventView eventPanel;
 	private NotificationCenterView notifPanel;
 	private BasketView basketPanel;
@@ -156,10 +157,13 @@ public class MainView extends JFrame implements ActionListener {
 	{
 		String cmd = e.getActionCommand();
 		nbNotif=this.notifFacade.nbNewNotification(userFacade.getIdUser());	
-		if(cmd.equals("Home")){
+		if(cmd.equals("Home")){ 
 			homePanel = new HomeView();
 			notifButton.setText(nbNotif);
 			changePanel(homePanel);
+			/*activityFormPanel = new ActivityFormView(this.persistType);
+			notifButton.setText(nbNotif);
+			changePanel(activityFormPanel);*/
 		}
 		else if(cmd.equals("Account")){
 			accountPanel = new AccountView(this.persistType);

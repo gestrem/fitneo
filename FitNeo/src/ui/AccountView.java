@@ -159,7 +159,7 @@ public class AccountView extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if(cmd.equals("create activity")){
-			//ActivityFormView activitypanel = new ActivityFormView(persistType);
+			activityPanel = new ActivityFormView(persistType);
 			MainView.changePanel(activityPanel);
 		}
 		
