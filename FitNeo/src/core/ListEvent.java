@@ -29,7 +29,7 @@ public abstract class ListEvent {
 	
 	/**
 	 * getListAllEvent retourne la liste des evenements
-	 * @return
+	 * @return liste des events
 	 */
 	public ArrayList<Event> getListAllEvent() {
 		return listAllEvents;
@@ -98,7 +98,7 @@ public abstract void deleteListEventJDBC(int aEventId);
 	/**
 	 * searchWithId permet de rechercher les informations relatives a un evenement dans la liste d evenement a partir de son id 
 	 * @param aEventID
-	 * @return
+	 * @return l'event concerne
 	 */
 	public Event searchWithId(int aEventID){
 		Event aEvent = null; 

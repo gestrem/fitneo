@@ -22,7 +22,6 @@ public class ListProductJDBC extends ListProduct{
 	
 	/**
 	 * getAllProduct permet de charger dans une liste de produits de tous ceux presents dans la BD
-	 * @return void
 	 */
 	public void getAllProduct(){
 		
@@ -48,7 +47,6 @@ public class ListProductJDBC extends ListProduct{
 	/**
 	 * getAllProductByCategory permet de charger dans une liste de produits tous les produits d'une categorie
 	 * @param idCategory doit etre de type int 
-	 * @return void
 	 */
 	public void getAllProductByCategory(int idCategory){
 		
@@ -70,12 +68,11 @@ public class ListProductJDBC extends ListProduct{
 		}
 		jdbc.close();
 	}
+	
 	/**
 	 * CreateProductJDBC d'inserer un Produit dans la base de donnees 
 	 * @param aProduct represente l'objet java produit qui va etre inserer dans la BD
-	 * @return void
 	 */
-
 	public void createProductJDBC(Product aProduct) throws SQLException{
 	
 		jdbc.openConnection();
@@ -93,8 +90,7 @@ public class ListProductJDBC extends ListProduct{
 	 * @param discountMember doit etre de type int 
 	 * @param category doit etre de type int (id de la category du produit)
 	 * @param id_product doit etre de type int (id du produit)
-	 * @param seller doit etre de type int (id du revendeur)
-	 * @return void
+	 * @param id_seller doit etre de type int (id du revendeur)
 	 */
 	public void updateProductJDBC(String productName, int productPrice, int availableQuantity, int discountMember, int category, int id_product, int id_seller) throws SQLException{
 		
@@ -108,7 +104,6 @@ public class ListProductJDBC extends ListProduct{
 	/**
 	 * deleteListProductJDBC permet de supprimer un produit de la BD 
 	 * @param aProductId doit etre de type int 
-	 * @return void
 	 */
 	public void deleteListProductJDBC(int aProductId) throws SQLException{
 		jdbc.openConnection();

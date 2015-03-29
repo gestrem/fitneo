@@ -20,7 +20,7 @@ public class ListNotificationJDBC extends ListNotification{
 	
 	/**
 	 * Methode load, charge toutes les notification d'un utilisateur
-	 * @param idUser, l'id de l'utilisateur
+	 * @param idUser l'id de l'utilisateur
 	 */
 	public void load(int idUser){
 		
@@ -47,7 +47,7 @@ public class ListNotificationJDBC extends ListNotification{
 
 	/**
 	 * Methode setRead, update une notification pour dire qu'elle a ete lue
-	 * @param idNotif, l'id de la notification
+	 * @param idNotif l'id de la notification
 	 */
 	@Override
 	public void setRead(int idNotif) {
@@ -67,7 +67,7 @@ public class ListNotificationJDBC extends ListNotification{
 
 	/**
 	 * Methode nbNEwNotification, renvoi le nombre de notification non lue. Cette valeur est affichee dans la fenetre principale a cote du bouton
-	 * @param idUser, l'id de l'utilisateur
+	 * @param idUser l'id de l'utilisateur
 	 * @return nbNewNotif, le nombre de notification non lues
 	 */
 	@Override

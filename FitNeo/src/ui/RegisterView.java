@@ -255,7 +255,7 @@ public class RegisterView extends JDialog implements ActionListener {
 	/**
 	 * Methode isValidZipCode, verifie que le Cp est valide
 	 * @param zip
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isValidZipCode(String zip){
 		return zip.matches("[0-9]{5}");
@@ -265,7 +265,7 @@ public class RegisterView extends JDialog implements ActionListener {
 	 * Methode isMatchPasswords, verifie que les 2 mots de passe correspondent
 	 * @param pwd
 	 * @param pwdConfirm
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isMatchPasswords(char[] pwd, char[] pwdConfirm){
 		boolean result = false;
@@ -289,7 +289,7 @@ public class RegisterView extends JDialog implements ActionListener {
 	
 	/**
 	 * Methode verifymandatoryFields, verifie si les champs sont correctement remplis
-	 * @return
+	 * @return boolean
 	 */
 	public boolean verifyMandatoryFields(){
 		boolean result = true;

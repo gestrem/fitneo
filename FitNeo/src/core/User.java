@@ -171,7 +171,7 @@ public abstract class User {
     /**
      * Methode isMailAvailable, verifie que le mail n'est pas déjà utilisé 
      * par un compte existant dans la base
-     * @param mail, le mail à verifier
+     * @param mail le mail à verifier
      * @return vrai si le mail est libre, false sinon
      */
 	public boolean isMailAvailable(String mail){
@@ -190,7 +190,7 @@ public abstract class User {
 	
 	/**
 	 * Methode getInstance, renvoi le singleton User s'il exite, cree une nouvelle instance sinon
-	 * @param persistType, le type de persistance
+	 * @param persistType le type de persistance
 	 * @return l'instance de User du type de persistance choisi
 	 */
 	public static User getInstance(int persistType){

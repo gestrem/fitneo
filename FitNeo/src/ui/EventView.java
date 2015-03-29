@@ -2,9 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-
 import java.awt.GridLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
-
 import javax.swing.table.TableCellRenderer;
+
 
 
 
@@ -31,12 +29,12 @@ import core.UserFacade;
  *
  */
 
+@SuppressWarnings("serial")
 public class EventView extends JPanel {
 	private int persistType;
 	private EventFacade aEventFacade;
 	private UserFacade userFacade;
 	private JPanel inscriptionPanel; 
-
 
 	/**
 	 * Create the panel.
@@ -51,14 +49,12 @@ public class EventView extends JPanel {
 
 		this.aEventFacade.getAllEventsFacade();
 		ArrayList<core.Event> listEvent = aEventFacade.getListAllEventsFacade();
-	
 		
 		Vector<String> columnNamesEvent = new Vector<String>();
         columnNamesEvent.add(0, "EventLabel");
         columnNamesEvent.add(1, "date");
         columnNamesEvent.add(2, "Details");
-        
-        
+      
         Vector<Vector<String>> events = new Vector<Vector<String>>();
         
         JPanel eventPanel = new JPanel();
@@ -79,15 +75,12 @@ public class EventView extends JPanel {
         table.setRowHeight(20);
         table.getColumn("Details").setCellRenderer(new ButtonRenderer());
         table.getColumn("Details").setCellEditor(new ButtonEditor(new JCheckBox()));
-        
-        
+               
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         inscriptionPanel= new JPanel();
         inscriptionPanel.setLayout(new GridLayout(0, 1));
-		
-
-        
+    
         add(eventPanel);
         add(inscriptionPanel);
 		
@@ -113,8 +106,7 @@ public class EventView extends JPanel {
 				  setBackground(UIManager.getColor("Button.background"));
 			  }
 			  setText("Details");
-			  }
-			  
+			  }			  
 			  return this;
 		  }
 	}
@@ -162,10 +154,7 @@ public class EventView extends JPanel {
 
 		public Object getCellEditorValue() {
 				if(eventSelected=="Details"){
-					if (isPushed) { 
-				  
-				  	
-				  	
+					if (isPushed) { 	  	
 					JLabel eventLabelName =  new JLabel("Event Name :"+eventChoose.getEventName());
 					JLabel eventLabelDate =  new JLabel("Event Date :"+eventChoose.getEventDate());
 					JLabel eventLabelPrice =  new JLabel("Event Price :"+eventChoose.getEventPrice()+"Û");
@@ -174,11 +163,6 @@ public class EventView extends JPanel {
 					subscriptionButton.addActionListener(this);
 					subscriptionButton.setActionCommand("Subscribe");
 					
-			       
-			       
-			        
-			        
-			        
 			        inscriptionPanel.removeAll();
 			        inscriptionPanel.repaint();
 			        inscriptionPanel.revalidate();
@@ -188,10 +172,7 @@ public class EventView extends JPanel {
 			        inscriptionPanel.add(eventLabelParticipant);
 			        inscriptionPanel.add(subscriptionButton);
 			        inscriptionPanel.repaint();
-			        inscriptionPanel.revalidate();
-			        
-			        
-				 
+			        inscriptionPanel.revalidate();			 
 			  }}
 			  isPushed = false;
 			  return new String(label);
@@ -210,8 +191,7 @@ public class EventView extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			String cmd = e.getActionCommand();
 			if(cmd.equals("Subscribe")){
-				//userFacade.subscribeEvent(eventChoose.getEventId());
-				
+				userFacade.subscribeEvent(eventChoose.getEventId());
 			}
 			
 		}

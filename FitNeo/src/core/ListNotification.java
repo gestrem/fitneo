@@ -24,7 +24,7 @@ public abstract class ListNotification {
 	
 	/**
 	 * Methode add, ajoute une notification dans la liste des notifications
-	 * @param notif, la notification a ajouter
+	 * @param notif la notification a ajouter
 	 */
     public void add(Notification notif) {
         
@@ -33,7 +33,7 @@ public abstract class ListNotification {
 
     /**
      * Methode getInstance, renvoi une instance de ListNotification
-     * @param persistType, le type de persistance
+     * @param persistType le type de persistance
      * @return mylistnotification, une instance de ListNotification du type de persistance choisi
      */
 	public static ListNotification getInstance(int persistType){
@@ -44,19 +44,19 @@ public abstract class ListNotification {
 	
 	/**
 	 * Methode load, charge toutes les notification d'un user
-	 * @param idUser, l'id de l'utilisateur
+	 * @param idUser l'id de l'utilisateur
 	 */
 	public abstract void load(int idUser);
 	
 	/**
 	 * Methode setRead, update une notification pour dire qu'elle a ete lue
-	 * @param idNotif, l'id de la notification
+	 * @param idNotif l'id de la notification
 	 */
 	public abstract void setRead(int idNotif);
 	
 	/**
 	 * Methode nbNewNotification, renvoi le nombre de notif non lue
-	 * @param idUser, l'id de l'utilisateur
+	 * @param idUser l'id de l'utilisateur
 	 * @return le nombre de nouvelles notifications
 	 */
 	public abstract String nbNewNotification(int idUser);

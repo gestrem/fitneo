@@ -60,7 +60,7 @@ public class UserJDBC extends User{
 	
     /**
      * Methode verifyMail qui verifie si le mail passé en parametre existe en base
-     * @param mail, le mail a verifier
+     * @param mail le mail a verifier
      * @return result, vrai si mail inconnu, false sinon
      */
 	@Override
@@ -82,7 +82,7 @@ public class UserJDBC extends User{
 	
     /**
      * Methode registerUser qui insere un nouvel utilisateur dans la base
-     * @param userLastname
+     * @param userLastName
      * @param userFirstName
      * @param userAdresse
      * @param userCity
@@ -110,7 +110,7 @@ public class UserJDBC extends User{
 
     /**
      * Methode getUserId qui renvoi l'id d'un user en fonction de son mail
-     * @param mail, le mail de l'user
+     * @param mail le mail de l'user
      * @return id, l'id de l'user qui possede cet email
      */
 	public int getUserId(String mail){
@@ -134,7 +134,7 @@ public class UserJDBC extends User{
     /**
      * Methode changePassword, change le mot de passe de l'utilisateur. 
      * La methode genere un nouveau mot de passe, l'insere dans la base et le renvoi a l'utilisateur
-     * @param mail, le mail de l'utilisateur
+     * @param mail le mail de l'utilisateur
      * @return newpass, le nouveau mot de passe
      */
 	@Override
@@ -181,7 +181,7 @@ public class UserJDBC extends User{
 	
     /**
      * Methode subscribeEvent, methode qui permet a un utilisateur de s'inscrire a un evenement
-     * @param idevent, l'id de l'evenement auquel on s'inscrit
+     * @param idevent l'id de l'evenement auquel on s'inscrit
      */
 	public void subscribeEvent(int idevent){
 		jdbc.openConnection();		
@@ -197,7 +197,7 @@ public class UserJDBC extends User{
 	
     /**
      * Methode unscribeEvent, methode qui permet a un utilisateur de se desinscrire d'un evenement
-     * @param idevent, l'id de l'evenement auquel on se desinscrit
+     * @param idevent l'id de l'evenement auquel on se desinscrit
      */
 	public void unscribeEvent(int idevent){
 		jdbc.openConnection();		
