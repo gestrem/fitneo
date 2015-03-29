@@ -193,6 +193,11 @@ public class AccountView extends JPanel implements ActionListener {
 					MainView.changePanel(categoryPanel);
 				}
 
+			else if(cmd.equals("Add a product")){
+				System.out.println("clique prod");
+				ProductFormView productFormPanel = new ProductFormView(persistType);
+				MainView.changePanel(productFormPanel);
+			}
 		}
 		else if(e.getSource() instanceof JComboBox){
 		
@@ -260,6 +265,8 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.add(btnP2);
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
+		         	btnP.addActionListener(this);
+		        	btnP.setActionCommand("Add a product");
 		        	break;
 		    }
 		}
