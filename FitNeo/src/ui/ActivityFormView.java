@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 
 
 
+
 import core.Activity;
 import core.ActivityFacade;
 
@@ -86,12 +87,11 @@ public class ActivityFormView extends JPanel implements ActionListener{
 			this.activityFacade.loadListActivities();
 			ArrayList<String> listManager = this.activityFacade.loadManagers();
 			JComboBox <ComboItem> comboBoxManager = new JComboBox<ComboItem>();
-			Iterator<String> it =  listManager.iterator();
-			while ( it.hasNext()) {
-				String id = it.next().toString();
-				String  label = it.next().toString();
-				this.comboitem = new ComboItem(id, label);
-				comboBoxManager.addItem(this.comboitem);
+			for (int i=0;i<listManager.size();i++){
+				String id=Integer.toString(listManager.get(i));
+				String categoryName=listCategory.get(i).getCategoryName();
+				cb_Category.addItem(new ComboItem(id, categoryName));
+
 			}
 			
 			

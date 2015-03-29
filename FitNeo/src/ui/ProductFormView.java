@@ -29,7 +29,7 @@ public class ProductFormView extends JPanel implements ActionListener {
 	private int persistType;
 	private CategoryProductFacade categoryProductFacade;
 	private ProductFacade productFacade;
-
+	private JComboBox cb_Category;
 	/**
 	 * Create the panel.
 	 */
@@ -48,7 +48,7 @@ public class ProductFormView extends JPanel implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, label, 355, SpringLayout.WEST, this);
 		add(label);
 		
-		JComboBox cb_Category = new JComboBox();
+		this.cb_Category = new JComboBox();
 		categoryProductFacade.loadListCategories();
 		ArrayList<CategoryProduct> listCategory =categoryProductFacade.getAllCategoriesFacade();
 		System.out.println("siez : "+listCategory.size());
