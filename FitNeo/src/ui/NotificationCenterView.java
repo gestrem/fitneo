@@ -72,7 +72,7 @@ public class NotificationCenterView extends JPanel {
             vectorNotification.add(notif.getMessage());
             vectorNotification.add(notif.getDate());
             vectorNotification.add(""+notif.getIsRead());
-            vectorNotification.add("Détails");
+            vectorNotification.add("Dï¿½tails");
             notifications.add(vectorNotification);
         }
 		
@@ -114,7 +114,7 @@ public class NotificationCenterView extends JPanel {
 				  setForeground(table.getForeground());
 				  setBackground(UIManager.getColor("Button.background"));
 			  }
-			  setText("Détails");
+			  setText("Dï¿½tails");
 			  return this;
 		  }
 	}
@@ -154,7 +154,7 @@ public class NotificationCenterView extends JPanel {
 			  isCreationDemand = notifFacade.getListNotification().get(row).getIsCreationDemand();
 			  categoryName = notifFacade.getListNotification().get(row).getCategoryName();
 			  idcategoryParent = notifFacade.getListNotification().get(row).getIdCategoryParent();
-			  button.setText("Détails");
+			  button.setText("Dï¿½tails");
 			  isPushed = true;
 			  idNotif=notifFacade.getListNotification().get(row).getIdNotification();
 			  System.out.println(idNotif);

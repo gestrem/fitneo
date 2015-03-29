@@ -94,7 +94,6 @@ public class ListActivityJDBC extends ListActivity {
 		
 		try{
 			
-			int i =0; 
 			String query = "SELECT u.idUser, u.userFirstName, u.userLastName FROM mainuser u WHERE u.roleManager = true";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
@@ -106,7 +105,7 @@ public class ListActivityJDBC extends ListActivity {
 			    System.out.println(" first name manager=" + managerLastName);
 			    managers.add(Integer.toString(managerId)); 
 			    managers.add(managerFirstName+" "+managerLastName); 
-			    i++; 
+			   
 			}
 			
 		}

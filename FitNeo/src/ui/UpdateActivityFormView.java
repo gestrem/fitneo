@@ -14,9 +14,10 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 
+import core.Activity;
 import core.ActivityFacade;
 
-public class ActivityFormView extends JPanel implements ActionListener{
+public class UpdateActivityFormView extends JPanel implements ActionListener{
 	
 		private ActivityFacade activityFacade;
 	//type de persistance choisi
@@ -35,7 +36,7 @@ public class ActivityFormView extends JPanel implements ActionListener{
 	/**
 	 * Create the panel.
 	 */
-	public ActivityFormView (int persistType){
+	public UpdateActivityFormView (int persistType, Activity actchoisie){
 			this.persistType = persistType;
 		
 			SpringLayout springLayout = new SpringLayout();
@@ -98,6 +99,7 @@ public class ActivityFormView extends JPanel implements ActionListener{
 			springLayout.putConstraint(SpringLayout.EAST, textFieldShortDescription, 0, SpringLayout.EAST, comboBoxManager);
 			add(textFieldShortDescription);
 			textFieldShortDescription.setColumns(10);
+			textFieldShortDescription.setText(actchoisie.getActivityShortDescription()); 
 			
 			JLabel lblDetailedDescription = new JLabel("Detailed Description");
 			springLayout.putConstraint(SpringLayout.NORTH, lblDetailedDescription, 54, SpringLayout.SOUTH, lblShortDescription);
@@ -111,12 +113,15 @@ public class ActivityFormView extends JPanel implements ActionListener{
 			springLayout.putConstraint(SpringLayout.EAST, textFieldDetailedDescription, 562, SpringLayout.EAST, lblDetailedDescription);
 			add(textFieldDetailedDescription);
 			textFieldDetailedDescription.setColumns(10);
+			textFieldDetailedDescription.setText(actchoisie.getActivityDetailedDescription()); 
 			
 			textFieldActivityName = new JTextField();
 			springLayout.putConstraint(SpringLayout.NORTH, textFieldActivityName, -6, SpringLayout.NORTH, lblActivityName);
 			springLayout.putConstraint(SpringLayout.WEST, textFieldActivityName, 70, SpringLayout.EAST, lblActivityName);
 			add(textFieldActivityName);
 			textFieldActivityName.setColumns(10); 
+			textFieldActivityName.setText(actchoisie.getActivityName()); 
+			
 
 	}
 	public void actionPerformed(ActionEvent e) {
@@ -149,29 +154,3 @@ public class ActivityFormView extends JPanel implements ActionListener{
 	}
 }
 
-	
-
-
-  class ComboItem {
-
-    private String value;
-    private String label;
-
-    public ComboItem(String value, String label) {
-        this.value = value;
-        this.label = label;
-    }
-
-    public String getValue() {
-        return this.value;
-    }
-
-    public String getLabel() {
-        return this.label;
-    }
-
-    @Override
-    public String toString() {
-        return label;
-    }
-  }
