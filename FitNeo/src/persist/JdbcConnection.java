@@ -5,12 +5,20 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public class JdbcConnection implements JdbcConstants {	
 	
     private Statement streamConnection;
     private ResultSet streamResponse;
 
+    /**
+     * methode openConnection, initialise une connection a la base de donnees
+     * @return boolean, true si la connection est etablie, false sinon
+     */
     public boolean openConnection(){
     	try {
     		// Charge le driver JDBC pour mysql

@@ -1,7 +1,11 @@
 package core;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public class NotificationFacade {
 	private ListNotification listnotification;
 	

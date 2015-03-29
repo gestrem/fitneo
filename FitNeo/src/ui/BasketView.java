@@ -30,7 +30,11 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 @SuppressWarnings("serial")
 public class BasketView extends JPanel implements ActionListener {
 
@@ -78,6 +82,7 @@ public class BasketView extends JPanel implements ActionListener {
         table = new JTable(products, columnNames);
         table.setFillsViewportHeight(true);
         table.setRowHeight(20);
+        //Ajout des bouton dans la table a l'aide des cellRenderer
         table.getColumn("").setCellRenderer(new ButtonRenderer());
         table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
         
@@ -105,6 +110,11 @@ public class BasketView extends JPanel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * 
+	 * @author Florent
+	 *
+	 */
 	class ButtonRenderer extends JButton implements TableCellRenderer {
 
 		  public ButtonRenderer() {
@@ -125,6 +135,11 @@ public class BasketView extends JPanel implements ActionListener {
 		  }
 	}
 	
+	/**
+	 * 
+	 * @author Florent
+	 *
+	 */
 	class ButtonEditor extends DefaultCellEditor {
 		protected JButton button;
 		private String label;

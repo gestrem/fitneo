@@ -20,7 +20,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.border.LineBorder;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
+@SuppressWarnings("serial")
 public class PasswordForgottenView extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();

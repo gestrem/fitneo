@@ -7,10 +7,13 @@ import core.ListEvent;
 import core.ListNotification;
 import core.ListProduct;
 import core.ListAccessoryType;
-import core.Activity;
 import core.User;
 import core.ListRoom;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public abstract class PersistKit {
 
     /* L'instance de notre kit */
@@ -29,14 +32,13 @@ public abstract class PersistKit {
     public abstract ListEvent createListEvent();  
     public abstract ListProduct createListProduct();
     public abstract ListRoom createListRoom();
-    //reste � modifier ici
     public abstract ListAccessoryType createListAccessory();
     public abstract ListActivity createListActivity();
     public abstract ListNotification createListNotification();
     
 
     /**
-     * Methode getInstance
+     * Methode getInstance, retourne une instance de PersistKit en fonction du type de persistance
      * @param type la persistance
      * @return le kit de persistance choisit
      */

@@ -2,7 +2,11 @@ package core;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public class Basket {
 	
 	private int idBasket;
@@ -15,12 +19,6 @@ public class Basket {
 		this.idUser = idUser;
 		this.isMainBasket=active_basket;	
 		this.listProducts=listProducts;
-	}
-	
-	public Basket(int idBasket, int idUser, boolean active_basket){
-		this.idBasket=idBasket;
-		this.idUser = idUser;
-		this.isMainBasket=active_basket;	
 	}
 
 	public int getIdBasket() {
@@ -55,6 +53,10 @@ public class Basket {
 		this.listProducts = listProducts;
 	}
 
+	/**
+	 * Methode getTotalPrice, calcule le montant total du panier actif
+	 * @return totalPrice, le montant total du panier actif
+	 */
 	public int getTotalPrice() {
 		int totalPrice = 0;
 		Iterator<Product> it =  this.getListProducts().iterator();	

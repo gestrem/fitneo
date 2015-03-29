@@ -3,7 +3,11 @@ package core;
 import java.util.ArrayList;
 
 import persist.PersistKit;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 public abstract class User {
 	
 	private int idUser;
@@ -157,6 +161,9 @@ public abstract class User {
 		}
 	}
 	
+	/**
+	 * Methode signin, methode qui inscrit un utilisateur dans la base de donnees
+	 */
 	public void signin(String userLastName, String userFirstName, String userAdresse, String userCity, String userCP, String userEmail, String passwordUser, String userAnswer, int idquestion){
 		registerUser(userLastName, userFirstName, userAdresse, userCity, userCP, userEmail, passwordUser, userAnswer, idquestion);
 	}
@@ -171,10 +178,21 @@ public abstract class User {
 		return verifyMail(mail);
 	}
 	
+	/**
+	 * Methode reinitializePassword, reinitialise le mot de passe. La methode genere un nouveau mot de passe
+	 * et le renvoie a l'utlisateur
+	 * @param mail
+	 * @return le nouveau mot de passe
+	 */
 	public String reinitializePassword(String mail){
 		return changePassword(mail);
 	}
 	
+	/**
+	 * Methode getInstance, renvoi le singleton User s'il exite, cree une nouvelle instance sinon
+	 * @param persistType, le type de persistance
+	 * @return l'instance de User du type de persistance choisi
+	 */
 	public static User getInstance(int persistType){
 		if (user == null){
 			user = PersistKit.createKit(persistType).createUser();

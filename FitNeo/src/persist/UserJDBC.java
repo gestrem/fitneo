@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import core.Event;
 import core.Inscription;
-import core.Notification;
 import core.User;
 
+/**
+ * class UserJDBC.java
+ * @author Florent Guillaume
+ */
 public class UserJDBC extends User{
 	
 	private JdbcConnection jdbc = null;
@@ -78,6 +80,18 @@ public class UserJDBC extends User{
 		return result;
 	}
 	
+    /**
+     * Methode registerUser qui insere un nouvel utilisateur dans la base
+     * @param userLastname
+     * @param userFirstName
+     * @param userAdresse
+     * @param userCity
+     * @param userCP
+     * @param userEmail
+     * @param passwordUser
+     * @param userAnswer
+     * @param idquestion
+     */
 	@Override
 	public void registerUser(String userLastName, String userFirstName, String userAdresse, String userCity, String userCP, String userEmail, String passwordUser, String userAnswer, int idquestion){
 		jdbc.openConnection();
@@ -94,6 +108,11 @@ public class UserJDBC extends User{
 		jdbc.close();
 	}
 
+    /**
+     * Methode getUserId qui renvoi l'id d'un user en fonction de son mail
+     * @param mail, le mail de l'user
+     * @return id, l'id de l'user qui possede cet email
+     */
 	public int getUserId(String mail){
 		jdbc.openConnection();
 		int id=0;
@@ -112,6 +131,12 @@ public class UserJDBC extends User{
 		return id;
 	}
 	
+    /**
+     * Methode changePassword, change le mot de passe de l'utilisateur. 
+     * La methode genere un nouveau mot de passe, l'insere dans la base et le renvoi a l'utilisateur
+     * @param mail, le mail de l'utilisateur
+     * @return newpass, le nouveau mot de passe
+     */
 	@Override
 	public String changePassword(String mail) {
 		jdbc.openConnection();
@@ -131,6 +156,9 @@ public class UserJDBC extends User{
 		return newpass;
 	}
 
+    /**
+     * Methode loadInscription, charge la liste des inscriptions aux evenement
+     */
 	@Override
 	public void loadInscription() {
 		jdbc.openConnection();
@@ -151,6 +179,10 @@ public class UserJDBC extends User{
 		jdbc.close();
 	}
 	
+    /**
+     * Methode subscribeEvent, methode qui permet a un utilisateur de s'inscrire a un evenement
+     * @param idevent, l'id de l'evenement auquel on s'inscrit
+     */
 	public void subscribeEvent(int idevent){
 		jdbc.openConnection();		
 		try{
@@ -163,6 +195,10 @@ public class UserJDBC extends User{
 		jdbc.close();
 	}
 	
+    /**
+     * Methode unscribeEvent, methode qui permet a un utilisateur de se desinscrire d'un evenement
+     * @param idevent, l'id de l'evenement auquel on se desinscrit
+     */
 	public void unscribeEvent(int idevent){
 		jdbc.openConnection();		
 		try{

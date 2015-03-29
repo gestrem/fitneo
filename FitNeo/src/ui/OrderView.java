@@ -3,7 +3,6 @@ package ui;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -12,12 +11,8 @@ import javax.swing.UIManager;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
-
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
-
-import ui.BasketView.ButtonEditor;
-import ui.BasketView.ButtonRenderer;
 import core.Basket;
 import core.BasketFacade;
 import core.Product;
@@ -28,7 +23,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Vector;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 @SuppressWarnings("serial")
 public class OrderView extends JPanel {
 	
@@ -76,13 +75,18 @@ public class OrderView extends JPanel {
         table = new JTable(baskets, columnNames);
         table.setFillsViewportHeight(true);
         table.setRowHeight(20);
+        //ajout des boutons grace au cellRenderer
         table.getColumn("").setCellRenderer(new ButtonRenderer());
         table.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
         
         JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         panelGauche.add(scrollPane, BorderLayout.CENTER);
 	}
-	
+	/**
+	 * 
+	 * @author Florent
+	 *
+	 */
 	class ButtonRenderer extends JButton implements TableCellRenderer {
 
 		  public ButtonRenderer() {
@@ -102,7 +106,11 @@ public class OrderView extends JPanel {
 			  return this;
 		  }
 	}
-	
+	/**
+	 * 
+	 * @author Florent
+	 *
+	 */
 	class ButtonEditor extends DefaultCellEditor {
 		protected JButton button;
 		private String label;

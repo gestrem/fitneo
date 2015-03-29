@@ -8,7 +8,11 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
-
+/**
+ * 
+ * @author Florent
+ *
+ */
 @SuppressWarnings("serial")
 public class HomeView extends JPanel {
 

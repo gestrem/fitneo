@@ -7,6 +7,10 @@ import core.Basket;
 import core.ListBasket;
 import core.Product;
 
+/**
+ * Class ListBasketJDBC.java
+ * @author Florent Guillaume
+ */
 public class ListBasketJDBC extends ListBasket{
 	
 	private JdbcConnection jdbc = null;
@@ -15,6 +19,10 @@ public class ListBasketJDBC extends ListBasket{
 		jdbc = new JdbcConnection();
 	}
 
+	/**
+	 * Methode loadMainBasket, charge le panier principal (panier courant) de l'utlisateur
+	 * @param idUser, id de l'utilisateur
+	 */
 	@Override
 	public void loadMainBasket(int idUser) {
 		jdbc.openConnection();
@@ -35,6 +43,10 @@ public class ListBasketJDBC extends ListBasket{
 		jdbc.close();		
 	}
 
+	/**
+	 * Methode loadOrders, charge les commandes passees par un utilisateur (panier inactifs)
+	 * @param idUser, id de l'utilisateur
+	 */
 	@Override
 	public void loadOrders(int idUser) {
 		jdbc.openConnection();
@@ -54,6 +66,11 @@ public class ListBasketJDBC extends ListBasket{
 		jdbc.close();		
 	}
 	
+	/**
+	 * Methode loadProducts, charge les produits d'un panier
+	 * @param idBasket, l'id du panier
+	 * @return listProducts, la liste des produits du panier
+	 */
 	public ArrayList<Product> loadProducts(int idBasket) {
 		jdbc.openConnection();
 		ResultSet rs = null;
@@ -71,6 +88,11 @@ public class ListBasketJDBC extends ListBasket{
 		return listProducts;
 	}
 	
+	/**
+	 * Methode getPrice, calcule le montant d'un panier
+	 * @param idBasket, l'id du panier
+	 * @return totalPrice, le montant total d'un panier
+	 */
 	public int getPrice (int idBasket){
 		jdbc.openConnection();
 		ResultSet rs = null;
@@ -87,8 +109,15 @@ public class ListBasketJDBC extends ListBasket{
 		}
 		return totalPrice;
 	}
+	
 
 	@Override
+	/**
+	 * Methode confirmOrder, la methode valide un panier. Elle change l'etat du panier actif en un panier inactif(commande)
+	 * Elle cree ensuite un nouveau panier actif vide
+	 * @param idUser, l'i de l'utilisateur
+	 * @param idBasket, l'id du panier
+	 */
 	public void confirmOrder(int idUser, int idBasket) {
 		jdbc.openConnection();
 		
@@ -105,6 +134,11 @@ public class ListBasketJDBC extends ListBasket{
 		jdbc.close();	
 	}
 	
+	/**
+	 * Methode insertProduct, ajoute un produit dans le panier actif
+	 * @param p, le produit a ajouter dans le panier
+	 * @param quantity, la quantite ajoutee pour ce produit
+	 */
 	public void insertProduct(Product p, int quantity){
 		jdbc.openConnection();	
 		try{
@@ -121,6 +155,10 @@ public class ListBasketJDBC extends ListBasket{
 		jdbc.close();	
 	}
 	
+	/**
+	 * Methode deleteProduct, enleve un produit du panier actif
+	 * @param p, le produit a enlever du panier
+	 */
 	public void deleteProduct(Product p){
 		jdbc.openConnection();	
 		try{
