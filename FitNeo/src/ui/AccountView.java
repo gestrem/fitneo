@@ -41,7 +41,7 @@ public class AccountView extends JPanel implements ActionListener {
 	private JComboBox comboBoxRole;
 	private JPanel panelButton;
 	
-	private ActivityFormView activityPanel;
+	private ManageActView manageactivityPanel;
 	
 	/**
 	 * Create the panel.
@@ -154,14 +154,15 @@ public class AccountView extends JPanel implements ActionListener {
 		panelDroit.add(comboBoxRole, BorderLayout.NORTH);
 		comboBoxRole.setSelectedIndex(0);
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() instanceof JButton){
 			String cmd = e.getActionCommand();
-			if(cmd.equals("create activity")){
-				activityPanel = new ActivityFormView(persistType);
+			if(cmd.equals("manage activity")){
+				ManageActView activityPanel = new ManageActView(persistType);
 				MainView.changePanel(activityPanel);
 			}
 		}
@@ -190,7 +191,7 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
 		        	JButton btnM1 = new JButton("Manage Participant");
-		        	JButton btnM2 = new JButton("Create Activity");
+		        	JButton btnM2 = new JButton("Manage Activity");
 		        	JButton btnM3 = new JButton("Create Category Demand");
 		        	panelButton.add(btnM1);
 		        	panelButton.add(btnM2); 
@@ -198,7 +199,7 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
 		        	btnM2.addActionListener(this);
-		        	btnM2.setActionCommand("create activity");
+		        	btnM2.setActionCommand("manage activity");
 	
 		        	break;
 		        case "Participant":
@@ -226,6 +227,7 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.revalidate();
 		        	break;
 		    }
-	    }
-    }    
+		}
+	}
 }
+		        
