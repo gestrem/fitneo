@@ -16,12 +16,12 @@ public class ListRoomJDBC extends ListRoom{
 		System.out.println("jdbclist");
 	}
 	
-	public void createRoomJDBC(String roomArea, String roomType){
+	public void createRoomJDBC(String roomArea, String roomType,int capacity){
 		
 		jdbc.openConnection();
 		
 		try{
-			String query = "INSERT INTO room(roomArea, roomType) VALUES ('" +roomArea +"','"+ roomType+"')";
+			String query = "INSERT INTO room(roomArea, roomType,capacity) VALUES ('" +roomArea +"','"+ roomType+"','"+ capacity+"')";
 			jdbc.executeRequest(query);
 			
             
@@ -32,10 +32,10 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 	
-	public void updateRoomJDBC(int roomId,String roomArea,String roomType,int capacity){
+	public void updateRoomJDBC(String roomAreaOld,String roomArea,String roomType,int capacity){
 		jdbc.openConnection();
 		try{
-			String query ="UPDATE room set roomArea='"+roomArea+"' ,roomType='"+roomType+"',capacity='"+capacity+"' WHERE idRoom='"+roomId+"' ";
+			String query ="UPDATE room set roomArea='"+roomArea+"' ,roomType='"+roomType+"',capacity='"+capacity+"' WHERE roomArea='"+roomAreaOld+"' ";
 						jdbc.executeRequest(query);
 		}
 		catch(Exception e){
@@ -44,10 +44,10 @@ public class ListRoomJDBC extends ListRoom{
 		jdbc.close();
 	}
 	
-	public void deleteListRoomJDBC(int roomId){
+	public void deleteRoomJDBC(String roomArea){
 		jdbc.openConnection();
 		try{
-			String query ="delete from room where idRoom='"+roomId+"'  ";
+			String query ="delete from room where roomArea='"+roomArea+"'  ";
 						jdbc.executeRequest(query);
 		}
 		catch(Exception e){
@@ -66,7 +66,8 @@ public class ListRoomJDBC extends ListRoom{
 			String query = "SELECT * FROM room";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType")));
+				System.out.println("capacite :"+rs.getInt("capacity"));
+				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType"),rs.getInt("capacity")));
             	
             }
 		this.setListRoom(listRoom);
@@ -88,7 +89,7 @@ public class ListRoomJDBC extends ListRoom{
 			String query = "SELECT * FROM room ";
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
-				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType")));
+				listRoom.add(new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType"),rs.getInt("capacity")));
 	        	
 	        }
 		this.setListRoom(listRoom);
@@ -100,9 +101,25 @@ public class ListRoomJDBC extends ListRoom{
 	}
 
 	@Override
-	public Room getRoomJDBC(int idRoom) {
-		// TODO Auto-generated method stub
-		return null;
+	public Room getRoomJDBC(String roomArea) {
+		jdbc.openConnection();
+		ResultSet rs = null;
+		Room room=null;
+		try{
+			String query = "SELECT * FROM room where roomArea='"+roomArea+"' ";
+			jdbc.executeRequest(query);
+			while ((rs = jdbc.fetchArray()) != null) {
+				room =new Room(rs.getInt("idRoom"),rs.getString("roomArea"),rs.getString("roomType"),rs.getInt("capacity"));
+	        	
+	        }
+
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		jdbc.close();
+		return room;
+
 	}
 
 }

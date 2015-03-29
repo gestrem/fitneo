@@ -95,6 +95,13 @@ public abstract class ListRoom {
 			listRoom.remove(index);
 			
 		}
+		public void addRoomToListRoom(ArrayList<Room> listRoom,String roomArea, String roomType,int capacity ){
+			
+			Room room=new Room(roomArea,roomType,capacity);
+			listRoom.add(room);
+				
+		
+		}
 		public abstract void createRoomJDBC(String roomArea, String roomType,int capacite);
 		public abstract void updateRoomJDBC(String roomAreaOld,String roomArea, String roomType,int capacite);
 		public abstract void deleteRoomJDBC(String RoomArea);

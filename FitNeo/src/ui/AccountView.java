@@ -40,6 +40,8 @@ public class AccountView extends JPanel implements ActionListener {
 	private JPanel panelButton;
 	
 	private ManageActView manageactivityPanel;
+	private ManageRoomView roomPanel;
+
 	
 	/**
 	 * Create the panel.
@@ -178,6 +180,10 @@ public class AccountView extends JPanel implements ActionListener {
 				InscriptionView inscriptionPanel = new InscriptionView(persistType);
 				MainView.changePanel(inscriptionPanel);
 			}
+			else if(cmd.equals("Manage Room")){
+				ManageRoomView roomPanel = new ManageRoomView(persistType);
+				MainView.changePanel(roomPanel);
+			}
 		}
 		else if(e.getSource() instanceof JComboBox){
 		
@@ -197,6 +203,8 @@ public class AccountView extends JPanel implements ActionListener {
 		        	panelButton.add(btn3); 
 		        	panelButton.repaint();
 		        	panelButton.revalidate();
+		        	btn2.addActionListener(this);
+		        	btn2.setActionCommand("Manage Room");
 		        	break;
 		        case "Manager": 
 		        	System.out.println("Manager");

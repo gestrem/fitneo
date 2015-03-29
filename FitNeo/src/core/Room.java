@@ -10,11 +10,7 @@ public class Room {
 	/* 
 	 * constructeur pour une salle de type office
 	 */
-	public Room(int idRoom, String roomArea, String roomType){
-		this.roomArea=roomArea;
-		this.roomId=idRoom;
-		this.roomType=roomType;	
-	}
+	
 	
 	/* 
 	 * constructeur pour une salle de type cours
@@ -25,7 +21,11 @@ public class Room {
 		this.roomType=roomType;	
 		this.capacity = capacity;
 	}
-
+	public Room( String roomArea, String roomType, int capacity){
+		this.roomArea=roomArea;
+		this.roomType=roomType;	
+		this.capacity = capacity;
+	}
 	public int getRoomId() {
 		return roomId;
 	}
