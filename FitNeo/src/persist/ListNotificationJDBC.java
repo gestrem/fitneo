@@ -90,5 +90,22 @@ public class ListNotificationJDBC extends ListNotification{
 		jdbc.close();
 		return nbNewNotif;
 	}
+
+	@Override
+	public void sendWelcomeNotification(String mail) {
+		jdbc.openConnection();
+		
+		try{
+			String query = "insert into notification(receiver, sender, isread, isCreationDemand, message, notification_date) values((select idUser from mainuser where userEmail = '"+mail+"'),4,0,0,'Welcome on Fitneo',curdate())";
+			jdbc.executeRequest(query);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		jdbc.close();		
+	}
+	
+	
 	
 }

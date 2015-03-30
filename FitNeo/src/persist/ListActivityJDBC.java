@@ -33,17 +33,17 @@ public class ListActivityJDBC extends ListActivity {
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
 				  int id = rs.getInt(1);
-			      System.out.println("id=" + id);
+			      //System.out.println("id=" + id);
 			      String actName = rs.getString(2);
-			      System.out.println("name=" + actName);
+			      //System.out.println("name=" + actName);
 			      String shortDescr = rs.getString(3);
-			      System.out.println("descrition=" + shortDescr);
+			      //System.out.println("descrition=" + shortDescr);
 			      String lgDescr = rs.getString(4);
-			      System.out.println("descrition=" + lgDescr);
+			      //System.out.println("descrition=" + lgDescr);
 			      String managerFirstName = rs.getString(5);
-			      System.out.println(" first name manager=" + managerFirstName);
+			      //System.out.println(" first name manager=" + managerFirstName);
 			      String managerLastName = rs.getString(6);
-			      System.out.println(" first name manager=" + managerLastName);
+			      //System.out.println(" first name manager=" + managerLastName);
 			      listAllActivities.add(new Activity(id,actName, managerFirstName+" "+managerLastName, shortDescr, lgDescr)); 
 			}
 			
@@ -123,11 +123,11 @@ public class ListActivityJDBC extends ListActivity {
 			jdbc.executeRequest(query);
 			while ((rs = jdbc.fetchArray()) != null) {
 				int managerId = rs.getInt(1);
-			    System.out.println("manager id =" + managerId);
+			    //System.out.println("manager id =" + managerId);
 			    String managerFirstName = rs.getString(2);
-			    System.out.println(" first name manager=" + managerFirstName);
+			    //System.out.println(" first name manager=" + managerFirstName);
 			    String managerLastName = rs.getString(3);
-			    System.out.println(" first name manager=" + managerLastName);
+			    //System.out.println(" first name manager=" + managerLastName);
 			    managers.add(Integer.toString(managerId)); 
 			    managers.add(managerFirstName+" "+managerLastName);  
 			}

@@ -24,6 +24,8 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+
+import core.NotificationFacade;
 /**
  * 
  * @author Florent
@@ -228,6 +230,8 @@ public class RegisterView extends JDialog implements ActionListener {
 			if (verifyMandatoryFields()){
 				this.owner.getUserFacade().signin(userLastName, userFirstName, userAdresse, userCity, userCP, userEmail, passwordUser, userAnswer, questionBox.getSelectedIndex());
 				this.owner.setLabelMsg("Successfull registration, you can now login", Color.GREEN, true);
+				NotificationFacade notifFacade = new NotificationFacade(this.owner.getPersistType());
+				notifFacade.sendWelcomeNotification(userEmail);
 				dispose();
 			}
 		}

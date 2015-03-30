@@ -29,4 +29,8 @@ public class NotificationFacade {
 	public String nbNewNotification(int idUser){
 		return listnotification.nbNewNotification(idUser);
 	}
+	
+	public void sendWelcomeNotification(String email){
+		listnotification.sendWelcomeNotification(email);
+	}
 }

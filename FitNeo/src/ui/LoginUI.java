@@ -63,6 +63,10 @@ public class LoginUI extends JFrame implements ActionListener {
 	public UserFacade getUserFacade(){
 		return userFacade;
 	}
+	
+	public int getPersistType(){
+		return this.persistType;
+	}
 
 	/**
 	 * Initialize the contents of the frame.

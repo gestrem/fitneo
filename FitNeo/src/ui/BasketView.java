@@ -105,8 +105,13 @@ public class BasketView extends JPanel implements ActionListener {
 	{
 		String cmd = e.getActionCommand();
 		if(cmd.equals("confirm")){ 
-			this.basketFacade.confirmOrder(this.userFacade.getIdUser(), this.basketFacade.getMainBasket().getIdBasket());
-			JOptionPane.showMessageDialog(null, "Your command has been confirmed", "Order confirmed", JOptionPane.INFORMATION_MESSAGE);
+			if(this.basketFacade.getMainBasket() == null){
+				this.basketFacade.confirmOrder(this.userFacade.getIdUser(), this.basketFacade.getMainBasket().getIdBasket());
+				JOptionPane.showMessageDialog(null, "Your command has been confirmed", "Order confirmed", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "Your basket is empty", "Impossible to confirm", JOptionPane.INFORMATION_MESSAGE);
+			}			
 		}
 	}
 	

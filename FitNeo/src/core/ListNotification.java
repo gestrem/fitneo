@@ -60,4 +60,10 @@ public abstract class ListNotification {
 	 * @return le nombre de nouvelles notifications
 	 */
 	public abstract String nbNewNotification(int idUser);
+	
+	/**
+	 * Methode sendWelcomeNotification, envoi une notification de bienvenue
+	 * @param mail, le mail de l'user
+	 */
+	public abstract void sendWelcomeNotification(String mail);
 }
