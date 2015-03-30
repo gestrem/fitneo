@@ -117,7 +117,7 @@ public class MainView extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, basketButton, -10, SpringLayout.EAST, getContentPane());
 		getContentPane().add(basketButton);
 		
-		JButton accountButton = new JButton(new ImageIcon(getClass().getResource("/profile-icon.png")));
+		JButton accountButton = new JButton("My account",new ImageIcon(getClass().getResource("/profile-icon.png")));
 		accountButton.addActionListener(this);
 		accountButton.setActionCommand("Account");
 		springLayout.putConstraint(SpringLayout.NORTH, accountButton, 0, SpringLayout.NORTH, basketButton);

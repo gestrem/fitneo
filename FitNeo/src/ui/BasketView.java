@@ -182,7 +182,7 @@ public class BasketView extends JPanel implements ActionListener {
 		  public Object getCellEditorValue() {
 			  if (isPushed) {
 				 int confirm;
-				 confirm = JOptionPane.showConfirmDialog(button, "Are you sur ?", "Delete confirmation", JOptionPane.YES_NO_OPTION);
+				 confirm = JOptionPane.showConfirmDialog(button, "Are you sure ?", "Delete confirmation", JOptionPane.YES_NO_OPTION);
 				 if(confirm == 0){
 					 basketFacade.deleteProduct(p);
 				 }

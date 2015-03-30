@@ -176,7 +176,7 @@ public class ManageRoomView extends JPanel {
 		    		
 		    		DefaultComboBoxModel newComboRoom = new DefaultComboBoxModel(newListRoom);
 		    		cb_roomToUpdate.setModel( newComboRoom );
-		    		JOptionPane.showMessageDialog(null,roomName+" a été créée");
+		    		JOptionPane.showMessageDialog(null,roomName+" has been created");
 					
 					
 				}
@@ -218,7 +218,7 @@ public class ManageRoomView extends JPanel {
     		
     		DefaultComboBoxModel newComboRoom = new DefaultComboBoxModel(newListRoom);
     		cb_roomToUpdate.setModel( newComboRoom );
-    		JOptionPane.showMessageDialog(null,roomToUpdateNameOld+" a été modifiée");
+    		JOptionPane.showMessageDialog(null,roomToUpdateNameOld+" has been updated");
 
 		}
 		
@@ -239,7 +239,7 @@ public class ManageRoomView extends JPanel {
     		
     		DefaultComboBoxModel newComboRoom = new DefaultComboBoxModel(newListRoom);
     		cb_roomToUpdate.setModel( newComboRoom );
-    		JOptionPane.showMessageDialog(null,roomToUpdateNameOld+" a été supprimée");
+    		JOptionPane.showMessageDialog(null,roomToUpdateNameOld+" has been deleted");
 		}
 	});
 }

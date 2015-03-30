@@ -155,10 +155,10 @@ public class EventView extends JPanel {
 		public Object getCellEditorValue() {
 				if(eventSelected=="Details"){
 					if (isPushed) { 	  	
-					JLabel eventLabelName =  new JLabel("Event Name :"+eventChoose.getEventName());
-					JLabel eventLabelDate =  new JLabel("Event Date :"+eventChoose.getEventDate());
-					JLabel eventLabelPrice =  new JLabel("Event Price :"+eventChoose.getEventPrice()+"Û");
-					JLabel eventLabelParticipant= new JLabel("Event Participant :"+eventChoose.getParticipantName());
+					JLabel eventLabelName =  new JLabel("Event Name : "+eventChoose.getEventName());
+					JLabel eventLabelDate =  new JLabel("Event Date : "+eventChoose.getEventDate());
+					JLabel eventLabelPrice =  new JLabel("Event Price : "+eventChoose.getEventPrice()+"€");
+					JLabel eventLabelParticipant= new JLabel("Event Participant : "+eventChoose.getParticipantName());
 					JButton subscriptionButton =new JButton("Click To Subscribe");
 					subscriptionButton.addActionListener(this);
 					subscriptionButton.setActionCommand("Subscribe");
